@@ -29,5 +29,5 @@ This repository holds the modified website with added personal features such as 
 
 ## Copyright and License
 
-Copyright 2013-2021 Start Bootstrap LLC. Code released under the [MIT](https://github.com/dillonzq/LoveIt/blob/master/LICENSE) license.
+Copyright 2013-2021. Code released under the [MIT](https://github.com/dillonzq/LoveIt/blob/master/LICENSE) license.
 
