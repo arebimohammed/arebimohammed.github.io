@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Abouts on Mohammed Arebi</title>
+    <link>https://arebimohammed.github.io/about/</link>
+    <description>Recent content in Abouts on Mohammed Arebi</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <managingEditor>arebi.mohamed59@gmail.com (Mohammed Arebi)</managingEditor>
+    <webMaster>arebi.mohamed59@gmail.com (Mohammed Arebi)</webMaster>
+    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
+    <lastBuildDate>Mon, 02 Mar 2020 11:04:49 +0800</lastBuildDate><atom:link href="https://arebimohammed.github.io/about/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>About Me</title>
+      <link>https://arebimohammed.github.io/about/about-me/</link>
+      <pubDate>Mon, 02 Mar 2020 11:04:49 +0800</pubDate>
+      <author>arebi.mohamed59@gmail.com (Mohammed Arebi)</author>
+      <guid>https://arebimohammed.github.io/about/about-me/</guid>
+      <description>I LOVE DATA! From a very early age I’ve been a problem solver. I was that kid who would take part in anything to see how it worked, tried to figure out the problem and find ways to solve it, I was very curious but driven as well. I grew up with this trait and other similar traits one of them being analytical, which shaped my ambitions today in being a data analyst/scientist and anything related to that field.</description>
+    </item>
+    
+  </channel>
+</rss>

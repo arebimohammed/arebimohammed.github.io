@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Resume - Tag - Mohammed Arebi</title>
+        <link>https://arebimohammed.github.io/tags/resume/</link>
+        <description>Resume - Tag - Mohammed Arebi</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>arebi.mohamed59@gmail.com (Mohammed Arebi)</managingEditor>
+            <webMaster>arebi.mohamed59@gmail.com (Mohammed Arebi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Tue, 03 Mar 2020 11:04:49 &#43;0800</lastBuildDate><atom:link href="https://arebimohammed.github.io/tags/resume/" rel="self" type="application/rss+xml" /><item>
+    <title>Resume</title>
+    <link>https://arebimohammed.github.io/resume/my-resume/</link>
+    <pubDate>Tue, 03 Mar 2020 11:04:49 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://arebimohammed.github.io/resume/my-resume/</guid>
+    <description><![CDATA[MOHAMMED AREBI Profile A resourceful and extremely motivated data scientist with a proven track record of solving difficult business problems. I like work on meaningful projects and build valuable applications in the area of machine learnig. Always building and learning.
+Work Experience TDK-Micronas Freiburg, Baden-WürttembergData Scientist InternSeptember 2021 to March 2022 Analyzing semi-conductor defect and test data using Python on Jupyter and its subsequent libraries (Pandas, NumPy, Plotly, SciPy, statsmodels, sci-kit learn, Dash, Keras, etc.]]></description>
+</item></channel>
+</rss>

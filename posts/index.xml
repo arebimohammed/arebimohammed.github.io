@@ -1,0 +1,35 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>All Posts - Mohammed Arebi</title>
+        <link>https://arebimohammed.github.io/posts/</link>
+        <description>All Posts | Mohammed Arebi</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>arebi.mohamed59@gmail.com (Mohammed Arebi)</managingEditor>
+            <webMaster>arebi.mohamed59@gmail.com (Mohammed Arebi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 28 Mar 2020 10:29:01 &#43;0800</lastBuildDate><atom:link href="https://arebimohammed.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>COVID-19: An Interactive Analysis</title>
+    <link>https://arebimohammed.github.io/covid19-interactive-analysis/</link>
+    <pubDate>Sat, 28 Mar 2020 10:29:01 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://arebimohammed.github.io/covid19-interactive-analysis/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/posts/COVID19-%20An%20Interactive%20Analysis/Coronavirus-SARS-CoV-2.jpg" referrerpolicy="no-referrer">
+            </div>A deep dive into the Coronavirus data]]></description>
+</item><item>
+    <title>Linear Regression</title>
+    <link>https://arebimohammed.github.io/linear-regression-all-you-need-to-know/</link>
+    <pubDate>Tue, 10 Mar 2020 10:29:01 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://arebimohammed.github.io/linear-regression-all-you-need-to-know/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/posts/Linear%20Regression/Linear-lamps.jpg" referrerpolicy="no-referrer">
+            </div>All you need to know]]></description>
+</item><item>
+    <title>Why I started Blogging</title>
+    <link>https://arebimohammed.github.io/why-i-started-blogging/</link>
+    <pubDate>Wed, 04 Mar 2020 10:29:01 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://arebimohammed.github.io/why-i-started-blogging/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/posts/Why%20I%20Started%20Blogging/bloggin.jfif" referrerpolicy="no-referrer">
+            </div>The beginning of sharing my journey publicly]]></description>
+</item></channel>
+</rss>

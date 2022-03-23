@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Projects on Mohammed Arebi</title>
+    <link>https://arebimohammed.github.io/projects/</link>
+    <description>Recent content in Projects on Mohammed Arebi</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <managingEditor>arebi.mohamed59@gmail.com (Mohammed Arebi)</managingEditor>
+    <webMaster>arebi.mohamed59@gmail.com (Mohammed Arebi)</webMaster>
+    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
+    <lastBuildDate>Tue, 03 Mar 2020 11:04:49 +0800</lastBuildDate><atom:link href="https://arebimohammed.github.io/projects/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Projects</title>
+      <link>https://arebimohammed.github.io/projects/my-projects/</link>
+      <pubDate>Tue, 03 Mar 2020 11:04:49 +0800</pubDate>
+      <author>arebi.mohamed59@gmail.com (Mohammed Arebi)</author>
+      <guid>https://arebimohammed.github.io/projects/my-projects/</guid>
+      <description>
+Here are some Projects I have worked on and currently working on:
+    Project Name Description Year Status      Covid-19 Interactive Data Analysis In-depth analysis of the Covid-19 data. Findings presented in interactive charts. The charts are deployed on both Binder and Heroku. Blog post that talks about the project can be found here and accompanying GitHub Repo 2020 Done✔️    </description>
+    </item>
+    
+  </channel>
+</rss>

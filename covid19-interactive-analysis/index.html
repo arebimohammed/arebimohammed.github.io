@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>COVID-19: An Interactive Analysis - Mohammed Arebi</title><meta name="Description" content="A deep dive into the Coronavirus data"><meta property="og:title" content="COVID-19: An Interactive Analysis" />
+<meta property="og:description" content="A deep dive into the Coronavirus data" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://arebimohammed.github.io/covid19-interactive-analysis/" /><meta property="og:image" content="https://arebimohammed.github.io/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2020-03-28T10:29:01+08:00" />
+<meta property="article:modified_time" content="2022-03-23T22:34:45+01:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://arebimohammed.github.io/logo.png"/>
+
+<meta name="twitter:title" content="COVID-19: An Interactive Analysis"/>
+<meta name="twitter:description" content="A deep dive into the Coronavirus data"/>
+<meta name="application-name" content="Mohammed Arebi">
+<meta name="apple-mobile-web-app-title" content="Mohammed Arebi"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://arebimohammed.github.io/covid19-interactive-analysis/" /><link rel="prev" href="https://arebimohammed.github.io/linear-regression-all-you-need-to-know/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "COVID-19: An Interactive Analysis",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/arebimohammed.github.io\/covid19-interactive-analysis\/"
+        },"image": ["https:\/\/arebimohammed.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "blogging, data science, machine learning, covid-19","wordcount":  4941 ,
+        "url": "https:\/\/arebimohammed.github.io\/covid19-interactive-analysis\/","datePublished": "2020-03-28T10:29:01+08:00","dateModified": "2022-03-23T22:34:45+01:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "xxxx","logo": "https:\/\/arebimohammed.github.io\/images\/avatar.png"},"author": {
+                "@type": "Person",
+                "name": "Mohammed Arebi"
+            },"description": "A deep dive into the Coronavirus data"
+    }
+    </script></head>
+    <body header-desktop="auto" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Mohammed Arebi"><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/about/about-me"> About </a><a class="menu-item" href="/resume/my-resume"> Resume </a><a class="menu-item" href="/projects/my-projects"> Projects </a><a class="menu-item" href="https://github.com/arebimohammed" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Mohammed Arebi"><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/about/about-me" title="">About</a><a class="menu-item" href="/resume/my-resume" title="">Resume</a><a class="menu-item" href="/projects/my-projects" title="">Projects</a><a class="menu-item" href="https://github.com/arebimohammed" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">COVID-19: An Interactive Analysis</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Mohammed Arebi</a></span>&nbsp;<span class="post-category">included in <a href="/categories/data-analysis/"><i class="far fa-folder fa-fw"></i>Data Analysis</a>&nbsp;<a href="/categories/interactive/"><i class="far fa-folder fa-fw"></i>Interactive</a>&nbsp;<a href="/categories/visualisation/"><i class="far fa-folder fa-fw"></i>Visualisation</a>&nbsp;<a href="/categories/linear-regression/"><i class="far fa-folder fa-fw"></i>Linear Regression</a>&nbsp;<a href="/categories/machine-learning/"><i class="far fa-folder fa-fw"></i>Machine Learning</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-03-28">2020-03-28</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;4941 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;24 minutes&nbsp;<span id="/covid19-interactive-analysis/" class="leancloud_visitors" data-flag-title="COVID-19: An Interactive Analysis">
+                        <i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;views
+                    </span>&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/COVID19-%20An%20Interactive%20Analysis/Coronavirus-SARS-CoV-2.jpg"
+        data-srcset="/posts/COVID19-%20An%20Interactive%20Analysis/Coronavirus-SARS-CoV-2.jpg, /posts/COVID19-%20An%20Interactive%20Analysis/Coronavirus-SARS-CoV-2.jpg 1.5x, /posts/COVID19-%20An%20Interactive%20Analysis/Coronavirus-SARS-CoV-2.jpg 2x"
+        data-sizes="auto"
+        alt="/posts/COVID19- An Interactive Analysis/Coronavirus-SARS-CoV-2.jpg"
+        title="A deep dive into the Coronavirus data" /></div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#introduction">Introduction</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#but-how-does-the-virus-spread">But how does the virus spread?</a></li>
+            <li><a href="#how-is-the-virus-detected">How is the virus detected?</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#diving-deep-into-the-data">Diving Deep into the data</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>A new virus has plauged us and caused turmoil in the world. This virus has caused shut-downs, lockdowns and in the worst-case will unfortunately cause deaths. It is our job as responsible citizens to do our best to stop it from further spreading, and what better way than for us data scientists to dive deep into the data (of course while wearing masks and keeping the safe distance).
+So lets dive in.</p>
+<h2 id="introduction">Introduction</h2>
+<hr>
+<p>The SARS-CoV-2 virus causes Coronavirus Disease (COVID-19), an infectious respiratory disease.
+The majority of those infected with the virus will have mild to moderate respiratory symptoms and will recover without the need for medical attention. Some, on the other hand, will become critically unwell and require medical assistance. Serious sickness is more likely to strike the elderly and those with underlying medical disorders such as cardiovascular disease, diabetes, chronic respiratory disease, or cancer. COVID-19 can make anyone sick and cause them to get very ill or die at any age.</p>
+<h4 id="but-how-does-the-virus-spread">But how does the virus spread?</h4>
+<p>Coughing, sneezing, and talking are the most common ways for the virus to spread through small droplets. Although the droplets are not normally airborne, persons who are in close proximity to them may inhale them and become infected. By contacting a contaminated surface and subsequently touching their face, people can become sick. Aerosols that can stay suspended in the air for prolonged periods of time in confined places may also be a source of transmission. It is most contagious in the first three days after symptoms develop, but it can also spread before symptoms appear and from asymptomatic people. Which strongly explains the value of wearing well fitted masks and as further illustrated in the GIF below.</p>
+<figure>
+  <img src="/posts/COVID19- An Interactive Analysis/COVID19-Spread.gif" alt="Covid-19 Spread"/>
+  <figcaption style = "font-size:15px">GIF Source: <a href = "https://www.youtube.com/watch?v=xEp-Sdgl9AU">Infrared video shows the risks of airborne coronavirus spread | Visual Forensics</a></figcaption>
+</figure>
+<p>So if we ask ourselves how can we prevent COVID-19 from spreading, we&rsquo;ll find these main precautions to take:</p>
+<ul>
+<li>Keep a safe distance away from somebody coughing or sneezing.</li>
+<li>When physical separation isn&rsquo;t possible, wear a mask.</li>
+<li>Seek medical help if you have a fever, cough, or difficulty breathing.</li>
+<li>If you&rsquo;re sick, stay at home.</li>
+<li>Hands should be washed frequently. Use soap and water or an alcohol-based hand rub to clean your hands.</li>
+<li>Keep your hands away from your eyes, nose, and mouth.</li>
+<li>When you cough or sneeze, cover your nose and mouth with your bent elbow or a tissue.</li>
+</ul>
+<br>
+<h4 id="how-is-the-virus-detected">How is the virus detected?</h4>
+<p>Real-time reverse transcription polymerase chain reaction (rRT-PCR) from a nasopharyngeal swab is the usual method of diagnosis. Although chest CT imaging may be useful for diagnosis in patients with a strong suspicion of infection based on symptoms and risk factors, it is not recommended for routine use screening (<a href="https://en.wikipedia.org/wiki/COVID-19_testing#:~:text=Chest%20CT%20scans%20and%20chest%20x%2Drays%20are%20not%20recommended%20for%20diagnosing%20COVID%2D19." target="_blank" rel="noopener noreffer">Wikipedia</a>), which may present an option to utilize computer vision for example by using convolutional neural networks to detect the virus in CT image scans, we&rsquo;ll explore this another time in a different article.</p>
+<h2 id="diving-deep-into-the-data">Diving Deep into the data</h2>
+<hr>
+<p>All these previous precautions mentioned are of tremendous importance to stop the virus from further spreading but these won&rsquo;t allow us to study more concisely where it spreads, why it spreads in areas more than others and how we can flatten the curve, as they are proactive measures, we are trying to analyze the historical (even though the virus is still fairly young) data through reactive measures of data analysis and machine learning, of course proactive (unsupervised learning) measures can also be deployed. That&rsquo;s where data analysis comes into play. I dug deep into the data and all the accompaying code in this article can be found in this Github repository:
+<a href="https://github.com/arebimohammed/Covid-19-Analysis" target="_blank" rel="noopener noreffer">Covid-19-Analysis</a>.</p>
+<p>The data is provided by John Hopkins University, it is available in their <a href="https://github.com/CSSEGISandData/COVID-19" target="_blank" rel="noopener noreffer">Github repo</a>. The data is updated daily. 
+I will also be using data from <a href="https://ourworldindata.org/coronavirus" target="_blank" rel="noopener noreffer">Our World In Data</a> and <a href="https://www.acaps.org/covid-19-government-measures-dataset" target="_blank" rel="noopener noreffer">acaps</a> for further data exploration.</p>
+<p>Lets start by first importing all required libraries. And setting some default settings</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">itertools</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">os</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">warnings</span> 
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">tee</span> 
+</span></span><span class="line"><span class="cl"><span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">plotly.express</span> <span class="k">as</span> <span class="nn">px</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">plotly.graph_objects</span> <span class="k">as</span> <span class="nn">go</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">plotly.subplots</span> <span class="kn">import</span> <span class="n">make_subplots</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">plotly.io</span> <span class="k">as</span> <span class="nn">pio</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">plotly.offline</span> <span class="k">as</span> <span class="nn">py</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">ipywidgets</span> <span class="k">as</span> <span class="nn">widgets</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">py</span><span class="o">.</span><span class="n">init_notebook_mode</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">pio</span><span class="o">.</span><span class="n">renderers</span><span class="o">.</span><span class="n">default</span> <span class="o">=</span> <span class="s2">&#34;notebook&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">plotting</span><span class="o">.</span><span class="n">backend</span> <span class="o">=</span> <span class="s2">&#34;plotly&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">max_rows</span> <span class="o">=</span> <span class="mi">20</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>  
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">PolynomialFeatures</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span>  <span class="n">r2_score</span><span class="p">,</span> <span class="n">mean_absolute_error</span><span class="p">,</span> <span class="n">mean_squared_error</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#from countryinfo import CountryInfo #Populations not up to date</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">pypopulation</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">pycountry</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>I&rsquo;ll be using <a href="https://plotly.com/python/getting-started/" target="_blank" rel="noopener noreffer">plotly</a> for interactive plotting. <a href="https://ipywidgets.readthedocs.io/en/latest/" target="_blank" rel="noopener noreffer">ipywidgets</a> for interactive user data filtering and selection. <a href="https://pandas.pydata.org/" target="_blank" rel="noopener noreffer">Pandas</a> and <a href="https://numpy.org/" target="_blank" rel="noopener noreffer">numpy</a> for data manipulation. <a href="https://scikit-learn.org/stable/" target="_blank" rel="noopener noreffer">scikit-learn</a> for machine learning and further corresponding libraries for other utilities.</p>
+<p>We&rsquo;ll then load the datasets using Pandas straight from the source URL, because in this way everytime the code is ran it will have the most up to date data, rather than a downloaded Excel or CSV file.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># Only use the columns we need </span>
+</span></span><span class="line"><span class="cl"><span class="n">cols</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;iso_code&#39;</span><span class="p">,</span><span class="s1">&#39;continent&#39;</span><span class="p">,</span><span class="s1">&#39;location&#39;</span><span class="p">,</span><span class="s1">&#39;date&#39;</span>
+</span></span><span class="line"><span class="cl">         <span class="p">,</span><span class="s1">&#39;total_cases&#39;</span><span class="p">,</span><span class="s1">&#39;new_cases&#39;</span><span class="p">,</span><span class="s1">&#39;total_deaths&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">         <span class="s1">&#39;new_deaths&#39;</span><span class="p">,</span><span class="s1">&#39;total_cases_per_million&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">         <span class="s1">&#39;new_cases_per_million&#39;</span><span class="p">,</span><span class="s1">&#39;total_deaths_per_million&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">         <span class="s1">&#39;new_deaths_per_million&#39;</span><span class="p">,</span><span class="s1">&#39;new_tests&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">         <span class="s1">&#39;total_tests&#39;</span><span class="p">,</span><span class="s1">&#39;total_tests_per_thousand&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">         <span class="s1">&#39;new_tests_per_thousand&#39;</span><span class="p">,</span><span class="s1">&#39;new_tests_smoothed&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">         <span class="s1">&#39;new_tests_smoothed_per_thousand&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">         <span class="s1">&#39;tests_units&#39;</span><span class="p">,</span><span class="s1">&#39;stringency_index&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">         <span class="s1">&#39;population&#39;</span><span class="p">,</span><span class="s1">&#39;population_density&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">         <span class="s1">&#39;median_age&#39;</span><span class="p">,</span><span class="s1">&#39;aged_65_older&#39;</span><span class="p">,</span><span class="s1">&#39;aged_70_older&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">         <span class="s1">&#39;gdp_per_capita&#39;</span><span class="p">,</span><span class="s1">&#39;extreme_poverty&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">         <span class="s1">&#39;cardiovasc_death_rate&#39;</span><span class="p">,</span><span class="s1">&#39;diabetes_prevalence&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">         <span class="s1">&#39;female_smokers&#39;</span><span class="p">,</span><span class="s1">&#39;male_smokers&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">         <span class="s1">&#39;handwashing_facilities&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">         <span class="s1">&#39;hospital_beds_per_thousand&#39;</span><span class="p">,</span><span class="s1">&#39;life_expectancy&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">df_stats</span> <span class="o">=</span>  <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://covid.ourworldindata.org/data/owid-covid-data.csv&#39;</span><span class="p">,</span><span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">df_stats</span> <span class="o">=</span> <span class="n">df_stats</span><span class="p">[</span><span class="n">cols</span><span class="p">]</span> 
+</span></span><span class="line"><span class="cl"><span class="n">df_measures</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;https://www.acaps.org/sites/acaps/files/resources/files/acaps_covid19_government_measures_dataset_0.xlsx&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;Dataset&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">df_confirmed</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">df_deaths</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">df_recoveries</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv&#39;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><pre><code>Shape for Statistics DataFrame: (167554, 34)
+Shape for Measures DataFrame: (23923, 18)
+Shape for Confirmed DataFrame: (284, 783)
+Shape for Deaths DataFrame: (284, 783)
+Shape for Recovories DataFrame: (269, 783)
+</code></pre>
+<p>After loading the data and printing their shapes I had a quick look at it using several Pandas DataFrame methods such as,
+<code>head</code>, <code>sample</code> , <code>describe</code> and <code>info</code>. I then grouped each case status by Country/Region which I will use later.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1">#Group by each country for later use</span>
+</span></span><span class="line"><span class="cl"><span class="n">df_confirmed_group</span> <span class="o">=</span> <span class="n">df_confirmed</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;Country/Region&#39;</span><span class="p">,</span><span class="n">as_index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">df_deaths_group</span> <span class="o">=</span> <span class="n">df_deaths</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;Country/Region&#39;</span><span class="p">,</span><span class="n">as_index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">df_recoveries_group</span> <span class="o">=</span> <span class="n">df_recoveries</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;Country/Region&#39;</span><span class="p">,</span><span class="n">as_index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Getting active cases by substracting the recovories and deaths from all cases</span>
+</span></span><span class="line"><span class="cl"><span class="n">df_active_group</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df_deaths_group</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span> <span class="p">,</span> <span class="p">:</span><span class="mi">3</span><span class="p">],</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">df_confirmed_group</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span> <span class="p">,</span> <span class="mi">3</span><span class="p">:]</span> <span class="o">-</span> <span class="p">(</span><span class="n">df_recoveries_group</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span> <span class="p">,</span><span class="mi">3</span><span class="p">:]</span> <span class="o">+</span>  <span class="n">df_deaths_group</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">:]))],</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Due to the shape of the data (see above; dates are columns), I created a combined dataframe for easier manipulation, analysis and visualization.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1">#Creating Dataframe for further visualization and analysis</span>
+</span></span><span class="line"><span class="cl"><span class="n">stats</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">,</span><span class="s1">&#39;Confirmed&#39;</span><span class="p">,</span><span class="s1">&#39;Deaths&#39;</span><span class="p">,</span><span class="s1">&#39;Recovered&#39;</span><span class="p">,</span><span class="s1">&#39;Active&#39;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_confirmed</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">4</span><span class="p">:]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;Confirmed&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">stats</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">df_confirmed</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl"><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;Deaths&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">stats</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">df_deaths</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl"><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;Recovered&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">stats</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">df_recoveries</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl"><span class="n">stats</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;Active&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">stats</span><span class="p">[</span><span class="s1">&#39;index&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;Confirmed&#39;</span><span class="p">][</span><span class="n">x</span><span class="p">]</span><span class="o">-</span><span class="p">(</span><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;Recovered&#39;</span><span class="p">][</span><span class="n">x</span><span class="p">]</span><span class="o">+</span><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;Deaths&#39;</span><span class="p">][</span><span class="n">x</span><span class="p">])))</span>
+</span></span><span class="line"><span class="cl"><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">])</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>I then created a figure, a Tree Map to be precise to get the latest world-wide Covid-19 status data. The figure was produced using plotlys <a href="https://plotly.com/python/graph-objects/" target="_blank" rel="noopener noreffer"> <code>graph_objects</code></a> API, which has support for many different types of figures (TreeMap in this example,using the general Figure)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">latest_stats_fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">latest_stats_fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">Treemap</span><span class="p">(</span><span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Confirmed&#39;</span><span class="p">,</span><span class="s1">&#39;Active&#39;</span><span class="p">,</span><span class="s1">&#39;Recovered&#39;</span><span class="p">,</span><span class="s1">&#39;Deaths&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">                                     <span class="n">parents</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="s1">&#39;Confirmed&#39;</span><span class="p">,</span><span class="s1">&#39;Confirmed&#39;</span><span class="p">,</span><span class="s1">&#39;Confirmed&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">                                     <span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;Confirmed&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span> <span class="n">stats</span><span class="p">[</span><span class="s1">&#39;Active&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span> <span class="n">stats</span><span class="p">[</span><span class="s1">&#39;Recovered&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span> <span class="n">stats</span><span class="p">[</span><span class="s1">&#39;Deaths&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()],</span>
+</span></span><span class="line"><span class="cl">                                      <span class="n">branchvalues</span><span class="o">=</span><span class="s2">&#34;total&#34;</span><span class="p">,</span> <span class="n">marker_colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;#b3e3ff&#39;</span><span class="p">,</span><span class="s1">&#39;#ff0000&#39;</span><span class="p">,</span><span class="s1">&#39;#26ff00&#39;</span><span class="p">,</span><span class="s1">&#39;#000000&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">                                      <span class="n">textinfo</span> <span class="o">=</span> <span class="s2">&#34;label+value&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                                      <span class="n">outsidetextfont</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&#34;size&#34;</span><span class="p">:</span> <span class="mi">35</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">                                      <span class="n">marker</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&#34;line&#34;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&#34;width&#34;</span><span class="p">:</span> <span class="mi">3</span><span class="p">}}</span>
+</span></span><span class="line"><span class="cl">                                     <span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">latest_stats_fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">height</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">title_text</span> <span class="o">=</span> <span class="s1">&#39;Latest Covid-19 Stats&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">latest_stats_fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><iframe src= "/posts/COVID19- An Interactive Analysis/latest.html" height="525" width="100%"></iframe>
+<p>Just a quick side note, you might realize that the recovery data is odd, as there is this sudden plummet on the 5th of August 2021. This is because this data has been discontinued from that day onwards (here is the issue: <a href="https://github.com/CSSEGISandData/COVID-19/issues/4465" target="_blank" rel="noopener noreffer">Recovery data to be discountinued</a>)</p>
+<p>I have added this figure for illustration on how plotly works in general but all other interactive plots have been deployed to <a href="https://mybinder.org/" target="_blank" rel="noopener noreffer">Binder</a> and <a href="https://www.heroku.com/" target="_blank" rel="noopener noreffer">Heroku</a> using <a href="https://voila.readthedocs.io/en/stable/using.html" target="_blank" rel="noopener noreffer">voila</a>. These can be attractive deployment options for machine learning apps and/or interactive dashboard apps for analysis (I will be using them quite often in the future 😊). The links for the interactive dashboard are:</p>
+<ul>
+<li><a href="https://mybinder.org/v2/gh/arebimohammed/Covid-19-Analysis/master?urlpath=voila%2Frender%2FML-Covid19-Interact-app.ipynb" target="_blank" rel="noopener noreffer">Binder</a></li>
+<li><a href="https://covid19-interactive-app.herokuapp.com/" target="_blank" rel="noopener noreffer">Heroku</a></li>
+</ul>
+<p>Both apps are using Voila as an interface to make the notebook interactive so there isn&rsquo;t any difference in how the app looks (see demo video below). The app will take a bit of time to launch as it has to execute all code cells in the notebook, some which take a bit longer due to creating animations in the figure (as we&rsquo;ll see later 😉). So be patient and you&rsquo;ll be able to interact with the figures, you can continue reading in the meantime.</p>
+<iframe src="https://drive.google.com/file/d/1hsrj-yOMJWZi8rlz1ublFc4ZUd4JVLzL/preview" width="640" height="480" allow="autoplay"></iframe>
+<p>Ok I hope you got the dashboard app up and running, now moving on. The next analysis I decided to conduct is to get the daily change in Covid-19 cases per status, which are either &ldquo;Confirmed&rdquo;, &ldquo;Recovored&rdquo;, &ldquo;Active&rdquo; or &ldquo;Deaths&rdquo;. This figure is produced with this piece of code below:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">daily_case_fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">FigureWidget</span><span class="p">(</span><span class="n">make_subplots</span><span class="p">(</span><span class="n">rows</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">cols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">vertical_spacing</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">horizontal_spacing</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                           <span class="n">subplot_titles</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;Confirmed&#39;</span><span class="p">,</span><span class="s1">&#39;Active&#39;</span><span class="p">,</span><span class="s1">&#39;Recovered&#39;</span><span class="p">,</span><span class="s1">&#39;Deaths&#39;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">                            <span class="n">x_title</span><span class="o">=</span><span class="s1">&#39;Date&#39;</span><span class="p">,</span> <span class="n">y_title</span><span class="o">=</span><span class="s1">&#39;Count of Cases&#39;</span><span class="p">,</span><span class="n">shared_xaxes</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">                                                                                  
+</span></span><span class="line"><span class="cl"><span class="n">daily_case_fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">Bar</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;index&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">stats</span><span class="p">[</span><span class="s1">&#39;Confirmed&#39;</span><span class="p">][</span><span class="n">x</span><span class="p">]</span><span class="o">-</span><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;Confirmed&#39;</span><span class="p">][</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="n">x</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span>
+</span></span><span class="line"><span class="cl">                              <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Confirmed&#39;</span><span class="p">,</span><span class="n">hovertemplate</span> <span class="o">=</span> <span class="s1">&#39;&lt;br&gt;&lt;b&gt;Date&lt;/b&gt;: %</span><span class="si">{x}</span><span class="s1">&#39;</span><span class="o">+</span><span class="s1">&#39;&lt;br&gt;&lt;b&gt;Daily Change of Confirmed Cases&lt;/b&gt;: %</span><span class="si">{y}</span><span class="s1">&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                                <span class="n">marker</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;#b3e3ff&#39;</span><span class="p">,</span> <span class="n">line</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;#b3e3ff&#39;</span><span class="p">))),</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">daily_case_fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">Bar</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;index&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">stats</span><span class="p">[</span><span class="s1">&#39;Active&#39;</span><span class="p">][</span><span class="n">x</span><span class="p">]</span><span class="o">-</span><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;Active&#39;</span><span class="p">][</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="n">x</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span> 
+</span></span><span class="line"><span class="cl">                             <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Active&#39;</span><span class="p">,</span><span class="n">hovertemplate</span> <span class="o">=</span> <span class="s1">&#39;&lt;br&gt;&lt;b&gt;Date&lt;/b&gt;: %</span><span class="si">{x}</span><span class="s1">&#39;</span><span class="o">+</span><span class="s1">&#39;&lt;br&gt;&lt;b&gt;Daily Change of Active Cases&lt;/b&gt;: %</span><span class="si">{y}</span><span class="s1">&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                               <span class="n">marker</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;#ff0000&#39;</span><span class="p">,</span> <span class="n">line</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;#ff0000&#39;</span><span class="p">))),</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">daily_case_fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">Bar</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;index&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">stats</span><span class="p">[</span><span class="s1">&#39;Recovered&#39;</span><span class="p">][</span><span class="n">x</span><span class="p">]</span><span class="o">-</span><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;Recovered&#39;</span><span class="p">][</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="n">x</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span> 
+</span></span><span class="line"><span class="cl">                              <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Recovered&#39;</span><span class="p">,</span><span class="n">hovertemplate</span> <span class="o">=</span> <span class="s1">&#39;&lt;br&gt;&lt;b&gt;Date&lt;/b&gt;: %</span><span class="si">{x}</span><span class="s1">&#39;</span><span class="o">+</span><span class="s1">&#39;&lt;br&gt;&lt;b&gt;Daily Change of Recovered Cases&lt;/b&gt;: %</span><span class="si">{y}</span><span class="s1">&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                               <span class="n">marker</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;#26ff00&#39;</span><span class="p">,</span> <span class="n">line</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;#26ff00&#39;</span><span class="p">))),</span><span class="n">row</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">daily_case_fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">Bar</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;index&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">stats</span><span class="p">[</span><span class="s1">&#39;Deaths&#39;</span><span class="p">][</span><span class="n">x</span><span class="p">]</span><span class="o">-</span><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;Deaths&#39;</span><span class="p">][</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="n">x</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span> 
+</span></span><span class="line"><span class="cl">                              <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Deaths&#39;</span><span class="p">,</span><span class="n">hovertemplate</span> <span class="o">=</span> <span class="s1">&#39;&lt;br&gt;&lt;b&gt;Date&lt;/b&gt;: %</span><span class="si">{x}</span><span class="s1">&#39;</span><span class="o">+</span><span class="s1">&#39;&lt;br&gt;&lt;b&gt;Daily Change of Deaths&lt;/b&gt;: %</span><span class="si">{y}</span><span class="s1">&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                               <span class="n">marker</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;#000000&#39;</span><span class="p">,</span> <span class="n">line</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;#000000&#39;</span><span class="p">))),</span><span class="n">row</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">daily_case_fig</span><span class="o">.</span><span class="n">update_xaxes</span><span class="p">(</span><span class="n">showticklabels</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">daily_case_fig</span> <span class="o">=</span> <span class="n">daily_case_fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">title_text</span><span class="o">=</span><span class="s2">&#34;Daily Change in Cases of Covid-19&#34;</span><span class="p">,</span> <span class="n">title_x</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span><span class="n">title_y</span><span class="o">=</span><span class="mf">0.97</span><span class="p">,</span> <span class="n">title_font_size</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                            <span class="n">legend</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">orientation</span><span class="o">=</span><span class="s1">&#39;h&#39;</span><span class="p">,</span><span class="n">yanchor</span><span class="o">=</span><span class="s1">&#39;top&#39;</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="mf">1.15</span><span class="p">,</span><span class="n">xanchor</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">,</span><span class="n">x</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>                
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">options</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="n">start</span> <span class="o">=</span><span class="n">stats</span><span class="o">.</span><span class="n">Date</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span><span class="n">end</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">Date</span><span class="o">.</span><span class="n">max</span><span class="p">())</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&#34;</span><span class="si">%#d</span><span class="s2">/%#m/%Y&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">index</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">options</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">w_date2</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">SelectionRangeSlider</span><span class="p">(</span><span class="n">options</span><span class="o">=</span><span class="n">options</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="n">index</span><span class="p">,</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Dates&#39;</span><span class="p">,</span><span class="n">orientation</span><span class="o">=</span><span class="s1">&#39;horizontal&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                            <span class="n">layout</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">Layout</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="s1">&#39;400px&#39;</span><span class="p">),</span> <span class="n">continuous_update</span> <span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">interactive_box</span>  <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">HBox</span><span class="p">([</span><span class="n">w_date2</span><span class="p">])</span>          
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">update_axes</span><span class="p">(</span><span class="n">dates</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">with</span> <span class="n">daily_case_fig</span><span class="o">.</span><span class="n">batch_update</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">daily_case_fig</span><span class="o">.</span><span class="n">data</span><span class="p">)):</span>
+</span></span><span class="line"><span class="cl">            <span class="n">daily_case_fig</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="n">dates</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">end</span><span class="o">=</span><span class="n">dates</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&#34;%#m/</span><span class="si">%#d</span><span class="s2">/%y&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">daily_case_fig</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">stats</span><span class="p">[(</span><span class="n">stats</span><span class="o">.</span><span class="n">Date</span> <span class="o">&gt;=</span> <span class="n">dates</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">stats</span><span class="o">.</span><span class="n">Date</span> <span class="o">&lt;=</span> <span class="n">dates</span><span class="p">[</span><span class="mi">1</span><span class="p">])][</span><span class="s1">&#39;index&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">stats</span><span class="p">[</span><span class="n">daily_case_fig</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">][</span><span class="n">x</span><span class="p">]</span><span class="o">-</span><span class="n">stats</span><span class="p">[</span><span class="n">daily_case_fig</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">][</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="n">x</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">out</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">interactive_output</span><span class="p">(</span><span class="n">update_axes</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;dates&#39;</span><span class="p">:</span> <span class="n">w_date2</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="n">widgets</span><span class="o">.</span><span class="n">VBox</span><span class="p">([</span><span class="n">interactive_box</span><span class="p">,</span> <span class="n">daily_case_fig</span><span class="p">])</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>The figure this time is produced using the <code>FigureWidget</code> object instead, to be able to have interactions with ipywidgets, as we will see below. The y-axis is produced by utilizing the index column, and to use it in the <code>apply</code> function, as an index (duh) to compute the daily difference in cases for each status. I am also using ipywidgets as mentioned above for interactive user data filtering and selection, in this case only to filter the date of the figures (but many more in the dashboard app). This can be done by adding a <code>SelectionRangeSlider</code> widget that outputs a tuple of dates (the start and end date). These dates can then be an input to the function <code>update_axes</code> which updates (guess what?) the axes. Plotlys figures have a very convenient function named <code>batch_update</code>, which according to the <a href="https://plotly.github.io/plotly.py-docs/generated/plotly.html#:~:text=batch_update%28%29,the%20context%20exits." target="_blank" rel="noopener noreffer">documentation</a>, is <cite>&ldquo;A context manager that batches up trace and layout assignment operations into a singe plotly_update message that is executed when the context exits.&quot;</cite> So I have used it as well to update the figure based on the user selected dates. Finally this is wrapped in an interactive output using ipywidgets <code>interactive_output</code> function to get the interactive figure. All the interactive graphs that have these selection/filtering figures are produced using the same workflow.</p>
+<ul>
+<li>First create a figure</li>
+<li>Then create the widgets (adding options from the data/figure)</li>
+<li>Writing the update logic in a callable function</li>
+<li>Finally wrapping the widgets, update logic and figure in a final output widget.</li>
+</ul>
+<p>I have added several other interactive figures in the dashboard app that I will not discuss here. But you can definitely check out the code for them in the Github repository linked above, and interact with the figures in the app also linked above.</p>
+<p>The next analysis I wanted to work on is trying to predict the number of cases per status (Confirmed, Recovered, Active, Deaths). I opted for Linear regression to conduct such analysis. If you haven&rsquo;t read my blog post on linear regression read it <a href="https://arebimohammed.github.io/2020/03/10/Linear-Regression-All-you-need-to-know.html" target="_blank" rel="noopener noreffer">here</a>. The blog posts tries to cover most of the details of linear regression, but also includes polynomial regression, which is linear regression with polynomial features, It&rsquo;s also possible to think of it as a linear regression with a feature space mapping (aka a polynomial kernel). I will try to dedicate a seperate post for polynomial features and polynomial regression, but all you need to know ahead here is that the time series data of the Covid-19 cases is not linear, it can have various shapes, particularly for the daily changes per status data, the others are fairly linear especially the &lsquo;Confirmed&rsquo; and &lsquo;Deaths&rsquo;, but of course they are if we are looking at the cumulative count, as seen below (click the &lsquo;Confirmed&rsquo; or &lsquo;Deaths&rsquo; button). But if you look at the daily changes data (also by clicking their respective buttons), it is not that linear.</p>
+<iframe src= "/posts/COVID19- An Interactive Analysis/stats_fig.html" height="525" width="100%"></iframe>
+<p>The code below shows how Polynomial Regression can be done using scikit-learns <a href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.PolynomialFeatures.html" target="_blank" rel="noopener noreffer"><code>PolynomialFeatures</code></a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;Confirmed Daily Change&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">stats</span><span class="p">[</span><span class="s1">&#39;index&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">stats</span><span class="p">[</span><span class="s1">&#39;Confirmed&#39;</span><span class="p">][</span><span class="n">x</span><span class="p">]</span><span class="o">-</span><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;Confirmed&#39;</span><span class="p">][</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="n">x</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl"><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;Deaths Daily Change&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">stats</span><span class="p">[</span><span class="s1">&#39;index&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">stats</span><span class="p">[</span><span class="s1">&#39;Deaths&#39;</span><span class="p">][</span><span class="n">x</span><span class="p">]</span><span class="o">-</span><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;Deaths&#39;</span><span class="p">][</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="n">x</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl"><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;Recovered Daily Change&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">stats</span><span class="p">[</span><span class="s1">&#39;index&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">stats</span><span class="p">[</span><span class="s1">&#39;Recovered&#39;</span><span class="p">][</span><span class="n">x</span><span class="p">]</span><span class="o">-</span><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;Recovered&#39;</span><span class="p">][</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="n">x</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl"><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;Active Daily Change&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">stats</span><span class="p">[</span><span class="s1">&#39;index&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">stats</span><span class="p">[</span><span class="s1">&#39;Active&#39;</span><span class="p">][</span><span class="n">x</span><span class="p">]</span><span class="o">-</span><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;Active&#39;</span><span class="p">][</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="n">x</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">days</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">stats</span><span class="p">[[</span><span class="s1">&#39;index&#39;</span><span class="p">]])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">days_idx</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">days</span><span class="p">)</span><span class="o">+</span><span class="mi">30</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">days_idx</span> <span class="o">=</span> <span class="n">days_idx</span><span class="o">+</span><span class="p">[[</span><span class="n">i</span><span class="p">]]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">df_prediction</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Index&#39;</span><span class="p">,</span> <span class="s1">&#39;Confirmed Prediction&#39;</span><span class="p">,</span> <span class="s1">&#39;Deaths Prediction&#39;</span><span class="p">,</span> <span class="s1">&#39;Recovered Prediction&#39;</span><span class="p">,</span> <span class="s1">&#39;Active Prediction&#39;</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">                                      <span class="s1">&#39;Confirmed Daily Change Prediction&#39;</span><span class="p">,</span> <span class="s1">&#39;Deaths Daily Change Prediction&#39;</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">                                      <span class="s1">&#39;Recovered Daily Change Prediction&#39;</span><span class="p">,</span> <span class="s1">&#39;Active Daily Change Prediction&#39;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="n">df_prediction</span><span class="p">[</span><span class="s1">&#39;Index&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">days_idx</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span> <span class="c1"># could use pandas.core.common.flatten as well</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">stats</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">2</span><span class="p">:]:</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">stats</span><span class="p">[</span><span class="n">col</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">days</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">mae</span><span class="p">,</span> <span class="n">mse</span><span class="p">,</span> <span class="n">R2</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">#creating the model</span>
+</span></span><span class="line"><span class="cl">        <span class="n">poly</span> <span class="o">=</span> <span class="n">PolynomialFeatures</span><span class="p">(</span><span class="n">degree</span><span class="o">=</span><span class="n">j</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">X_train_poly</span> <span class="o">=</span> <span class="n">poly</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="n">regr_poly</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="n">regr_poly</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_poly</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="n">y_pred_poly</span> <span class="o">=</span> <span class="n">regr_poly</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">poly</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="n">mae</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_poly</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="n">mse</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span><span class="n">y_pred_poly</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="n">R2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span> <span class="p">,</span> <span class="n">y_pred_poly</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">    <span class="n">deg</span> <span class="o">=</span> <span class="n">mse</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">mse</span><span class="p">))</span><span class="o">+</span><span class="mi">1</span> <span class="c1"># Get best degree with lowest Mean Squared Error</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Best Polynomial Degree for feature &#39;</span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s2">&#39; is </span><span class="si">{</span><span class="n">deg</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">poly</span> <span class="o">=</span> <span class="n">PolynomialFeatures</span><span class="p">(</span><span class="n">degree</span><span class="o">=</span><span class="n">deg</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">X_train_poly</span> <span class="o">=</span> <span class="n">poly</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">regr_poly</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">regr_poly</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_poly</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">col_name</span> <span class="o">=</span> <span class="n">col</span><span class="o">+</span><span class="s1">&#39; Prediction&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">df_prediction</span><span class="p">[</span><span class="n">col_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">regr_poly</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">poly</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">days_idx</span><span class="p">)))</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><pre><code>Best Polynomial Degree for feature 'Confirmed' is 9
+Best Polynomial Degree for feature 'Deaths' is 1
+Best Polynomial Degree for feature 'Recovered' is 2
+Best Polynomial Degree for feature 'Active' is 4
+Best Polynomial Degree for feature 'Confirmed Daily Change' is 8
+Best Polynomial Degree for feature 'Deaths Daily Change' is 7
+Best Polynomial Degree for feature 'Recovered Daily Change' is 3
+Best Polynomial Degree for feature 'Active Daily Change' is 2
+</code></pre>
+<p>First I added the daily change to the dataframe and then I computed our input feature which is the days. After that we simply run a for loop to try different degrees of Polynomials for the different Covid-19 status. The results for the best Polynomial per status are printed, the results are obtained by finding the lowest <a href="https://en.wikipedia.org/wiki/Mean_squared_error" target="_blank" rel="noopener noreffer">Mean Squared Error</a> and finally the prediction results are added to a dataframe (<code>df_prediction</code>) for visualization.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span><span class="lnt">86
+</span><span class="lnt">87
+</span><span class="lnt">88
+</span><span class="lnt">89
+</span><span class="lnt">90
+</span><span class="lnt">91
+</span><span class="lnt">92
+</span><span class="lnt">93
+</span><span class="lnt">94
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">prediction_fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">color_pred_dict</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;Confirmed&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;#b3e3ff&#39;</span><span class="p">,</span> <span class="s1">&#39;Confirmed&#39;</span><span class="p">,</span> <span class="s1">&#39;Predicted Confirmed&#39;</span><span class="p">,</span><span class="s1">&#39;#357387&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;Deaths&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;#000000&#39;</span><span class="p">,</span> <span class="s1">&#39;Deaths&#39;</span><span class="p">,</span> <span class="s1">&#39;Predicted Deaths&#39;</span><span class="p">,</span><span class="s1">&#39;#62b5d1&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;Recovered&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;#26ff00&#39;</span><span class="p">,</span> <span class="s1">&#39;Recovered&#39;</span><span class="p">,</span> <span class="s1">&#39;Predicted Recovered&#39;</span><span class="p">,</span><span class="s1">&#39;#00c491&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;Active&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;#ff0000&#39;</span><span class="p">,</span> <span class="s1">&#39;Active&#39;</span><span class="p">,</span> <span class="s1">&#39;Predicted Active&#39;</span><span class="p">,</span> <span class="s1">&#39;#fa4d76&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;Confirmed Daily Change&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;#141011&#39;</span><span class="p">,</span> <span class="s1">&#39;Confirmed Daily Change&#39;</span><span class="p">,</span> <span class="s1">&#39;Predicted Confirmed Daily Change&#39;</span><span class="p">,</span><span class="s1">&#39;#5e5e5e&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;Deaths Daily Change&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;#303030&#39;</span><span class="p">,</span> <span class="s1">&#39;Deaths Daily Change&#39;</span><span class="p">,</span><span class="s1">&#39;Predicted Deaths Daily Change&#39;</span><span class="p">,</span> <span class="s1">&#39;#8c8b8b&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;Recovered Daily Change&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;#363636&#39;</span><span class="p">,</span> <span class="s1">&#39;Recovered Daily Change&#39;</span><span class="p">,</span> <span class="s1">&#39;Predicted Recovered Daily Change&#39;</span><span class="p">,</span> <span class="s1">&#39;#969595&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;Active Daily Change&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;#1a1a1a&#39;</span><span class="p">,</span> <span class="s1">&#39;Active Daily Change&#39;</span><span class="p">,</span> <span class="s1">&#39;Predicted Active Daily Change&#39;</span><span class="p">,</span><span class="s1">&#39;#c2c2c2&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">stats</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">2</span><span class="p">:]:</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="n">col_pred</span> <span class="o">=</span> <span class="n">col</span><span class="o">+</span><span class="s1">&#39; Prediction&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">prediction_fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">days</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">y</span><span class="o">=</span><span class="n">stats</span><span class="p">[</span><span class="n">col</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">                                       <span class="n">line</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">color_pred_dict</span><span class="p">[</span><span class="n">col</span><span class="p">][</span><span class="mi">0</span><span class="p">]),</span> <span class="n">name</span> <span class="o">=</span> <span class="n">color_pred_dict</span><span class="p">[</span><span class="n">col</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">                                       <span class="n">hovertemplate</span> <span class="o">=</span><span class="s1">&#39;&lt;br&gt;&lt;b&gt;Day Number&lt;/b&gt;: %</span><span class="si">{x}</span><span class="s1">&#39;</span><span class="o">+</span><span class="s1">&#39;&lt;br&gt;&lt;b&gt;No.of Cases &lt;/b&gt;:&#39;</span><span class="o">+</span><span class="s1">&#39;%</span><span class="si">{y}</span><span class="s1">&#39;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="n">prediction_fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">days_idx</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">y</span><span class="o">=</span><span class="n">df_prediction</span><span class="p">[</span><span class="n">col_pred</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">                                       <span class="n">line</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">dash</span><span class="o">=</span><span class="s2">&#34;longdash&#34;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color_pred_dict</span><span class="p">[</span><span class="n">col</span><span class="p">][</span><span class="mi">3</span><span class="p">]),</span><span class="n">name</span> <span class="o">=</span> <span class="n">color_pred_dict</span><span class="p">[</span><span class="n">col</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">                                       <span class="n">hovertemplate</span> <span class="o">=</span><span class="s1">&#39;&lt;br&gt;&lt;b&gt;Day Number&lt;/b&gt;: %</span><span class="si">{x}</span><span class="s1">&#39;</span><span class="o">+</span><span class="s1">&#39;&lt;br&gt;&lt;b&gt;Predicted No.of Cases &lt;/b&gt;:&#39;</span><span class="o">+</span><span class="s1">&#39;%</span><span class="si">{y}</span><span class="s1">&#39;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl"><span class="n">prediction_fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">updatemenus</span><span class="o">=</span><span class="p">[</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">dict</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">buttons</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="p">[</span><span class="nb">dict</span><span class="p">(</span><span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;All&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                  <span class="n">method</span> <span class="o">=</span> <span class="s1">&#39;update&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                  <span class="n">args</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;visible&#39;</span><span class="p">:</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">]},</span>
+</span></span><span class="line"><span class="cl">                          <span class="p">{</span><span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s1">&#39;All Cases&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                           <span class="s1">&#39;showlegend&#39;</span><span class="p">:</span><span class="kc">True</span><span class="p">}]),</span>
+</span></span><span class="line"><span class="cl">             <span class="nb">dict</span><span class="p">(</span><span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Confirmed&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                  <span class="n">method</span> <span class="o">=</span> <span class="s1">&#39;update&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                  <span class="n">args</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;visible&#39;</span><span class="p">:</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">]},</span>
+</span></span><span class="line"><span class="cl">                          <span class="p">{</span><span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s1">&#39;Confirmed Cases&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                           <span class="s1">&#39;showlegend&#39;</span><span class="p">:</span><span class="kc">True</span><span class="p">}]),</span>
+</span></span><span class="line"><span class="cl">             <span class="nb">dict</span><span class="p">(</span><span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Deaths&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                  <span class="n">method</span> <span class="o">=</span> <span class="s1">&#39;update&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                  <span class="n">args</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;visible&#39;</span><span class="p">:</span> <span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">]},</span>
+</span></span><span class="line"><span class="cl">                          <span class="p">{</span><span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s1">&#39;Deaths Cases&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                           <span class="s1">&#39;showlegend&#39;</span><span class="p">:</span><span class="kc">True</span><span class="p">}]),</span>
+</span></span><span class="line"><span class="cl">             <span class="nb">dict</span><span class="p">(</span><span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Recovered&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                  <span class="n">method</span> <span class="o">=</span> <span class="s1">&#39;update&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                  <span class="n">args</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;visible&#39;</span><span class="p">:</span> <span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">]},</span>
+</span></span><span class="line"><span class="cl">                          <span class="p">{</span><span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s1">&#39;Recovered Cases&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                           <span class="s1">&#39;showlegend&#39;</span><span class="p">:</span><span class="kc">True</span><span class="p">}]),</span>
+</span></span><span class="line"><span class="cl">             <span class="nb">dict</span><span class="p">(</span><span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Active&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                  <span class="n">method</span> <span class="o">=</span> <span class="s1">&#39;update&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                  <span class="n">args</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;visible&#39;</span><span class="p">:</span> <span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">]},</span>
+</span></span><span class="line"><span class="cl">                          <span class="p">{</span><span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s1">&#39;Active Cases&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                           <span class="s1">&#39;showlegend&#39;</span><span class="p">:</span><span class="kc">True</span><span class="p">}]),</span>
+</span></span><span class="line"><span class="cl">             <span class="nb">dict</span><span class="p">(</span><span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Confirmed Daily Change&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                  <span class="n">method</span> <span class="o">=</span> <span class="s1">&#39;update&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                  <span class="n">args</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;visible&#39;</span><span class="p">:</span> <span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">]},</span>
+</span></span><span class="line"><span class="cl">                          <span class="p">{</span><span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s1">&#39;Daily Change Cases&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                           <span class="s1">&#39;showlegend&#39;</span><span class="p">:</span><span class="kc">True</span><span class="p">}]),</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">dict</span><span class="p">(</span><span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Deaths Daily Change&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                  <span class="n">method</span> <span class="o">=</span> <span class="s1">&#39;update&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                  <span class="n">args</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;visible&#39;</span><span class="p">:</span> <span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">]},</span>
+</span></span><span class="line"><span class="cl">                          <span class="p">{</span><span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s1">&#39;Daily Change Cases&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                           <span class="s1">&#39;showlegend&#39;</span><span class="p">:</span><span class="kc">True</span><span class="p">}]),</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">dict</span><span class="p">(</span><span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Recovered Daily Change&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                  <span class="n">method</span> <span class="o">=</span> <span class="s1">&#39;update&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                  <span class="n">args</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;visible&#39;</span><span class="p">:</span> <span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">]},</span>
+</span></span><span class="line"><span class="cl">                          <span class="p">{</span><span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s1">&#39;Daily Change Cases&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                           <span class="s1">&#39;showlegend&#39;</span><span class="p">:</span><span class="kc">True</span><span class="p">}]),</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">dict</span><span class="p">(</span><span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Active Daily Change&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                  <span class="n">method</span> <span class="o">=</span> <span class="s1">&#39;update&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                  <span class="n">args</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;visible&#39;</span><span class="p">:</span> <span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">]},</span>
+</span></span><span class="line"><span class="cl">                          <span class="p">{</span><span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s1">&#39;Daily Change Cases&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                           <span class="s1">&#39;showlegend&#39;</span><span class="p">:</span><span class="kc">True</span><span class="p">}]),</span>
+</span></span><span class="line"><span class="cl">            <span class="p">]),</span>
+</span></span><span class="line"><span class="cl">             <span class="nb">type</span> <span class="o">=</span> <span class="s2">&#34;buttons&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">             <span class="n">direction</span><span class="o">=</span><span class="s2">&#34;down&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">             <span class="n">showactive</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">             <span class="n">x</span><span class="o">=-</span><span class="mf">0.5</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">             <span class="n">xanchor</span><span class="o">=</span><span class="s2">&#34;left&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">             <span class="n">y</span><span class="o">=</span><span class="mf">1.1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">             <span class="n">yanchor</span><span class="o">=</span><span class="s2">&#34;top&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">prediction_fig</span><span class="o">.</span><span class="n">update_xaxes</span><span class="p">(</span><span class="n">showticklabels</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">prediction_fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">title_text</span><span class="o">=</span><span class="s2">&#34;Prediction for Covid19 Cases&#34;</span><span class="p">,</span> <span class="n">title_x</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">title_font_size</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                            <span class="n">legend</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">orientation</span><span class="o">=</span><span class="s1">&#39;h&#39;</span><span class="p">,</span><span class="n">yanchor</span><span class="o">=</span><span class="s1">&#39;top&#39;</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="mf">1.12</span><span class="p">,</span><span class="n">xanchor</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">,</span><span class="n">x</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">                            <span class="n">xaxis_title</span><span class="o">=</span><span class="s2">&#34;Number of Days&#34;</span><span class="p">,</span> <span class="n">yaxis_title</span><span class="o">=</span><span class="s2">&#34;Count&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">prediction_fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><iframe src= "/posts/COVID19- An Interactive Analysis/prediction_fig.html" height="525" width="100%"></iframe>
+<p>The results may not look so great. But it did a fairly good job for a quick implementation, other methods might perform much better for example a recurrent neural network with LSTM or GRU layers, or even a 1-dimensional convolutional neural network. These options might be better for time-series data such as Covid-19 cases. XGBoost, or other ensemble boosted methods can also perform very well on time series data. Given that good feature engineering is conducted to get lagging/leading values, rolling averages etc. (I will write about these different topics in a seperate blog post)</p>
+<p>I also created a World Map using plotlys <code>Choropleth</code> figure object, to get the status stats per country in a map. I also added an interactive figure with widgets to get different Covid-19 rates per country and filter by dates. I then used plotly to create animations to visualize the development of Covid-19 cases for the top 20 countries with the highest number of cases. All these figures can be found in the app linked above.</p>
+<p>The final analysis I conducted was to see if a measure introduced by the government to reduce/limit the number of Covid-19 infection is effective or not. As I am living in Germany I only did this analysis for Germany, but it can of course be reproduced for other countries as well.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># Filtering just for Germany </span>
+</span></span><span class="line"><span class="cl"><span class="n">df_measures</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;DATE_IMPLEMENTED&#39;</span><span class="p">:</span> <span class="s1">&#39;date&#39;</span><span class="p">},</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">df_stats_de</span> <span class="o">=</span> <span class="n">df_stats</span><span class="p">[(</span><span class="n">df_stats</span><span class="o">.</span><span class="n">location</span> <span class="o">==</span> <span class="s1">&#39;Germany&#39;</span><span class="p">)]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">df_measures_de</span> <span class="o">=</span> <span class="n">df_measures</span><span class="p">[(</span><span class="n">df_measures</span><span class="o">.</span><span class="n">COUNTRY</span> <span class="o">==</span> <span class="s1">&#39;Germany&#39;</span><span class="p">)]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">df_stats_de</span><span class="o">.</span><span class="n">date</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df_stats_de</span><span class="o">.</span><span class="n">date</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Firstly, I filtered the datasets just for Germany (as mentioned), had a look at the data types and data in general, removed unnecessary columns, dropped NA rows and finally merged the two datasets for analysis.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">df_all_de</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_measures_de</span><span class="p">,</span> <span class="n">df_stats_de</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&#34;outer&#34;</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s2">&#34;date&#34;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>I wanted to get the week of Covid-19 since its start to add to the dataframe for further analysis as we will see later. I didn&rsquo;t want the week of the year, but that can also be used if conducting the analysis for just one year, but I want this analysis to be reproducible anytime it is ran, maybe if the virus is still here after several years, hopefully not (UPDATE: It is still here after 2 years 😕), then the analysis would still be feasible and it is done with this piece of code:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1">#Function to get all pairs of weeks (see below)</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">pairwise</span><span class="p">(</span><span class="n">iterable</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">tee</span><span class="p">(</span><span class="n">iterable</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">next</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">start</span><span class="p">,</span><span class="n">end</span> <span class="o">=</span> <span class="n">df_all_de</span><span class="o">.</span><span class="n">date</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">df_all_de</span><span class="o">.</span><span class="n">date</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">weeks</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span><span class="n">end</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;W-MON&#39;</span><span class="p">)</span> <span class="c1"># Every Monday since startof Covid </span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#Week dictionary to lookup week number since Covid starts</span>
+</span></span><span class="line"><span class="cl"><span class="n">week_dict</span> <span class="o">=</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">week</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">weeks</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">week_dict</span><span class="p">[</span><span class="n">week</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">week_pairs</span> <span class="o">=</span> <span class="n">pairwise</span><span class="p">(</span><span class="n">weeks</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">pairs</span> <span class="ow">in</span> <span class="n">week_pairs</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">   <span class="n">start</span><span class="p">,</span><span class="n">end</span> <span class="o">=</span> <span class="n">pairs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">,</span><span class="n">pairs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">   <span class="n">indexes</span> <span class="o">=</span> <span class="n">df_all_de</span><span class="o">.</span><span class="n">date</span><span class="p">[</span><span class="n">df_all_de</span><span class="o">.</span><span class="n">date</span><span class="o">.</span><span class="n">between</span><span class="p">(</span><span class="n">start</span><span class="p">,</span><span class="n">end</span><span class="p">)]</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span> <span class="c1">#Getting all dataframe indexes betweenin this week </span>
+</span></span><span class="line"><span class="cl">   <span class="n">week_no</span> <span class="o">=</span> <span class="n">week_dict</span><span class="p">[</span><span class="n">start</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">   <span class="n">df_all_de</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">indexes</span><span class="p">,</span><span class="s1">&#39;Week&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">week_no</span> <span class="c1"># Creating new column Week to the week of covid based on date</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>I first used the pairwise function to get consecutive pairs of weeks for example, Week 1 and 2, Week 2 and 3, Week 3 and 4 etc.
+I then got the first and last dates in the dataframe to create a weekly date range using Pandas <code>date_range</code> and with frequency <code>W-MON</code>, which is weekly every Monday. This week range is then used to create a dictionary that maps these weeks to their number since the start of Covid. Finally we loop through these pairs of weeks and check if the date is between these pairs of weeks then we assign it the week number of the start week.</p>
+<p>We can then get the average of new or total cases per week for Germany by doing this</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">df_week_avg</span> <span class="o">=</span> <span class="n">df_all_de</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Week&#39;</span><span class="p">,</span><span class="n">as_index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s1">&#39;total_cases&#39;</span><span class="p">:</span><span class="s1">&#39;mean&#39;</span><span class="p">,</span><span class="s1">&#39;new_cases&#39;</span><span class="p">:</span><span class="s1">&#39;mean&#39;</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="n">new_week_fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">df_week_avg</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span> <span class="s1">&#39;Week&#39;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span><span class="s1">&#39;new_cases&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">new_week_fig</span> <span class="o">=</span> <span class="n">new_week_fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">title_text</span> <span class="o">=</span> <span class="s1">&#39;Average of New Cases Per Week of Covid-19&#39;</span><span class="p">,</span><span class="n">title_x</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">new_week_fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><iframe src= "/posts/COVID19- An Interactive Analysis/new_week.html" height="525" width="100%"></iframe>
+<p>We can then see these sudden rises and falls of new cases in certain weeks, we will try to see why. I chose only a subset of measures to analyse which I think are the mostly employed measures, these are:</p>
+<ul>
+<li>Schools closure,</li>
+<li>Limit public gatherings</li>
+<li>Isolation and quarantine policies</li>
+<li>Visa restrictions</li>
+<li>Closure of businesses and public services</li>
+</ul>
+<p>I then added (annotated) when these measures where first introduced to the previous plot:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">sub_measures</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Schools closure&#39;</span><span class="p">,</span><span class="s1">&#39;Limit public gatherings&#39;</span><span class="p">,</span><span class="s1">&#39;Isolation and quarantine policies&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="s1">&#39;Visa restrictions&#39;</span><span class="p">,</span><span class="s1">&#39;Closure of businesses and public services&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">first_measures</span> <span class="o">=</span> <span class="n">df_all_de</span><span class="p">[</span><span class="n">df_all_de</span><span class="o">.</span><span class="n">MEASURE</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">sub_measures</span><span class="p">)]</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;MEASURE&#39;</span><span class="p">],</span><span class="n">keep</span><span class="o">=</span><span class="s1">&#39;first&#39;</span><span class="p">)[[</span><span class="s1">&#39;MEASURE&#39;</span><span class="p">,</span><span class="s1">&#39;Week&#39;</span><span class="p">]]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">position_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Schools closure&#39;</span><span class="p">:[</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span><span class="o">-</span><span class="mi">30</span><span class="p">],</span><span class="s1">&#39;Limit public gatherings&#39;</span><span class="p">:[</span><span class="o">-</span><span class="mi">90</span><span class="p">,</span><span class="o">-</span><span class="mi">30</span><span class="p">],</span><span class="s1">&#39;Requirement to wear protective gear in public&#39;</span><span class="p">:[</span><span class="o">-</span><span class="mi">70</span><span class="p">,</span><span class="mi">80</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl"><span class="s1">&#39;Isolation and quarantine policies&#39;</span><span class="p">:[</span><span class="o">-</span><span class="mi">70</span><span class="p">,</span><span class="o">-</span><span class="mi">10</span><span class="p">],</span><span class="s1">&#39;Visa restrictions&#39;</span><span class="p">:[</span><span class="o">-</span><span class="mi">60</span><span class="p">,</span><span class="o">-</span><span class="mi">5</span><span class="p">],</span><span class="s1">&#39;Closure of businesses and public services&#39;</span><span class="p">:[</span><span class="o">-</span><span class="mi">40</span><span class="p">,</span><span class="mi">10</span><span class="p">]}</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">idx</span><span class="p">,</span><span class="n">row</span> <span class="ow">in</span> <span class="n">first_measures</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="n">text</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;MEASURE&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">week_no</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;Week&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">y_val</span> <span class="o">=</span> <span class="n">df_week_avg</span><span class="p">[</span><span class="n">df_week_avg</span><span class="o">.</span><span class="n">Week</span> <span class="o">==</span> <span class="n">week_no</span><span class="p">][</span><span class="s1">&#39;new_cases&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">100</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">new_week_fig</span><span class="o">.</span><span class="n">add_annotation</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">week_no</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y_val</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="n">text</span><span class="p">,</span> <span class="n">font_size</span> <span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                                <span class="n">hoverlabel</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">bgcolor</span><span class="o">=</span><span class="s1">&#39;#e5ff3b&#39;</span><span class="p">),</span><span class="n">hovertext</span><span class="o">=</span><span class="n">text</span><span class="p">,</span><span class="n">ay</span><span class="o">=</span><span class="n">position_dict</span><span class="p">[</span><span class="n">text</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="n">ax</span><span class="o">=</span><span class="n">position_dict</span><span class="p">[</span><span class="n">text</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">new_week_fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><iframe src= "/posts/COVID19- An Interactive Analysis/new_week_annot.html" height="525" width="100%"></iframe>
+<p>And luckily with plotly you can slightly zoom in to see when these measures where first introduced. When they were first introduced only the Visa Restrictions measure had weeks after it with a decreased average of new cases.</p>
+<p>Next I did a naive analysis to see if the measures mentioned are effective or not. This is done by looking at the average of new cases 4 weeks before the measure was introduced and the average of new cases 4 week after the measure was introduced (for everytime it was introduced/employed). This method has a flaw which we will discuss in just a second but first lets see how we can do that:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># Looking at only 5 measures to check for their effectiveness </span>
+</span></span><span class="line"><span class="cl"><span class="c1"># For every week the measure was introduced/employed we calculate the mean of new cases 4 weeks before and 4 weeks after and during</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># The means are then averaged to get an overall measure of effectiveness then they are compared to see if the measure was effective or not</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">df_imp_measures</span> <span class="o">=</span> <span class="n">df_all_de</span><span class="p">[</span><span class="n">df_all_de</span><span class="o">.</span><span class="n">MEASURE</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">sub_measures</span><span class="p">)]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;date&#39;</span><span class="p">)[[</span><span class="s1">&#39;MEASURE&#39;</span><span class="p">,</span><span class="s1">&#39;date&#39;</span><span class="p">,</span><span class="s1">&#39;Week&#39;</span><span class="p">,</span><span class="s1">&#39;Week_of_year&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">df_week_sum</span> <span class="o">=</span> <span class="n">df_all_de</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Week&#39;</span><span class="p">,</span><span class="n">as_index</span> <span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s1">&#39;new_cases&#39;</span><span class="p">:</span><span class="s1">&#39;sum&#39;</span><span class="p">})</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;Week&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">measure_dict</span> <span class="o">=</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">measure</span> <span class="ow">in</span> <span class="n">sub_measures</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">dftmp</span> <span class="o">=</span> <span class="n">df_imp_measures</span><span class="p">[</span><span class="n">df_imp_measures</span><span class="o">.</span><span class="n">MEASURE</span> <span class="o">==</span> <span class="n">measure</span><span class="p">]</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;MEASURE&#39;</span><span class="p">,</span><span class="s1">&#39;Week&#39;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">    <span class="n">mean_before</span><span class="p">,</span><span class="n">mean_after</span> <span class="o">=</span> <span class="p">[],[]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">week</span> <span class="ow">in</span> <span class="n">dftmp</span><span class="o">.</span><span class="n">Week</span><span class="p">:</span> 
+</span></span><span class="line"><span class="cl">        <span class="n">mean_before</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df_week_sum</span><span class="p">[</span><span class="n">df_week_sum</span><span class="o">.</span><span class="n">Week</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="n">week</span><span class="o">-</span><span class="mi">4</span><span class="p">,(</span><span class="n">week</span><span class="o">-</span><span class="mi">4</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">,(</span><span class="n">week</span><span class="o">-</span><span class="mi">4</span><span class="p">)</span><span class="o">+</span><span class="mi">2</span><span class="p">,(</span><span class="n">week</span><span class="o">-</span><span class="mi">4</span><span class="p">)</span><span class="o">+</span><span class="mi">3</span><span class="p">])]</span><span class="o">.</span><span class="n">new_cases</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">mean_after</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df_week_sum</span><span class="p">[</span><span class="n">df_week_sum</span><span class="o">.</span><span class="n">Week</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="n">week</span><span class="p">,</span><span class="n">week</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">week</span><span class="o">+</span><span class="mi">2</span><span class="p">,</span><span class="n">week</span><span class="o">+</span><span class="mi">3</span><span class="p">])]</span><span class="o">.</span><span class="n">new_cases</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">measure_dict</span><span class="p">[</span><span class="n">measure</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;mean_before&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">mean_before</span><span class="p">),</span> <span class="s1">&#39;mean_after&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">mean_after</span><span class="p">)}</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl"><span class="n">result_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">measure_dict</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">result_df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;MEASURE&#39;</span><span class="p">,</span><span class="s1">&#39;Average Infection 4 weeks Before&#39;</span><span class="p">,</span> <span class="s1">&#39;Average Infection 4 weeks After&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">result_df</span><span class="p">[</span><span class="s1">&#39;Effective&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">((</span><span class="n">result_df</span><span class="p">[</span><span class="s1">&#39;Average Infection 4 weeks Before&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">result_df</span><span class="p">[</span><span class="s1">&#39;Average Infection 4 weeks After&#39;</span><span class="p">]),</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>We can then see the results below and that the out of these 5 measures 3 were effective, Schools closure, Visa restrictions and Closure of businesses and public services. But like I said above this analysis has a flaw because even if the rise has already occurred, a countermeasure is usually implemented in response to it. If the measure was implemented during a period of rapid growth in new infections and only took effect after 4 weeks, it is evident that the number of new infections 4 weeks before the measure was implemented will be lower than the number of new infections 4 weeks after it was implemented.</p>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>MEASURE</th>
+      <th>Average Infection 4 weeks Before</th>
+      <th>Average Infection 4 weeks After</th>
+      <th>Effective</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Schools closure</td>
+      <td>34754.687500</td>
+      <td>26264.750000</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Limit public gatherings</td>
+      <td>24231.833333</td>
+      <td>31325.944444</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Isolation and quarantine policies</td>
+      <td>12751.886364</td>
+      <td>23022.522727</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Visa restrictions</td>
+      <td>18329.333333</td>
+      <td>17110.750000</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Closure of businesses and public services</td>
+      <td>23464.150000</td>
+      <td>23450.275000</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p>With that being said we know from <a href="https://arebimohammed.github.io/2020/03/10/Linear-Regression-All-you-need-to-know.html" target="_blank" rel="noopener noreffer">Linear Regression</a> that it is trying to estimate the coefficients of the input variables, these coefficients help us determine the relationship between the input variable (independent variable/predictor/feature) and the output variable (dependent variable/response/target). So I have used Linear Regression to estimate the coefficient for the &rsquo;effectiveness&rsquo; of the measure as we will see below.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># Reindexing the average cases to calculate weekly trend (difference between subsequent weeks)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">cases</span> <span class="o">=</span> <span class="n">df_week_avg</span><span class="p">[</span><span class="s1">&#39;new_cases&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">cases</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl"><span class="n">cases</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">cases</span><span class="o">.</span><span class="n">index</span> <span class="o">+</span><span class="mi">1</span>
+</span></span><span class="line"><span class="cl"><span class="n">cases</span><span class="o">.</span><span class="n">sort_index</span><span class="p">(</span><span class="n">inplace</span> <span class="o">=</span>  <span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">weekly_trend</span> <span class="o">=</span> <span class="n">cases</span> <span class="o">-</span> <span class="n">cases</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">weekly_trend</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Using these 4 features + 1 feature representing the measure for a particular week,</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># for linear regression to predict average new cases </span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">df_reg</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">df_reg</span><span class="p">[</span><span class="s1">&#39;New Cases&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cases</span>
+</span></span><span class="line"><span class="cl"><span class="n">df_reg</span><span class="p">[</span><span class="s1">&#39;Weekly Trend&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">weekly_trend</span>
+</span></span><span class="line"><span class="cl"><span class="n">df_reg</span><span class="p">[</span><span class="s1">&#39;Week&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_week_avg</span><span class="p">[</span><span class="s1">&#39;Week&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">df_reg</span><span class="p">[</span><span class="s1">&#39;Week_sqr&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_reg</span><span class="p">[</span><span class="s1">&#39;Week&#39;</span><span class="p">]</span> <span class="o">**</span><span class="mi">2</span>
+</span></span><span class="line"><span class="cl"><span class="n">df_reg</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">df_reg</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">df_school</span> <span class="o">=</span> <span class="n">df_reg</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">df_school</span><span class="p">[</span><span class="s1">&#39;Schools Closure&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">((</span><span class="n">df_school</span><span class="o">.</span><span class="n">Week</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">df_imp_measures</span><span class="p">[</span><span class="n">df_imp_measures</span><span class="o">.</span><span class="n">MEASURE</span> <span class="o">==</span> <span class="s1">&#39;Schools closure&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">Week</span><span class="o">.</span><span class="n">values</span><span class="p">)),</span><span class="kc">True</span><span class="p">,</span><span class="kc">False</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">X_school</span> <span class="o">=</span> <span class="n">df_school</span><span class="o">.</span><span class="n">values</span>
+</span></span><span class="line"><span class="cl"><span class="n">y</span> <span class="o">=</span> <span class="n">df_week_avg</span><span class="p">[</span><span class="s1">&#39;new_cases&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">lin_reg_school</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_school</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">df_limit</span> <span class="o">=</span> <span class="n">df_reg</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">df_limit</span><span class="p">[</span><span class="s1">&#39;Limit public gatherings&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">((</span><span class="n">df_school</span><span class="o">.</span><span class="n">Week</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">df_imp_measures</span><span class="p">[</span><span class="n">df_imp_measures</span><span class="o">.</span><span class="n">MEASURE</span> <span class="o">==</span> <span class="s1">&#39;Limit public gatherings&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">Week</span><span class="o">.</span><span class="n">values</span><span class="p">)),</span><span class="kc">True</span><span class="p">,</span><span class="kc">False</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">X_limit</span> <span class="o">=</span> <span class="n">df_limit</span><span class="o">.</span><span class="n">values</span>
+</span></span><span class="line"><span class="cl"><span class="n">lin_reg_limit</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_limit</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">df_isolation</span> <span class="o">=</span> <span class="n">df_reg</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">df_isolation</span><span class="p">[</span><span class="s1">&#39;Isolation and quarantine policies&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">((</span><span class="n">df_isolation</span><span class="o">.</span><span class="n">Week</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">df_imp_measures</span><span class="p">[</span><span class="n">df_imp_measures</span><span class="o">.</span><span class="n">MEASURE</span> <span class="o">==</span> <span class="s1">&#39;Isolation and quarantine policies&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">Week</span><span class="o">.</span><span class="n">values</span><span class="p">)),</span><span class="kc">True</span><span class="p">,</span><span class="kc">False</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">X_isolation</span> <span class="o">=</span> <span class="n">df_isolation</span><span class="o">.</span><span class="n">values</span>
+</span></span><span class="line"><span class="cl"><span class="n">lin_reg_isolation</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_isolation</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">df_visa</span> <span class="o">=</span> <span class="n">df_reg</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">df_visa</span><span class="p">[</span><span class="s1">&#39;Limit public gatherings&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">((</span><span class="n">df_visa</span><span class="o">.</span><span class="n">Week</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">df_imp_measures</span><span class="p">[</span><span class="n">df_imp_measures</span><span class="o">.</span><span class="n">MEASURE</span> <span class="o">==</span> <span class="s1">&#39;Visa restrictions&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">Week</span><span class="o">.</span><span class="n">values</span><span class="p">)),</span><span class="kc">True</span><span class="p">,</span><span class="kc">False</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">X_visa</span> <span class="o">=</span> <span class="n">df_visa</span><span class="o">.</span><span class="n">values</span>
+</span></span><span class="line"><span class="cl"><span class="n">lin_reg_visa</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_visa</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">df_closure</span> <span class="o">=</span> <span class="n">df_reg</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">df_closure</span><span class="p">[</span><span class="s1">&#39;Limit public gatherings&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">((</span><span class="n">df_closure</span><span class="o">.</span><span class="n">Week</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">df_imp_measures</span><span class="p">[</span><span class="n">df_imp_measures</span><span class="o">.</span><span class="n">MEASURE</span> <span class="o">==</span> <span class="s1">&#39;Closure of businesses and public services&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">Week</span><span class="o">.</span><span class="n">values</span><span class="p">)),</span><span class="kc">True</span><span class="p">,</span><span class="kc">False</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">X_closure</span> <span class="o">=</span> <span class="n">df_closure</span><span class="o">.</span><span class="n">values</span>
+</span></span><span class="line"><span class="cl"><span class="n">lin_reg_closure</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_closure</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>I first get the average new cases per week and reindex them to calculate the weekly trend in average new cases by substracting subsequent weeks from previous weeks. I have also used the Week and Week squared as input features as well. Finally the input feature we are mostly interested in, is the measure feature which is different for every measure hence the different input variables (<code> X_&lt;measure&gt;</code>) for the different measures. This will give us this Linear Regression equation:</p>
+<p>$$ \hat{y}<em>{t} = {\alpha} + {\beta}</em>{0}N_{t-1} + {\beta}<em>{1}W + {\beta}</em>{2}t + {\beta}<em>{3}t^2 + {\beta}</em>{4}M $$</p>
+<p>Where:</p>
+<ul>
+<li>$ {\alpha} $ is the y-intercept</li>
+<li>$ {\beta}_{i} $ is for the coefficients to be estimated</li>
+<li>$ N_{t-1} $ is for the new infections 1 week ago</li>
+<li>$ W $ is for the weekly trend $ (N_{t-1}  –  N_{t-2}) $</li>
+<li>$ t $ is for the week</li>
+<li>$ t^2 $ is for the week squared</li>
+<li>$ M $ is for the measure dummy variable</li>
+</ul>
+<p>Then how can we interpret this coefficient? It is fairly simple, we can interpret this coefficient by its sign if it is negative then it is reducing the weekly average of new cases, if it positive it is either not reducing it or the average is still on the rise. Here are the results:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Schools Closure Coefficient: &#34;</span><span class="p">,</span> <span class="n">lin_reg_school</span><span class="o">.</span><span class="n">coef_</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Limit public gatherings Coefficient: &#34;</span><span class="p">,</span> <span class="n">lin_reg_limit</span><span class="o">.</span><span class="n">coef_</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Isolation and quarantine policies: &#34;</span><span class="p">,</span> <span class="n">lin_reg_isolation</span><span class="o">.</span><span class="n">coef_</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Visa restrictions Coefficient: &#34;</span><span class="p">,</span> <span class="n">lin_reg_visa</span><span class="o">.</span><span class="n">coef_</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Closure of businesses and public services Coefficient: &#34;</span><span class="p">,</span> <span class="n">lin_reg_closure</span><span class="o">.</span><span class="n">coef_</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><pre><code>  Schools Closure Coefficient:  -136.60953972008906
+  Limit public gatherings Coefficient:  178.78724726294902
+  Isolation and quarantine policies:  272.8940135554292
+  Visa restrictions Coefficient:  -574.2499316102472
+  Closure of businesses and public services Coefficient:  -97.1873527294096
+</code></pre>
+<p>And coincidently the naive approach had the same results as the Linear Regression approach the same 3 measures are effective here as well.</p>
+<p>We can also use <code>statsmodels</code> to estimate the coefficients like so:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">modeltst</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">sm</span><span class="o">.</span><span class="n">add_constant</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">df_school</span><span class="p">,</span> <span class="n">dtype</span> <span class="o">=</span><span class="nb">float</span><span class="p">)))</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">modeltst</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>We add a constant to get the intercept of the Linear Regression ($ {\alpha} $), the results are very similar to scikit-learns <code>LinearRegression</code> class which uses scipys <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.lstsq.html" target="_blank" rel="noopener noreffer"><code>linalg.lstsq</code></a> in the backend.</p>
+<p>Thank you very much for reading all the way through, and I hope you enjoyed the article and hopefully we can all defeat this virus together, don&rsquo;t forget to check out the interactive dashboard app linked above. You can of course write me if you have any questions or just want to chat :), all my contact details are at the end of the page. See you in the next article and, Stay Safe!</p></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://arebimohammed.github.io/covid19-interactive-analysis/" data-title="COVID-19: An Interactive Analysis" data-hashtags="blogging,data science,machine learning,covid-19"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://arebimohammed.github.io/covid19-interactive-analysis/" data-hashtag="blogging"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://arebimohammed.github.io/covid19-interactive-analysis/"><i class="fab fa-linkedin fa-fw"></i></a><a href="javascript:void(0);" title="Share on WhatsApp" data-sharer="whatsapp" data-url="https://arebimohammed.github.io/covid19-interactive-analysis/" data-title="COVID-19: An Interactive Analysis" data-web><i class="fab fa-whatsapp fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/blogging/">blogging</a>,&nbsp;<a href="/tags/data-science/">data science</a>,&nbsp;<a href="/tags/machine-learning/">machine learning</a>,&nbsp;<a href="/tags/covid-19/">covid-19</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/linear-regression-all-you-need-to-know/" class="prev" rel="prev" title="Linear Regression"><i class="fas fa-angle-left fa-fw"></i>Linear Regression</a></div>
+</div>
+<div id="comments"><div id="valine" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Mohammed Arebi</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/valine/valine.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery.js@1.2.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/copy-tex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/smooth-scroll@16.1.3/dist/smooth-scroll.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.37.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/algoliasearch@4.2.0/dist/algoliasearch-lite.umd.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.2.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery.js@1.2.0/dist/js/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lg-thumbnail.js@1.2.0/dist/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lg-zoom.js@1.2.0/dist/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.0/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/typeit@7.0.4/dist/typeit.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":30},"comment":{"valine":{"appId":"QGzwQXOqs5JOhN4RGPOkR2mR-MdYXbMMI","appKey":"WBmoGyJtbqUswvfLh6L8iEBr","avatar":"mp","el":"#valine","emojiCDN":"https://cdn.jsdelivr.net/npm/emoji-datasource-google@5.0.1/img/google/64/","emojiMaps":{"100":"1f4af.png","alien":"1f47d.png","anger":"1f4a2.png","angry":"1f620.png","anguished":"1f627.png","astonished":"1f632.png","black_heart":"1f5a4.png","blue_heart":"1f499.png","blush":"1f60a.png","bomb":"1f4a3.png","boom":"1f4a5.png","broken_heart":"1f494.png","brown_heart":"1f90e.png","clown_face":"1f921.png","cold_face":"1f976.png","cold_sweat":"1f630.png","confounded":"1f616.png","confused":"1f615.png","cry":"1f622.png","crying_cat_face":"1f63f.png","cupid":"1f498.png","dash":"1f4a8.png","disappointed":"1f61e.png","disappointed_relieved":"1f625.png","dizzy":"1f4ab.png","dizzy_face":"1f635.png","drooling_face":"1f924.png","exploding_head":"1f92f.png","expressionless":"1f611.png","face_vomiting":"1f92e.png","face_with_cowboy_hat":"1f920.png","face_with_hand_over_mouth":"1f92d.png","face_with_head_bandage":"1f915.png","face_with_monocle":"1f9d0.png","face_with_raised_eyebrow":"1f928.png","face_with_rolling_eyes":"1f644.png","face_with_symbols_on_mouth":"1f92c.png","face_with_thermometer":"1f912.png","fearful":"1f628.png","flushed":"1f633.png","frowning":"1f626.png","ghost":"1f47b.png","gift_heart":"1f49d.png","green_heart":"1f49a.png","grimacing":"1f62c.png","grin":"1f601.png","grinning":"1f600.png","hankey":"1f4a9.png","hear_no_evil":"1f649.png","heart":"2764-fe0f.png","heart_decoration":"1f49f.png","heart_eyes":"1f60d.png","heart_eyes_cat":"1f63b.png","heartbeat":"1f493.png","heartpulse":"1f497.png","heavy_heart_exclamation_mark_ornament":"2763-fe0f.png","hole":"1f573-fe0f.png","hot_face":"1f975.png","hugging_face":"1f917.png","hushed":"1f62f.png","imp":"1f47f.png","innocent":"1f607.png","japanese_goblin":"1f47a.png","japanese_ogre":"1f479.png","joy":"1f602.png","joy_cat":"1f639.png","kiss":"1f48b.png","kissing":"1f617.png","kissing_cat":"1f63d.png","kissing_closed_eyes":"1f61a.png","kissing_heart":"1f618.png","kissing_smiling_eyes":"1f619.png","laughing":"1f606.png","left_speech_bubble":"1f5e8-fe0f.png","love_letter":"1f48c.png","lying_face":"1f925.png","mask":"1f637.png","money_mouth_face":"1f911.png","nauseated_face":"1f922.png","nerd_face":"1f913.png","neutral_face":"1f610.png","no_mouth":"1f636.png","open_mouth":"1f62e.png","orange_heart":"1f9e1.png","partying_face":"1f973.png","pensive":"1f614.png","persevere":"1f623.png","pleading_face":"1f97a.png","pouting_cat":"1f63e.png","purple_heart":"1f49c.png","rage":"1f621.png","relaxed":"263a-fe0f.png","relieved":"1f60c.png","revolving_hearts":"1f49e.png","right_anger_bubble":"1f5ef-fe0f.png","robot_face":"1f916.png","rolling_on_the_floor_laughing":"1f923.png","scream":"1f631.png","scream_cat":"1f640.png","see_no_evil":"1f648.png","shushing_face":"1f92b.png","skull":"1f480.png","skull_and_crossbones":"2620-fe0f.png","sleeping":"1f634.png","sleepy":"1f62a.png","slightly_frowning_face":"1f641.png","slightly_smiling_face":"1f642.png","smile":"1f604.png","smile_cat":"1f638.png","smiley":"1f603.png","smiley_cat":"1f63a.png","smiling_face_with_3_hearts":"1f970.png","smiling_imp":"1f608.png","smirk":"1f60f.png","smirk_cat":"1f63c.png","sneezing_face":"1f927.png","sob":"1f62d.png","space_invader":"1f47e.png","sparkling_heart":"1f496.png","speak_no_evil":"1f64a.png","speech_balloon":"1f4ac.png","star-struck":"1f929.png","stuck_out_tongue":"1f61b.png","stuck_out_tongue_closed_eyes":"1f61d.png","stuck_out_tongue_winking_eye":"1f61c.png","sunglasses":"1f60e.png","sweat":"1f613.png","sweat_drops":"1f4a6.png","sweat_smile":"1f605.png","thinking_face":"1f914.png","thought_balloon":"1f4ad.png","tired_face":"1f62b.png","triumph":"1f624.png","two_hearts":"1f495.png","unamused":"1f612.png","upside_down_face":"1f643.png","weary":"1f629.png","white_frowning_face":"2639-fe0f.png","white_heart":"1f90d.png","wink":"1f609.png","woozy_face":"1f974.png","worried":"1f61f.png","yawning_face":"1f971.png","yellow_heart":"1f49b.png","yum":"1f60b.png","zany_face":"1f92a.png","zipper_mouth_face":"1f910.png","zzz":"1f4a4.png"},"enableQQ":false,"highlight":true,"lang":"en","pageSize":10,"placeholder":"Your comment ...","recordIP":true,"serverURLs":"https://leancloud.hugoloveit.com","visitor":true}},"data":{"id-1":"Mohammed Arebi","id-2":"Mohammed Arebi"},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"algoliaAppID":"PASDMWALPK","algoliaIndex":"index.en","algoliaSearchKey":"b42948e51daaa93df92381c8e2ac0f93","highlightTag":"em","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"algolia"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
