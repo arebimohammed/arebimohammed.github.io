@@ -17,7 +17,7 @@ What a better way to start my blogging journey, than with one of the most fundam
 - The second step is to compute R<sup>2</sup>
 - Finally, compute the p-value for the computed R squared in the previous step
 
-The first concept we are going to tackle is fitting a line to the data, what exactly does that mean and how can we do it? To effectively explain that we are going to need some data. I will be using the fish market data from Kaggle which is available [here](https://www.kaggle.com/aungpyaeap/fish-market). The dataset contains sales records for seven common fish species seen in fish markets. Some of the features (columns) in dataset are: Species, Weight, Different Lengths, Height and Width. We'll be using it to estimate the weight of the fish, as we are trying to explain linear regression we'll first use only one feature to predict the weight, the height (simple linear regression).
+The first concept we are going to tackle is fitting a line to the data, what exactly does that mean and how can we do it? To effectively explain that we are going to need some data. I will be using the fish market data from Kaggle which is available [here](https://www.kaggle.com/aungpyaeap/fish-market). The dataset contains sales records for seven common fish species seen in fish markets. Some of the features (columns) in dataset are: Species, Weight, Different Lengths, Height and Width. We'll be using it to estimate the weight of the fish, as we are trying to explain linear regression we'll first use only one feature to predict the weight, the height (simple linear regression)
 
 We'll first load the dataset using pandas ``` read_csv ```:
 
