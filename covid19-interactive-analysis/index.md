@@ -636,7 +636,9 @@ lin_reg_closure = LinearRegression().fit(X_closure,y)
 
 I first get the average new cases per week and reindex them to calculate the weekly trend in average new cases by substracting subsequent weeks from previous weeks. I have also used the Week and Week squared as input features as well. Finally the input feature we are mostly interested in, is the measure feature which is different for every measure hence the different input variables (``` X_<measure>```) for the different measures. This will give us this Linear Regression equation:
 
-$$ \hat{y}_{t} = {\alpha} + {\beta}_{0}N_{t-1} + {\beta}_{1}W + {\beta}_{2}t + {\beta}_{3}t^2 + {\beta}_{4}M $$
+
+<img src="/posts/COVID19- An Interactive Analysis/LR_EQ.png" alt="Linear Regression Equation"/>
+
 
 Where: 
 - $ {\alpha} $ is the y-intercept

@@ -10,7 +10,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://arebimohammed.github.io/linear-regression-all-you-need-to-know/" /><meta property="og:image" content="https://arebimohammed.github.io/logo.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2020-03-10T10:29:01+08:00" />
-<meta property="article:modified_time" content="2022-03-23T23:28:53+01:00" />
+<meta property="article:modified_time" content="2022-03-23T23:42:53+01:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://arebimohammed.github.io/logo.png"/>
@@ -29,8 +29,8 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/arebimohammed.github.io\/linear-regression-all-you-need-to-know\/"
-        },"image": ["https:\/\/arebimohammed.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "blogging, data science, machine learning, linear regression, python","wordcount":  3358 ,
-        "url": "https:\/\/arebimohammed.github.io\/linear-regression-all-you-need-to-know\/","datePublished": "2020-03-10T10:29:01+08:00","dateModified": "2022-03-23T23:28:53+01:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+        },"image": ["https:\/\/arebimohammed.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "blogging, data science, machine learning, linear regression, python","wordcount":  3348 ,
+        "url": "https:\/\/arebimohammed.github.io\/linear-regression-all-you-need-to-know\/","datePublished": "2020-03-10T10:29:01+08:00","dateModified": "2022-03-23T23:42:53+01:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": "https:\/\/arebimohammed.github.io\/images\/avatar.png"},"author": {
                 "@type": "Person",
@@ -106,7 +106,7 @@
             <div class="toc-content always-active" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">Linear Regression</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Mohammed Arebi</a></span>&nbsp;<span class="post-category">included in <a href="/categories/linear-regression/"><i class="far fa-folder fa-fw"></i>Linear Regression</a>&nbsp;<a href="/categories/tutorial/"><i class="far fa-folder fa-fw"></i>Tutorial</a>&nbsp;<a href="/categories/machine-learning/"><i class="far fa-folder fa-fw"></i>Machine Learning</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-03-10">2020-03-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;3358 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-03-10">2020-03-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;3348 words&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;16 minutes&nbsp;<span id="/linear-regression-all-you-need-to-know/" class="leancloud_visitors" data-flag-title="Linear Regression">
                         <i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;views
                     </span>&nbsp;</div>
@@ -225,8 +225,8 @@
 <p>You probably remember from linear algebra that a line is just this equation $ y = mx +b $, where $m$ is the slope of the line $b$ is the y-intercept, $x$ is the x-axis value and $y$ is the y-axis value. Well to rotate the line we need to iteratively - or mathematically - adjust the y-intercept ($b$) and the slope ($m$) so that the sum of the squared residuals - the error - is the lowest. In linear regression the equation is usually expressed in a different way like so: $\hat{y} = {\alpha} + {\beta}x$, where $ {\alpha} $ is the y-intercept (sometimes also written as $ {\beta}_0 $) and $ {\beta} $ is the slope. In simple linear regression there is only one independent variable - feature - and therefore only one slope - or coefficient -, but in many cases we have many different features that we would like to use in our equation so for every feature $X_n$ added we add its coefficient $ {\beta}_n$, to be estimated with the y-intercept.
 In general, such a relationship may not hold perfectly for the mostly unobserved population of values of the feature and target variables; these unobserved variations from the above equation are referred to as random errors or noise, which we assume on average is zero, so during modelling of the linear regression line it is omitted from the parameters to estimate. And they are usually added to the equation as well to get: $\hat{y} = {\alpha} + {\beta}x  + {\epsilon}_i$.</p>
 <p>But now comes the real question how does linear regression adjust the y-intercept and coefficients to get the &ldquo;best-fitting&rdquo; line which yields the lowest sum of squared residuals. Recall that I mentioned that these parameters ($\hat{\alpha}$ and $\hat{\beta}$) can be either estimated iteratively or mathematically. In the third step I mentioned that we rotate the line a little bit to be able to decrease the sum of squared residuals, well that is actually the iterative approach, which is conducted using an optimization technique named gradient descent. The mathematical approach uses derived equations using calculus to estimate these parameters, analytically straight away to get the line. In this article I&rsquo;ll talk about these equations i.e. the mathematical approach, and will leave the iterative approach using gradient descent for another article where I talk about gradient descent in general as it is widely used in many other machine learning algorithms (not only linear regression) to minimize a loss or cost function (or gradient ascent to maximize an objective function) and it does that by iteratively adjusting these parameter, in linear regression the sum of squared residuals is the loss function.</p>
-<p>First let&rsquo;s define the sum of squared residuals equations, we know that the equation for the line is: $ \hat{y} = {\alpha} + {\beta}x$, and we know that the residuals is the actual value $y$ minus the estimated value which we will give the symbol $\hat{y}$ then squared. So the sum of squared residuals is defined by:</p>
-<p>$$ \sum_{i=1}^{n} (y_i - \hat{y}<em>i)^2  = \sum</em>{i=1}^{n} (y_i -  (\hat{\alpha} + {\hat{\beta}}x_i))^2 $$</p>
+<p>First let&rsquo;s define the sum of squared residuals equations, we know that the equation for the line is: $ \hat{y} = {\alpha} + {\beta}x$, and we know that the residuals is the actual value $y$ minus the estimated value (which we will give the symbol $\hat{y}$), the result is then squared. So the sum of squared residuals is defined by:</p>
+<img src = "/posts/Linear Regression/SSR.png">
 <p>where $n$ is the sample size.</p>
 <p>we can shorten this to a function with $ \hat{\alpha} $ and $ \hat{\beta} $ as parameters, $ F(\hat{\alpha},\hat{\beta}) $. To minimize this equation, we use calculus, which is great in such problems (if the function is differentiable).</p>
 <p>How does it do that?</p>
