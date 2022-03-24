@@ -10,7 +10,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://arebimohammed.github.io/covid19-interactive-analysis/" /><meta property="og:image" content="https://arebimohammed.github.io/logo.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2020-03-28T10:29:01+08:00" />
-<meta property="article:modified_time" content="2022-03-23T23:42:53+01:00" />
+<meta property="article:modified_time" content="2022-03-24T15:08:32+01:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://arebimohammed.github.io/logo.png"/>
@@ -30,7 +30,7 @@
             "@type": "WebPage",
             "@id": "https:\/\/arebimohammed.github.io\/covid19-interactive-analysis\/"
         },"image": ["https:\/\/arebimohammed.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "blogging, data science, machine learning, covid-19","wordcount":  4926 ,
-        "url": "https:\/\/arebimohammed.github.io\/covid19-interactive-analysis\/","datePublished": "2020-03-28T10:29:01+08:00","dateModified": "2022-03-23T23:42:53+01:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+        "url": "https:\/\/arebimohammed.github.io\/covid19-interactive-analysis\/","datePublished": "2020-03-28T10:29:01+08:00","dateModified": "2022-03-24T15:08:32+01:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": "https:\/\/arebimohammed.github.io\/images\/avatar.png"},"author": {
                 "@type": "Person",
@@ -487,7 +487,7 @@ Shape for Recovories DataFrame: (269, 783)
 <li>Finally wrapping the widgets, update logic and figure in a final output widget.</li>
 </ul>
 <p>I have added several other interactive figures in the dashboard app that I will not discuss here. But you can definitely check out the code for them in the Github repository linked above, and interact with the figures in the app also linked above.</p>
-<p>The next analysis I wanted to work on is trying to predict the number of cases per status (Confirmed, Recovered, Active, Deaths). I opted for Linear regression to conduct such analysis. If you haven&rsquo;t read my blog post on linear regression read it <a href="https://arebimohammed.github.io/2020/03/10/Linear-Regression-All-you-need-to-know.html" target="_blank" rel="noopener noreffer">here</a>. The blog posts tries to cover most of the details of linear regression, but also includes polynomial regression, which is linear regression with polynomial features, It&rsquo;s also possible to think of it as a linear regression with a feature space mapping (aka a polynomial kernel). I will try to dedicate a seperate post for polynomial features and polynomial regression, but all you need to know ahead here is that the time series data of the Covid-19 cases is not linear, it can have various shapes, particularly for the daily changes per status data, the others are fairly linear especially the &lsquo;Confirmed&rsquo; and &lsquo;Deaths&rsquo;, but of course they are if we are looking at the cumulative count, as seen below (click the &lsquo;Confirmed&rsquo; or &lsquo;Deaths&rsquo; button). But if you look at the daily changes data (also by clicking their respective buttons), it is not that linear.</p>
+<p>The next analysis I wanted to work on is trying to predict the number of cases per status (Confirmed, Recovered, Active, Deaths). I opted for Linear regression to conduct such analysis. If you haven&rsquo;t read my blog post on linear regression read it <a href="https://arebimohammed.github.io/linear-regression-all-you-need-to-know/" target="_blank" rel="noopener noreffer">here</a>. The blog posts tries to cover most of the details of linear regression, but also includes polynomial regression, which is linear regression with polynomial features, It&rsquo;s also possible to think of it as a linear regression with a feature space mapping (aka a polynomial kernel). I will try to dedicate a seperate post for polynomial features and polynomial regression, but all you need to know ahead here is that the time series data of the Covid-19 cases is not linear, it can have various shapes, particularly for the daily changes per status data, the others are fairly linear especially the &lsquo;Confirmed&rsquo; and &lsquo;Deaths&rsquo;, but of course they are if we are looking at the cumulative count, as seen below (click the &lsquo;Confirmed&rsquo; or &lsquo;Deaths&rsquo; button). But if you look at the daily changes data (also by clicking their respective buttons), it is not that linear.</p>
 <iframe src= "/posts/COVID19- An Interactive Analysis/stats_fig.html" height="525" width="100%"></iframe>
 <p>The code below shows how Polynomial Regression can be done using scikit-learns <a href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.PolynomialFeatures.html" target="_blank" rel="noopener noreffer"><code>PolynomialFeatures</code></a></p>
 <div class="highlight"><div class="chroma">
@@ -1048,7 +1048,7 @@ I then got the first and last dates in the dataframe to create a weekly date ran
   </tbody>
 </table>
 </div>
-<p>With that being said we know from <a href="https://arebimohammed.github.io/2020/03/10/Linear-Regression-All-you-need-to-know.html" target="_blank" rel="noopener noreffer">Linear Regression</a> that it is trying to estimate the coefficients of the input variables, these coefficients help us determine the relationship between the input variable (independent variable/predictor/feature) and the output variable (dependent variable/response/target). So I have used Linear Regression to estimate the coefficient for the &rsquo;effectiveness&rsquo; of the measure as we will see below.</p>
+<p>With that being said we know from <a href="https://arebimohammed.github.io/linear-regression-all-you-need-to-know/" target="_blank" rel="noopener noreffer">Linear Regression</a> that it is trying to estimate the coefficients of the input variables, these coefficients help us determine the relationship between the input variable (independent variable/predictor/feature) and the output variable (dependent variable/response/target). So I have used Linear Regression to estimate the coefficient for the &rsquo;effectiveness&rsquo; of the measure as we will see below.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
