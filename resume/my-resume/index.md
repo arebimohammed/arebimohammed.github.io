@@ -14,7 +14,7 @@
 <br>
 
 # Profile
-A resourceful and extremely motivated data scientist with a proven track record of solving difficult business problems. I like work on meaningful projects and build valuable applications in the area of machine learnig. Actively Building. Always Learning.
+A resourceful and extremely motivated data scientist with a proven track record of solving difficult business problems. I like work on meaningful projects and build valuable applications in the area of machine learning. Actively Building. Always Learning.
 
 <hr>
 
