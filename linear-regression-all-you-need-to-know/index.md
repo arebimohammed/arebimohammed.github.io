@@ -2,40 +2,41 @@
 
 <!--more-->
 
-What a better way to start my blogging journey, than with one of the most fundamental statistical learning techniques, Linear Regression. A straightforward method for supervised learning - supervised learning is the process of training a model on data where the outcome is known before applying it to data where the outcome is unknown -, learning linear regression also helps to understand the overall process of what supervised learning looks like. Linear regression, in particular, is a powerful tool for predicting a quantitative response. It's been around for a while and is the subject of a slew of textbooks. Linear Regression is part of the Generalized Linear Models family (GLM for short). Despite the fact that it may appear tedious in comparison to some of the more current statistical learning approaches, linear regression remains an effective and extensively used statistical learning method. It also provides as a useful starting point for emerging approaches. Many fancy statistical learning methods can be thought of as extensions or generalizations of linear regression. As a result, the necessity of mastering linear regression before moving on to more advanced learning approaches cannot be emphasized.
+<p style="font-size:1.125rem">What a better way to start my blogging journey, than with one of the most fundamental statistical learning techniques, Linear Regression. A straightforward method for supervised learning - supervised learning is the process of training a model on data where the outcome is known before applying it to data where the outcome is unknown -, learning linear regression also helps to understand the overall process of what supervised learning looks like. Linear regression, in particular, is a powerful tool for predicting a quantitative response. It's been around for a while and is the subject of a slew of textbooks. Linear Regression is part of the Generalized Linear Models family (GLM for short). Despite the fact that it may appear tedious in comparison to some of the more current statistical learning approaches, linear regression remains an effective and extensively used statistical learning method. It also provides as a useful starting point for emerging approaches. Many fancy statistical learning methods can be thought of as extensions or generalizations of linear regression. As a result, the necessity of mastering linear regression before moving on to more advanced learning approaches cannot be emphasized.</p>
 
 
- The response to the question "Is the variable $X$ associated with a variable $Y$, and if so, what is the relationship, and can we use it to predict Y?" is perhaps the most prevalent goal in statistics and linear regression tries to answer that, it does this based on linear relationships between the independent ($X$) and dependent ($Y$) variables. Simple linear regression creates a model of the relationship between the magnitudes of two variables—for example, as X increases, Y increases as well. Alternatively, when X increases, Y decreases. I've used the term simple here because we are only talking about one variable X, but instead of one variable X, we can of course use multiple predictor variables $ X_{1}...X_{n} $, which is often termed Multiple Linear Regression or just simply Linear Regression. 
+ <p style="font-size:1.125rem">The response to the question "Is the variable $X$ associated with a variable $Y$, and if so, what is the relationship, and can we use it to predict Y?" is perhaps the most prevalent goal in statistics and linear regression tries to answer that, it does this based on linear relationships between the independent ($X$) and dependent ($Y$) variables. Simple linear regression creates a model of the relationship between the magnitudes of two variables—for example, as X increases, Y increases as well. Alternatively, when X increases, Y decreases. I've used the term simple here because we are only talking about one variable X, but instead of one variable X, we can of course use multiple predictor variables $ X_{1}...X_{n} $, which is often termed Multiple Linear Regression or just simply Linear Regression.</p>
 
- I assure you that I have a multitude of examples and explanations that go through all of the finer points of linear regression. But first, let's go through the fundamental concepts. 
+ <p style="font-size:1.125rem">I assure you that I have a multitude of examples and explanations that go through all of the finer points of linear regression. But first, let's go through the fundamental concepts.</p>
 
 
 ### The fundamental concepts behind linear regression
 <br>
 
-- The first step in linear regression is to fit a line to the data using least squares
-- The second step is to compute R<sup>2</sup>
-- Finally, compute the p-value for the computed R squared in the previous step
+- <p style="font-size:1.125rem">The first step in linear regression is to fit a line to the data using least squares</p>
+- <p style="font-size:1.125rem">The second step is to compute R<sup>2</sup></p>
+- <p style="font-size:1.125rem">Finally, compute the p-value for the computed R squared in the previous step</p>
 
-The first concept we are going to tackle is fitting a line to the data, what exactly does that mean and how can we do it? To effectively explain that we are going to need some data. I will be using the fish market data from Kaggle which is available [here](https://www.kaggle.com/aungpyaeap/fish-market). The dataset contains sales records for seven common fish species seen in fish markets. Some of the features (columns) in dataset are: Species, Weight, Different Lengths, Height and Width. We'll be using it to estimate the weight of the fish, as we are trying to explain linear regression we'll first use only one feature to predict the weight, the height (simple linear regression)
 
-We'll first load the dataset using pandas ``` read_csv ```:
+<span style="font-size:1.125rem"> The first concept we are going to tackle is fitting a line to the data, what exactly does that mean and how can we do it? To effectively explain that we are going to need some data. I will be using the fish market data from Kaggle which is available [here](https://www.kaggle.com/aungpyaeap/fish-market). The dataset contains sales records for seven common fish species seen in fish markets. Some of the features (columns) in dataset are: Species, Weight, Different Lengths, Height and Width. We'll be using it to estimate the weight of the fish, as we are trying to explain linear regression we'll first use only one feature to predict the weight, the height (simple linear regression)</span>
+
+<span style="font-size:1.125rem"> We'll first load the dataset using pandas ``` read_csv ```: </span>
 
 ```python
 df = pd.read_csv("data/Fish.csv")
 ```
-All code in this article can be found in my Github in this [repository](https://github.com/arebimohammed/code-for-articles/tree/master/Linear%20Regression)
+<span style="font-size:1.125rem"> All code in this article can be found in my Github in this [repository](https://github.com/arebimohammed/code-for-articles/tree/master/Linear%20Regression) </span>
 
-Now back to our first concept, fitting a line to the data, what does that mean? 
+<span style="font-size:1.125rem"> Now back to our first concept, fitting a line to the data, what does that mean? </span> 
 
 #### Fitting a line to the data
 
-To clearly explain this concept let's first get only one species of fish, in this example we'll use Perch:
+<span style="font-size:1.125rem"> To clearly explain this concept let's first get only one species of fish, in this example we'll use Perch: </span>
 
 ```python
 df_perch = df[df.Species == 'Perch']
 ```
-We'll then simply create a scatter plot of Weight vs. Height.
+<span style="font-size:1.125rem"> We'll then simply create a scatter plot of Weight vs. Height.</span>
 ```python
 fig = px.scatter(df_perch, x='Height', y='Weight')
 fig.show()
@@ -43,7 +44,7 @@ fig.show()
 
 <img style = "width: 100%" src = "/posts/Linear Regression/Scatter_x_y.png">
 
-And then we'll plot a horizontal line across the data, at the average weight (our target variable). 
+<span style="font-size:1.125rem"> And then we'll plot a horizontal line across the data, at the average weight (our target variable).</span>
 
 ```python
 mean_val= df_perch.Weight.mean()
@@ -54,7 +55,7 @@ fig.show()
 <img style = "width: 100%" src = "/posts/Linear Regression/Scatter_mean.png">
 
 
-Then we calculate the difference between the actual values, the dots representing the weights in the figure, and the line (the mean value). This can be thought of as the distance between them (if you would like to think geometrically). These distances are also called the residuals. Here are the residuals plotted.
+<span style="font-size:1.125rem"> Then we calculate the difference between the actual values, the dots representing the weights in the figure, and the line (the mean value). This can be thought of as the distance between them (if you would like to think geometrically). These distances are also called the residuals. Here are the residuals plotted.</span>
 
 ```python
 for weight,height in zip(df_perch.Weight,df_perch.Height):
@@ -63,6 +64,7 @@ fig.show()
 ```
 <img style = "width: 100%" src = "/posts/Linear Regression/Scatter_residuals.png">
 
+<span style="font-size:1.125rem">
  Then we'll square each distance (residual) from the line to the data and sum them all up. We square the residuals so that the negative and positive residuals don't cancel each other out. 
 
  ```python
@@ -327,4 +329,5 @@ These are the main and most fundamental ideas behind linear regression, but of c
 
 Thank you very much for reading all the way through, and I hope you enjoyed the article. See you in the next article and, Stay Safe! 
 
+</span>
 
