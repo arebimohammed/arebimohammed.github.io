@@ -29,7 +29,7 @@ _ = plt.ylabel("$y$", rotation=0, fontsize=16)
 
 </span>
 
-<span style="font-size:1.125rem"> Understanding linear regression and the mathematics underlying it is necessary for this topic. You can read my previos article on [Linear Regression](https://arebimohammed.github.io/linear-regression-all-you-need-to-know/) if you aren't familiar with it.</span>
+<span style="font-size:1.125rem"> Understanding linear regression and the mathematics underlying it is necessary for this topic. You can read my previous article on [Linear Regression](https://arebimohammed.github.io/linear-regression-all-you-need-to-know/) if you aren't familiar with it.</span>
 
 <span style="font-size:1.125rem">
 Applying a linear regression model to this dataset first will allow us to gauge how well it will perform.
