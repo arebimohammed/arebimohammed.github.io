@@ -78,7 +78,7 @@ Given that the coefficients and weights assigned to the features are still linea
 
 What we are only doing here is adding powers of each feature as new features (interactions between multiple features can also be added as well depending on the implementation), then simply train a linear model on this extended set of features. This is the essence of Polynomial Regression (details later :wink:)
 
-The scikit-Learn ``` PolynomialFeatures ``` class can be used to transform the original features into their higher order terms. Then we can train a linear model with those new generated features. Numpy also offers a polynomail regresion implementation using ``` numpy.polyfit ``` (check my [github](https://github.com/arebimohammed/code-for-articles) for usage).
+The scikit-Learn ``` PolynomialFeatures ``` class can be used to transform the original features into their higher order terms. Then we can train a linear model with those new generated features. Numpy also offers a polynomial regression implementation using ``` numpy.polyfit ``` (check my [github](https://github.com/arebimohammed/code-for-articles) for usage).
 
 ```python
 polynomial_features= PolynomialFeatures(degree=2)
