@@ -1,6 +1,7 @@
 # COVID-19: An Interactive Analysis
 
 <!--more-->
+<span style="font-size:1.125rem">
 
 A new virus has plauged us and caused turmoil in the world. This virus has caused shut-downs, lockdowns and in the worst-case will unfortunately cause deaths. It is our job as responsible citizens to do our best to stop it from further spreading, and what better way than for us data scientists to dive deep into the data (of course while wearing masks and keeping the safe distance).
 So lets dive in.
@@ -678,3 +679,5 @@ We add a constant to get the intercept of the Linear Regression ($ {\alpha} $), 
 
 
 Thank you very much for reading all the way through, and I hope you enjoyed the article and hopefully we can all defeat this virus together, don't forget to check out the interactive dashboard app linked above. You can of course write me if you have any questions or just want to chat :), all my contact details are at the end of the page. See you in the next article and, Stay Safe! 
+
+</span>
