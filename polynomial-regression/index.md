@@ -1,6 +1,7 @@
 # Polynomial Regression
 
 
+
 ### Introduction
 <span style="font-size:1.125rem"> The data we have frequently cannot be fitted linearly, and we must use a higher degree polynomial (such as a quadratic or cubic one) to be able to fit the data. When the relationship between the dependent ($Y$) and the independent ($X$) variables is curvilinear, as seen in the following figure (generated using numpy based on a quadratic equation), we can utilise a polynomial model.
 
