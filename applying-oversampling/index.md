@@ -4,7 +4,7 @@
 <span style="font-size:1.125rem">
 
 
-I mentioned various undersampling approaches for dealing with highly imbalanced data in the earlier post ["Using Under-Sampling Techniques for Extremely Imbalanced Data."]() In this article, I present oversampling strategies for dealing with the same problem.
+I mentioned various undersampling approaches for dealing with highly imbalanced data in the earlier post ["Applying Under-Sampling Methods to Highly Imbalanced Data"](https://arebimohammed.github.io/applying-under-sampling/) In this article, I present oversampling strategies for dealing with the same problem.
 
 By reproducing minority class examples, oversampling raises the weight of the minority class. Although it does not provide information, it introduces the issue of over-fitting, which causes the model to be overly specific. It is possible that while the accuracy for the training set is great, the performance for unseen datasets is poor.
 
@@ -66,7 +66,7 @@ plot_data(X_rs,y_rs)
 
 <img style = "width: 100%" src = "/posts/Upsampling Applications/data_adsn.png">
 
-The previous article [Applying Under-Sampling Methods to Highly Imbalanced Data]() along with this article together can give you a comprehensive view of both the undersampling and oversampling techniques!
+The previous article [Applying Under-Sampling Methods to Highly Imbalanced Data](https://arebimohammed.github.io/applying-under-sampling/) along with this article together can give you a comprehensive view of both the undersampling and oversampling techniques!
 
 ### Conclusion
 

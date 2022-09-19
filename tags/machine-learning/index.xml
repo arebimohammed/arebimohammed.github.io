@@ -12,7 +12,7 @@
     <guid>https://arebimohammed.github.io/applying-oversampling/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/posts/Upsampling%20Applications/oversampling.png" referrerpolicy="no-referrer">
-            </div>I mentioned various undersampling approaches for dealing with highly imbalanced data in the earlier post &ldquo;Using Under-Sampling Techniques for Extremely Imbalanced Data.&rdquo; In this article, I present oversampling strategies for dealing with the same problem.
+            </div>I mentioned various undersampling approaches for dealing with highly imbalanced data in the earlier post &ldquo;Applying Under-Sampling Methods to Highly Imbalanced Data&rdquo; In this article, I present oversampling strategies for dealing with the same problem.
 By reproducing minority class examples, oversampling raises the weight of the minority class. Although it does not provide information, it introduces the issue of over-fitting, which causes the model to be overly specific. It is possible that while the accuracy for the training set is great, the performance for unseen datasets is poor.]]></description>
 </item><item>
     <title>Applying Under-Sampling Methods to Highly Imbalanced Data</title>
