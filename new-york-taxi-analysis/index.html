@@ -10,7 +10,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://arebimohammed.github.io/new-york-taxi-analysis/" /><meta property="og:image" content="https://arebimohammed.github.io/logo.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2020-10-16T20:29:01+08:00" />
-<meta property="article:modified_time" content="2022-10-30T02:41:53+02:00" />
+<meta property="article:modified_time" content="2022-10-30T08:18:47+01:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://arebimohammed.github.io/logo.png"/>
@@ -29,8 +29,8 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/arebimohammed.github.io\/new-york-taxi-analysis\/"
-        },"image": ["https:\/\/arebimohammed.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "blogging, data science, machine learning, project, python, data analysis","wordcount":  10267 ,
-        "url": "https:\/\/arebimohammed.github.io\/new-york-taxi-analysis\/","datePublished": "2020-10-16T20:29:01+08:00","dateModified": "2022-10-30T02:41:53+02:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+        },"image": ["https:\/\/arebimohammed.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "blogging, data science, machine learning, project, python, data analysis","wordcount":  12461 ,
+        "url": "https:\/\/arebimohammed.github.io\/new-york-taxi-analysis\/","datePublished": "2020-10-16T20:29:01+08:00","dateModified": "2022-10-30T08:18:47+01:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": "https:\/\/arebimohammed.github.io\/images\/avatar.png"},"author": {
                 "@type": "Person",
@@ -106,8 +106,8 @@
             <div class="toc-content always-active" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">Digging Deep Into the New York Taxi Dataset</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Mohammed Arebi</a></span>&nbsp;<span class="post-category">included in <a href="/categories/data-analysis/"><i class="far fa-folder fa-fw"></i>Data Analysis</a>&nbsp;<a href="/categories/machine-learning/"><i class="far fa-folder fa-fw"></i>Machine Learning</a>&nbsp;<a href="/categories/big-data/"><i class="far fa-folder fa-fw"></i>Big Data</a>&nbsp;<a href="/categories/interactive/"><i class="far fa-folder fa-fw"></i>Interactive</a>&nbsp;<a href="/categories/data-visualisation/"><i class="far fa-folder fa-fw"></i>Data Visualisation</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-10-16">2020-10-16</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;10267 words&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;49 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-10-16">2020-10-16</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;12461 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;59 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -173,6 +173,18 @@
             <li><a href="#traffic-volume-per-direction-of-trip">Traffic Volume per Direction of Trip</a></li>
             <li><a href="#traffic-volume-between-nyc-boroughs">Traffic Volume between NYC Boroughs</a></li>
             <li><a href="#traffic-density-per-borough-and-area">Traffic Density per Borough and Area</a></li>
+            <li><a href="#traffic-density-throughout-the-year">Traffic Density Throughout the Year</a></li>
+          </ul>
+        </li>
+        <li><a href="#q4-tip-analysis">Q4: Tip Analysis</a>
+          <ul>
+            <li><a href="#tip-per-hour-of-day">Tip per Hour of Day</a></li>
+            <li><a href="#tip-per-day-of-week">Tip per Day of Week</a></li>
+            <li><a href="#tip-per-hour-of-day-and-day-of-week">Tip per Hour of Day and Day of Week</a></li>
+            <li><a href="#tip-per-time-of-day">Tip per Time of Day</a></li>
+            <li><a href="#tip-per-month">Tip per Month</a></li>
+            <li><a href="#tip-per-direction">Tip per Direction</a></li>
+            <li><a href="#tip-per-borough">Tip per Borough</a></li>
           </ul>
         </li>
       </ul>
@@ -4724,7 +4736,992 @@ Speed Mean    Speed Median    Speed Mode
 </video>
 <p>We notice the same patterns as well in that most pickups are focused in the Manhattan area and that Dropoffs are more spread out to Queens, Brooklyn and JFK Airport</p>
 <p>I have also animated the traffic volume per day and hour as well to get a more granular look but again its file is way too big to publish here, but the code to reproduce it can be found in my GitHub repo linked above.</p>
-</span></div><div class="post-footer" id="post-footer">
+<h4 id="traffic-density-throughout-the-year">Traffic Density Throughout the Year</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;pickup_datetime&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;pickup_datetime&#39;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;dropoff_datetime&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;dropoff_datetime&#39;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="n">date_time_density</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;pickup_hour&#39;</span><span class="p">,</span><span class="n">df_train</span><span class="o">.</span><span class="n">pickup_datetime</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">date</span><span class="p">],</span><span class="n">as_index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">size</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">date_time_density</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s2">&#34;pickup_datetime&#34;</span><span class="p">,</span><span class="s2">&#34;pickup_hour&#34;</span><span class="p">],</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">date_time_density_img</span> <span class="o">=</span> <span class="n">date_time_density</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s1">&#39;pickup_datetime&#39;</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="s2">&#34;pickup_hour&#34;</span><span class="p">,</span><span class="n">values</span><span class="o">=</span> <span class="s2">&#34;size&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">date_time_density_img</span> <span class="o">=</span> <span class="n">date_time_density_img</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">traffic_datehour</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">date_time_density_img</span><span class="p">,</span><span class="n">color_continuous_scale</span><span class="o">=</span><span class="s1">&#39;OrRd&#39;</span><span class="p">,</span><span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">traffic_datehour</span> <span class="o">=</span> <span class="n">traffic_datehour</span><span class="o">.</span><span class="n">update_xaxes</span><span class="p">(</span><span class="n">showticklabels</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">traffic_datehour</span> <span class="o">=</span> <span class="n">traffic_datehour</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">title</span><span class="o">=</span> <span class="s2">&#34;Pickup Density 2013&#34;</span><span class="p">,</span><span class="n">xaxis_title</span><span class="o">=</span> <span class="s2">&#34;Date&#34;</span><span class="p">,</span><span class="n">yaxis_title</span><span class="o">=</span> <span class="s2">&#34;Hour&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">highlighted_dates</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;2013-02-01&#39;</span><span class="p">,</span><span class="s1">&#39;2013-02-08&#39;</span><span class="p">,</span><span class="s1">&#39;2013-07-04&#39;</span><span class="p">,</span><span class="s1">&#39;2013-09-13&#39;</span><span class="p">,</span><span class="s1">&#39;2013-12-25&#39;</span><span class="p">,</span><span class="s1">&#39;2013-12-31&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">highlighted_hours</span> <span class="o">=</span> <span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">22</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">text</span><span class="o">=</span> <span class="p">[</span><span class="s1">&#39;&lt;b&gt;New York Knicks Final&lt;/b&gt;&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;b&gt;Weather Storm&lt;/b&gt;&#39;</span><span class="p">,</span><span class="s1">&#39;&lt;b&gt;4th of July&lt;/b&gt;&#39;</span><span class="p">,</span><span class="s1">&#39;&lt;b&gt;New York Yankees Final&lt;/b&gt;&#39;</span><span class="p">,</span><span class="s1">&#39;&lt;b&gt;Christmas&lt;/b&gt;&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">       <span class="s1">&#39;&lt;b&gt;New Years Eve&lt;/b&gt;&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">text</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">highlighted_dates</span><span class="p">,</span> <span class="n">highlighted_hours</span><span class="p">,</span><span class="n">text</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">traffic_datehour</span><span class="o">.</span><span class="n">add_annotation</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="n">text</span><span class="p">,</span><span class="n">showarrow</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">arrowhead</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span><span class="n">arrowwidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span><span class="n">xshift</span><span class="o">=</span><span class="mf">2.5</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl"><span class="n">traffic_datehour</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><iframe src= "/posts/New-York-Taxi-Analysis/traffic_datehour.html" height="525" width="100%"></iframe>
+<p>Looking at the whole year we can see the traffic volumne pattern on specific dates</p>
+<h3 id="q4-tip-analysis">Q4: Tip Analysis</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">fig_tip</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">df_train</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&#34;tip_amount&#34;</span><span class="p">,</span><span class="n">nbins</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Histogram of Tip Amount&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">fig_tip</span> <span class="o">=</span> <span class="n">fig_tip</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">xaxis_title</span> <span class="o">=</span> <span class="s2">&#34;Tip Amount&#34;</span><span class="p">,</span> <span class="n">yaxis_title</span><span class="o">=</span> <span class="s1">&#39;Count&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">fig_tip</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><iframe src= "/posts/New-York-Taxi-Analysis/fig_tip.html" height="525" width="100%"></iframe>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">table</span> <span class="o">=</span><span class="p">[</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;tip_amount&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;tip_amount&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">median</span><span class="p">(),</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;tip_amount&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mode</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Right Skewed Distribution which means mean &gt; median &gt; mode&#34;</span><span class="p">,</span><span class="n">end</span><span class="o">=</span><span class="s2">&#34;</span><span class="se">\n\n</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">tabulate</span><span class="p">([</span><span class="n">table</span><span class="p">],</span><span class="n">headers</span><span class="o">=</span><span class="p">[</span><span class="s2">&#34;Tip Amount Mean&#34;</span><span class="p">,</span><span class="s2">&#34;Tip Amount Median&#34;</span><span class="p">,</span><span class="s2">&#34;Tip Amount Mode&#34;</span><span class="p">]))</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><pre><code>Right Skewed Distribution which means mean &gt; median &gt; mode
+
+Tip Amount Mean    Tip Amount Median    Tip Amount Mode
+</code></pre>
+<hr>
+<pre><code>      1.32447                    1                  0
+</code></pre>
+<p>We see that most people don&rsquo;t tip.</p>
+<h4 id="tip-per-hour-of-day">Tip per Hour of Day</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">tip_per_hourofday</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&#34;dropoff_hour&#34;</span><span class="p">,</span><span class="n">as_index</span><span class="o">=</span><span class="kc">False</span><span class="p">)[</span><span class="s1">&#39;tip_amount&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">tip_hour</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">tip_hour</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">tip_per_hourofday</span><span class="o">.</span><span class="n">dropoff_hour</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">tip_per_hourofday</span><span class="p">[</span><span class="s1">&#39;tip_amount&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">                             <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Average Tip Amount per hour&#39;</span><span class="p">,</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;markers+lines&#39;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">tip_hour</span> <span class="o">=</span> <span class="n">tip_hour</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s2">&#34;Average Tip Amount Per Hour of Day&#34;</span><span class="p">,</span> <span class="n">yaxis_title</span> <span class="o">=</span> <span class="s2">&#34;Average Tip Amount&#34;</span><span class="p">,</span> <span class="n">xaxis_title</span> <span class="o">=</span><span class="s2">&#34;Hour of Day&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">tip_hour</span> <span class="o">=</span> <span class="n">tip_hour</span><span class="o">.</span><span class="n">update_xaxes</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;category&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">tip_hour</span><span class="o">.</span><span class="n">show</span><span class="p">()</span> 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><iframe src= "/posts/New-York-Taxi-Analysis/tip_hour.html" height="525" width="100%"></iframe>
+<h4 id="tip-per-day-of-week">Tip per Day of Week</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">order_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&#34;Monday&#34;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&#34;Tuesday&#34;</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&#34;Wednesday&#34;</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span><span class="s2">&#34;Thursday&#34;</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span><span class="s2">&#34;Friday&#34;</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="s2">&#34;Saturday&#34;</span><span class="p">:</span><span class="mi">6</span><span class="p">,</span><span class="s2">&#34;Sunday&#34;</span><span class="p">:</span><span class="mi">7</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="n">tip_per_day</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&#34;dropoff_day&#34;</span><span class="p">,</span><span class="n">as_index</span><span class="o">=</span><span class="kc">False</span><span class="p">)[</span><span class="s1">&#39;tip_amount&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">tip_per_day</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s2">&#34;dropoff_day&#34;</span><span class="p">],</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">order_dict</span><span class="p">),</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">tip_day</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">tip_day</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">tip_per_day</span><span class="o">.</span><span class="n">dropoff_day</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">tip_per_day</span><span class="p">[</span><span class="s1">&#39;tip_amount&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">                             <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Average Tip Amount per day&#39;</span><span class="p">,</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;markers+lines&#39;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">tip_day</span> <span class="o">=</span> <span class="n">tip_day</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s2">&#34;Average Tip Amount Per Day&#34;</span><span class="p">,</span> <span class="n">yaxis_title</span> <span class="o">=</span> <span class="s2">&#34;Average Tip Amount&#34;</span><span class="p">,</span> <span class="n">xaxis_title</span> <span class="o">=</span><span class="s2">&#34;Day&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">tip_day</span> <span class="o">=</span> <span class="n">tip_day</span><span class="o">.</span><span class="n">update_xaxes</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;category&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">tip_day</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><iframe src= "/posts/New-York-Taxi-Analysis/tip_day.html" height="525" width="100%"></iframe>
+<h4 id="tip-per-hour-of-day-and-day-of-week">Tip per Hour of Day and Day of Week</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">order_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&#34;Monday&#34;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&#34;Tuesday&#34;</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&#34;Wednesday&#34;</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span><span class="s2">&#34;Thursday&#34;</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span><span class="s2">&#34;Friday&#34;</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="s2">&#34;Saturday&#34;</span><span class="p">:</span><span class="mi">6</span><span class="p">,</span><span class="s2">&#34;Sunday&#34;</span><span class="p">:</span><span class="mi">7</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="n">tip_per_dayhour</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">&#34;dropoff_day&#34;</span><span class="p">,</span><span class="s2">&#34;dropoff_hour&#34;</span><span class="p">],</span><span class="n">as_index</span><span class="o">=</span><span class="kc">False</span><span class="p">)[</span><span class="s1">&#39;tip_amount&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">tip_per_dayhour</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s2">&#34;dropoff_day&#34;</span><span class="p">,</span><span class="s2">&#34;dropoff_hour&#34;</span><span class="p">],</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">order_dict</span><span class="p">),</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">tip_dayhour</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">tip_per_dayhour</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&#34;dropoff_hour&#34;</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="s2">&#34;tip_amount&#34;</span><span class="p">,</span><span class="n">facet_row</span><span class="o">=</span><span class="s2">&#34;dropoff_day&#34;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;dropoff_day&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                       <span class="n">barmode</span><span class="o">=</span><span class="s1">&#39;stack&#39;</span><span class="p">,</span><span class="n">height</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span><span class="n">facet_row_spacing</span><span class="o">=</span><span class="mf">0.03</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">tip_dayhour</span><span class="o">.</span><span class="n">add_hline</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">df_train</span><span class="p">[</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;dropoff_day&#39;</span><span class="p">]</span><span class="o">==</span> <span class="s1">&#39;Monday&#39;</span><span class="p">][</span><span class="s2">&#34;tip_amount&#34;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">line_dash</span><span class="o">=</span><span class="s2">&#34;dot&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">annotation_text</span><span class="o">=</span><span class="s2">&#34;Monday Mean Tip Amount&#34;</span><span class="p">,</span><span class="n">annotation_position</span><span class="o">=</span><span class="s2">&#34;bottom right&#34;</span><span class="p">,</span><span class="n">row</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">line_color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">tip_dayhour</span><span class="o">.</span><span class="n">add_hline</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">df_train</span><span class="p">[</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;dropoff_day&#39;</span><span class="p">]</span><span class="o">==</span> <span class="s1">&#39;Tuesday&#39;</span><span class="p">][</span><span class="s2">&#34;tip_amount&#34;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">line_dash</span><span class="o">=</span><span class="s2">&#34;dot&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">annotation_text</span><span class="o">=</span><span class="s2">&#34;Tuesday Mean Tip Amount&#34;</span><span class="p">,</span><span class="n">annotation_position</span><span class="o">=</span><span class="s2">&#34;bottom right&#34;</span><span class="p">,</span><span class="n">row</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span><span class="n">line_color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">tip_dayhour</span><span class="o">.</span><span class="n">add_hline</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">df_train</span><span class="p">[</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;dropoff_day&#39;</span><span class="p">]</span><span class="o">==</span> <span class="s1">&#39;Wednesday&#39;</span><span class="p">][</span><span class="s2">&#34;tip_amount&#34;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">line_dash</span><span class="o">=</span><span class="s2">&#34;dot&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">annotation_text</span><span class="o">=</span><span class="s2">&#34;Wednesday Mean Tip Amount&#34;</span><span class="p">,</span><span class="n">annotation_position</span><span class="o">=</span><span class="s2">&#34;bottom right&#34;</span><span class="p">,</span><span class="n">row</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">line_color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">tip_dayhour</span><span class="o">.</span><span class="n">add_hline</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">df_train</span><span class="p">[</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;dropoff_day&#39;</span><span class="p">]</span><span class="o">==</span> <span class="s1">&#39;Thursday&#39;</span><span class="p">][</span><span class="s2">&#34;tip_amount&#34;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">line_dash</span><span class="o">=</span><span class="s2">&#34;dot&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">annotation_text</span><span class="o">=</span><span class="s2">&#34;Thursday Mean Tip Amount&#34;</span><span class="p">,</span><span class="n">annotation_position</span><span class="o">=</span><span class="s2">&#34;bottom right&#34;</span><span class="p">,</span><span class="n">row</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">line_color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">tip_dayhour</span><span class="o">.</span><span class="n">add_hline</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">df_train</span><span class="p">[</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;dropoff_day&#39;</span><span class="p">]</span><span class="o">==</span> <span class="s1">&#39;Friday&#39;</span><span class="p">][</span><span class="s2">&#34;tip_amount&#34;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">line_dash</span><span class="o">=</span><span class="s2">&#34;dot&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">annotation_text</span><span class="o">=</span><span class="s2">&#34;Friday Mean Tip Amount&#34;</span><span class="p">,</span><span class="n">annotation_position</span><span class="o">=</span><span class="s2">&#34;bottom right&#34;</span><span class="p">,</span><span class="n">row</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">line_color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">tip_dayhour</span><span class="o">.</span><span class="n">add_hline</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">df_train</span><span class="p">[</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;dropoff_day&#39;</span><span class="p">]</span><span class="o">==</span> <span class="s1">&#39;Saturday&#39;</span><span class="p">][</span><span class="s2">&#34;tip_amount&#34;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">line_dash</span><span class="o">=</span><span class="s2">&#34;dot&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">annotation_text</span><span class="o">=</span><span class="s2">&#34;Saturday Mean Tip Amount&#34;</span><span class="p">,</span><span class="n">annotation_position</span><span class="o">=</span><span class="s2">&#34;bottom right&#34;</span><span class="p">,</span><span class="n">row</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">line_color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">tip_dayhour</span><span class="o">.</span><span class="n">add_hline</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">df_train</span><span class="p">[</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;dropoff_day&#39;</span><span class="p">]</span><span class="o">==</span> <span class="s1">&#39;Sunday&#39;</span><span class="p">][</span><span class="s2">&#34;tip_amount&#34;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">line_dash</span><span class="o">=</span><span class="s2">&#34;dot&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">annotation_text</span><span class="o">=</span><span class="s2">&#34;Sunday Mean Tip Amount&#34;</span><span class="p">,</span><span class="n">annotation_position</span><span class="o">=</span><span class="s2">&#34;bottom right&#34;</span><span class="p">,</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">line_color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">tip_dayhour</span> <span class="o">=</span> <span class="n">tip_dayhour</span><span class="o">.</span><span class="n">for_each_annotation</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;=&#34;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+</span></span><span class="line"><span class="cl"><span class="n">tip_dayhour</span> <span class="o">=</span> <span class="n">tip_dayhour</span><span class="o">.</span><span class="n">update_xaxes</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s2">&#34;Hour&#34;</span><span class="p">,</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;category&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">axis</span> <span class="ow">in</span> <span class="n">tip_dayhour</span><span class="o">.</span><span class="n">layout</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">tip_dayhour</span><span class="o">.</span><span class="n">layout</span><span class="p">[</span><span class="n">axis</span><span class="p">])</span> <span class="o">==</span> <span class="n">go</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">YAxis</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">tip_dayhour</span><span class="o">.</span><span class="n">layout</span><span class="p">[</span><span class="n">axis</span><span class="p">]</span><span class="o">.</span><span class="n">title</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">tip_dayhour</span><span class="o">.</span><span class="n">layout</span><span class="p">[</span><span class="n">axis</span><span class="p">])</span> <span class="o">==</span> <span class="n">go</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">XAxis</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">tip_dayhour</span><span class="o">.</span><span class="n">layout</span><span class="p">[</span><span class="n">axis</span><span class="p">]</span><span class="o">.</span><span class="n">title</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl"><span class="n">tip_dayhour</span> <span class="o">=</span> <span class="n">tip_dayhour</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">annotations</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">tip_dayhour</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">annotations</span><span class="p">)</span> <span class="o">+</span> 
+</span></span><span class="line"><span class="cl">                            <span class="p">[</span><span class="n">go</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">Annotation</span><span class="p">(</span><span class="n">x</span><span class="o">=-</span><span class="mf">0.07</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span><span class="n">font</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">14</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">                                                  <span class="n">showarrow</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">text</span><span class="o">=</span><span class="s2">&#34;Average Tip Amount&#34;</span><span class="p">,</span><span class="n">textangle</span><span class="o">=-</span><span class="mi">90</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                                                  <span class="n">xref</span><span class="o">=</span><span class="s2">&#34;paper&#34;</span><span class="p">,</span><span class="n">yref</span><span class="o">=</span><span class="s2">&#34;paper&#34;</span><span class="p">)])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">tip_dayhour</span> <span class="o">=</span> <span class="n">tip_dayhour</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">annotations</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">tip_dayhour</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">annotations</span><span class="p">)</span> <span class="o">+</span> 
+</span></span><span class="line"><span class="cl">                            <span class="p">[</span><span class="n">go</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">Annotation</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span><span class="n">y</span><span class="o">=-</span><span class="mf">0.05</span><span class="p">,</span><span class="n">font</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">14</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">                                                  <span class="n">showarrow</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">text</span><span class="o">=</span><span class="s2">&#34;Hour&#34;</span><span class="p">,</span><span class="n">xref</span><span class="o">=</span><span class="s2">&#34;paper&#34;</span><span class="p">,</span><span class="n">yref</span><span class="o">=</span><span class="s2">&#34;paper&#34;</span><span class="p">)])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">tip_dayhour</span> <span class="o">=</span> <span class="n">tip_dayhour</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">legend_title</span> <span class="o">=</span> <span class="s1">&#39;Day&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">tip_dayhour</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><iframe src= "/posts/New-York-Taxi-Analysis/tip_dayhour.html" height="525" width="100%"></iframe>
+<p>This if a slightly harder figure to interpret so let&rsquo;s simplify it:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">tip_per_dayhour_img</span> <span class="o">=</span> <span class="n">tip_per_dayhour</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s1">&#39;dropoff_day&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="s1">&#39;dropoff_hour&#39;</span><span class="p">,</span><span class="n">values</span><span class="o">=</span><span class="s1">&#39;tip_amount&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">tip_per_dayhour_img</span> <span class="o">=</span> <span class="n">tip_per_dayhour_img</span><span class="p">[[</span><span class="s1">&#39;Monday&#39;</span><span class="p">,</span> <span class="s1">&#39;Tuesday&#39;</span><span class="p">,</span> <span class="s1">&#39;Wednesday&#39;</span><span class="p">,</span> <span class="s1">&#39;Thursday&#39;</span><span class="p">,</span> <span class="s1">&#39;Friday&#39;</span><span class="p">,</span> <span class="s1">&#39;Saturday&#39;</span><span class="p">,</span> <span class="s1">&#39;Sunday&#39;</span><span class="p">]]</span>
+</span></span><span class="line"><span class="cl"><span class="n">tip_per_dayhour_img</span> <span class="o">=</span> <span class="n">tip_per_dayhour_img</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">tip_per_dayhour_img_fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">tip_per_dayhour_img</span><span class="p">,</span><span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">tip_per_dayhour_img_fig</span> <span class="o">=</span> <span class="n">tip_per_dayhour_img_fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;Heatmap of Average Tip Amount&#39;</span><span class="p">,</span> <span class="n">xaxis_title</span><span class="o">=</span><span class="s1">&#39;Day&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                                                               <span class="n">yaxis_title</span><span class="o">=</span> <span class="s1">&#39;Hour&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">tip_per_dayhour_img_fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><iframe src= "/posts/New-York-Taxi-Analysis/tip_per_dayhour_img_fig.html" height="525" width="100%"></iframe>
+<h4 id="tip-per-time-of-day">Tip per Time of Day</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">tip_per_tday</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&#34;dropoff_time_of_day&#34;</span><span class="p">,</span><span class="n">as_index</span><span class="o">=</span><span class="kc">False</span><span class="p">)[</span><span class="s1">&#39;tip_amount&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">tip_tday</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">tip_tday</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">tip_tday</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">tip_per_tday</span><span class="o">.</span><span class="n">dropoff_time_of_day</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">tip_per_tday</span><span class="p">[</span><span class="s1">&#39;tip_amount&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">                             <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Average Tip Amount per Time of Day&#39;</span><span class="p">,</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;markers+lines&#39;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">tip_tday</span> <span class="o">=</span> <span class="n">tip_tday</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s2">&#34;Average Tip Amount per Time of Day&#34;</span><span class="p">,</span> <span class="n">yaxis_title</span> <span class="o">=</span> <span class="s2">&#34;Average Tip Amount&#34;</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">                                  <span class="n">xaxis_title</span> <span class="o">=</span><span class="s2">&#34;Time of Day&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">tip_tday</span> <span class="o">=</span> <span class="n">tip_tday</span><span class="o">.</span><span class="n">update_xaxes</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;category&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">tip_tday</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><iframe src= "/posts/New-York-Taxi-Analysis/tip_tday.html" height="525" width="100%"></iframe>
+<h4 id="tip-per-month">Tip per Month</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># Average tipping per month</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">order_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&#34;January&#34;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&#34;February&#34;</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&#34;March&#34;</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span><span class="s2">&#34;April&#34;</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span><span class="s2">&#34;May&#34;</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="s2">&#34;June&#34;</span><span class="p">:</span><span class="mi">6</span><span class="p">,</span><span class="s2">&#34;July&#34;</span><span class="p">:</span><span class="mi">7</span><span class="p">,</span><span class="s2">&#34;August&#34;</span><span class="p">:</span><span class="mi">8</span><span class="p">,</span><span class="s2">&#34;September&#34;</span><span class="p">:</span><span class="mi">9</span><span class="p">,</span><span class="s2">&#34;October&#34;</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">              <span class="s2">&#34;November&#34;</span><span class="p">:</span><span class="mi">11</span><span class="p">,</span><span class="s2">&#34;December&#34;</span><span class="p">:</span><span class="mi">12</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">tip_per_month</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&#34;dropoff_month&#34;</span><span class="p">,</span><span class="n">as_index</span><span class="o">=</span><span class="kc">False</span><span class="p">)[</span><span class="s1">&#39;tip_amount&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">tip_per_month</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s2">&#34;dropoff_month&#34;</span><span class="p">],</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">order_dict</span><span class="p">),</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">tip_month</span><span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">tip_month</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">tip_per_month</span><span class="o">.</span><span class="n">dropoff_month</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">tip_per_month</span><span class="p">[</span><span class="s1">&#39;tip_amount&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">                             <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Average Tip Amount per Month&#39;</span><span class="p">,</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;markers+lines&#39;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">tip_month</span> <span class="o">=</span> <span class="n">tip_month</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s2">&#34;Average Tip Amount Per Month&#34;</span><span class="p">,</span> <span class="n">yaxis_title</span> <span class="o">=</span> <span class="s2">&#34;Average Tip Amount&#34;</span><span class="p">,</span> <span class="n">xaxis_title</span> <span class="o">=</span><span class="s2">&#34;Month&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">tip_month</span> <span class="o">=</span> <span class="n">tip_month</span><span class="o">.</span><span class="n">update_xaxes</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;category&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">tip_month</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><iframe src= "/posts/New-York-Taxi-Analysis/tip_month.html" height="525" width="100%"></iframe>
+<h4 id="tip-per-direction">Tip per Direction</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># Average tipping per direction</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">tip_per_dir</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&#34;trip_direction&#34;</span><span class="p">,</span><span class="n">as_index</span><span class="o">=</span><span class="kc">False</span><span class="p">)[</span><span class="s1">&#39;tip_amount&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">tip_dir</span><span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">tip_dir</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">tip_per_dir</span><span class="o">.</span><span class="n">trip_direction</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">tip_per_dir</span><span class="p">[</span><span class="s1">&#39;tip_amount&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">                             <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Average Tip Amount per Direction&#39;</span><span class="p">,</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;markers+lines&#39;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">tip_dir</span> <span class="o">=</span> <span class="n">tip_dir</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s2">&#34;Average Tip Amount Per Direction&#34;</span><span class="p">,</span> <span class="n">yaxis_title</span> <span class="o">=</span> <span class="s2">&#34;Average Tip Amount&#34;</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">                                <span class="n">xaxis_title</span> <span class="o">=</span><span class="s2">&#34;Direction&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">tip_dir</span> <span class="o">=</span> <span class="n">tip_dir</span><span class="o">.</span><span class="n">update_xaxes</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;category&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">tip_dir</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><iframe src= "/posts/New-York-Taxi-Analysis/tip_dir.html" height="525" width="100%"></iframe>
+<p>On average people tip the highest early in the morning (maybe going home drunk from a nightout 😆), lowest at the afternoon. People also tip highest on Wednesdays and lowest on Saturdays but these differences aren&rsquo;t that significant (of a few cents). We can also analyze the tipping behaviour with regards to geographic data.</p>
+<h4 id="tip-per-borough">Tip per Borough</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">avg_tip_boroughs</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">&#34;pickup_borough&#34;</span><span class="p">,</span><span class="s2">&#34;dropoff_borough&#34;</span><span class="p">],</span><span class="n">as_index</span><span class="o">=</span><span class="kc">False</span><span class="p">)[</span><span class="s1">&#39;tip_amount&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">avg_tip_boroughs_img</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">avg_tip_boroughs</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="s1">&#39;pickup_borough&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;dropoff_borough&#39;</span><span class="p">,</span> <span class="n">values</span> <span class="o">=</span> <span class="s1">&#39;tip_amount&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">avg_tip_boroughs_fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">avg_tip_boroughs_img</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">r</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">avg_tip_boroughs_img</span><span class="o">.</span><span class="n">values</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">r</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">c</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="n">c</span> <span class="o">=</span> <span class="s1">&#39;No Trips&#39;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">avg_tip_boroughs_fig</span><span class="o">.</span><span class="n">add_annotation</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">k</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="n">i</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                               <span class="n">text</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;&lt;b&gt;</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s1">&lt;/b&gt;&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                               <span class="n">showarrow</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                               <span class="n">font</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">avg_tip_boroughs_fig</span><span class="o">.</span><span class="n">add_annotation</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">k</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="n">i</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                               <span class="n">text</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;&lt;b&gt;</span><span class="si">{</span><span class="n">c</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&lt;/b&gt;&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                               <span class="n">showarrow</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                               <span class="n">font</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">avg_tip_boroughs_fig</span> <span class="o">=</span> <span class="n">avg_tip_boroughs_fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;Average Tip Amount between Borough&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                                                              <span class="n">xaxis_title</span> <span class="o">=</span> <span class="s1">&#39;Dropoff Borough&#39;</span><span class="p">,</span> <span class="n">yaxis_title</span> <span class="o">=</span> <span class="s1">&#39;Pickup Borough&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">avg_tip_boroughs_fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><iframe src= "/posts/New-York-Taxi-Analysis/avg_tip_boroughs_fig.html" height="525" width="100%"></iframe>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">tip_borough</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;dropoff_borough&#39;</span><span class="p">,</span><span class="n">as_index</span><span class="o">=</span><span class="kc">False</span><span class="p">)[</span><span class="s1">&#39;tip_amount&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">tip_borough</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;tip_amount&#39;</span><span class="p">,</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">tip_borough_fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">tip_borough</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;dropoff_borough&#39;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;tip_amount&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">tip_borough_fig</span> <span class="o">=</span> <span class="n">tip_borough_fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">title</span><span class="o">=</span> <span class="s1">&#39;Average Tip Amount Per Borough&#39;</span><span class="p">,</span> <span class="n">xaxis_title</span> <span class="o">=</span> <span class="s1">&#39;Average Tip Amount&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                                               <span class="n">yaxis_title</span><span class="o">=</span> <span class="s1">&#39;Borough&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">tip_borough_fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><iframe src= "/posts/New-York-Taxi-Analysis/tip_borough_fig.html" height="525" width="100%"></iframe>
+<p>Queens is the highest tip paying borough when disregarding the low density of trips in Staten Island and the Outside Boroughs</p>
+<p>We saw earlier that there isn&rsquo;t a significant difference between the tipping of various time of the day on average but we can also investigate the correlation as well</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">columns</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">24</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">correlation_hour</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s2">&#34;tip_amount&#34;</span><span class="p">],</span><span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">hour_one_hot</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">df_train</span><span class="o">.</span><span class="n">dropoff_hour</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">col</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">columns</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cor</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">tip_amount</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">hour_one_hot</span><span class="p">[</span><span class="n">col</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">    <span class="n">correlation_hour</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="n">columns</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="n">cor</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">correlation_hour</span><span class="p">,</span><span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;.4f&#39;</span><span class="p">,</span> <span class="n">annot_kws</span><span class="o">=</span><span class="p">{</span><span class="s2">&#34;fontsize&#34;</span><span class="p">:</span><span class="mi">12</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="n">g</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">([</span><span class="s1">&#39;Tip Amount&#39;</span><span class="p">],</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">16</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&#34;Correlation Matrix between Tip Amount and Hour of Day&#34;</span><span class="p">,</span> <span class="n">fontdict</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;fontsize&#39;</span><span class="p">:</span><span class="mi">20</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">columns</span><span class="o">=</span><span class="n">df_train</span><span class="o">.</span><span class="n">dropoff_time_of_day</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">correlation_tday</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s2">&#34;tip_amount&#34;</span><span class="p">],</span><span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">tday_onehot</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">df_train</span><span class="o">.</span><span class="n">dropoff_time_of_day</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">col</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">columns</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cor</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">tip_amount</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">tday_onehot</span><span class="p">[</span><span class="n">col</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">    <span class="n">correlation_tday</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="n">columns</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="n">cor</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">correlation_tday</span><span class="p">,</span><span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;.4f&#39;</span><span class="p">,</span> <span class="n">annot_kws</span><span class="o">=</span><span class="p">{</span><span class="s2">&#34;fontsize&#34;</span><span class="p">:</span><span class="mi">16</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="n">g</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">([</span><span class="s1">&#39;Tip Amount&#39;</span><span class="p">],</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">16</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&#34;Correlation Matrix between Tip Amount and Time of Day&#34;</span><span class="p">,</span> <span class="n">fontdict</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;fontsize&#39;</span><span class="p">:</span><span class="mi">20</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><img src="/posts/New-York-Taxi-Analysis/corr_thour.png" width="100%">
+<img src="/posts/New-York-Taxi-Analysis/corr_tday.png" width="100%">
+<p>Again no significant correlation, but we can still go even further with simple linear regression</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">lr</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span><span class="n">df_train</span><span class="o">.</span><span class="n">tip_amount</span><span class="p">,</span> <span class="n">sm</span><span class="o">.</span><span class="n">add_constant</span><span class="p">(</span><span class="n">hour_one_hot</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="mi">23</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)))</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">lr2</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span><span class="n">df_train</span><span class="o">.</span><span class="n">tip_amount</span><span class="p">,</span> <span class="n">sm</span><span class="o">.</span><span class="n">add_constant</span><span class="p">(</span><span class="n">tday_onehot</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Night&#39;</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)))</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">lr</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>       <td>tip_amount</td>    <th>  R-squared:         </th>  <td>   0.002</td>  
+</tr>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th>  <td>   0.002</td>  
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th>  <td>   108.0</td>  
+</tr>
+<tr>
+  <th>Date:</th>             <td>Sun, 30 Oct 2022</td> <th>  Prob (F-statistic):</th>   <td>  0.00</td>   
+</tr>
+<tr>
+  <th>Time:</th>                 <td>06:35:25</td>     <th>  Log-Likelihood:    </th> <td>-2.5450e+06</td>
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td>1182030</td>     <th>  AIC:               </th>  <td>5.090e+06</td> 
+</tr>
+<tr>
+  <th>Df Residuals:</th>          <td>1182006</td>     <th>  BIC:               </th>  <td>5.090e+06</td> 
+</tr>
+<tr>
+  <th>Df Model:</th>              <td>    23</td>      <th>                     </th>      <td> </td>     
+</tr>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>      <td> </td>     
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+    <td></td>       <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>const</th> <td>    1.4465</td> <td>    0.008</td> <td>  181.745</td> <td> 0.000</td> <td>    1.431</td> <td>    1.462</td>
+</tr>
+<tr>
+  <th>0</th>     <td>    0.0436</td> <td>    0.012</td> <td>    3.664</td> <td> 0.000</td> <td>    0.020</td> <td>    0.067</td>
+</tr>
+<tr>
+  <th>1</th>     <td>   -0.0119</td> <td>    0.014</td> <td>   -0.861</td> <td> 0.389</td> <td>   -0.039</td> <td>    0.015</td>
+</tr>
+<tr>
+  <th>2</th>     <td>   -0.0992</td> <td>    0.015</td> <td>   -6.514</td> <td> 0.000</td> <td>   -0.129</td> <td>   -0.069</td>
+</tr>
+<tr>
+  <th>3</th>     <td>   -0.1342</td> <td>    0.017</td> <td>   -7.934</td> <td> 0.000</td> <td>   -0.167</td> <td>   -0.101</td>
+</tr>
+<tr>
+  <th>4</th>     <td>   -0.1116</td> <td>    0.019</td> <td>   -5.870</td> <td> 0.000</td> <td>   -0.149</td> <td>   -0.074</td>
+</tr>
+<tr>
+  <th>5</th>     <td>    0.2021</td> <td>    0.022</td> <td>    9.390</td> <td> 0.000</td> <td>    0.160</td> <td>    0.244</td>
+</tr>
+<tr>
+  <th>6</th>     <td>    0.0184</td> <td>    0.015</td> <td>    1.189</td> <td> 0.235</td> <td>   -0.012</td> <td>    0.049</td>
+</tr>
+<tr>
+  <th>7</th>     <td>   -0.1275</td> <td>    0.012</td> <td>  -10.354</td> <td> 0.000</td> <td>   -0.152</td> <td>   -0.103</td>
+</tr>
+<tr>
+  <th>8</th>     <td>   -0.0405</td> <td>    0.011</td> <td>   -3.557</td> <td> 0.000</td> <td>   -0.063</td> <td>   -0.018</td>
+</tr>
+<tr>
+  <th>9</th>     <td>   -0.0629</td> <td>    0.011</td> <td>   -5.489</td> <td> 0.000</td> <td>   -0.085</td> <td>   -0.040</td>
+</tr>
+<tr>
+  <th>10</th>    <td>   -0.1860</td> <td>    0.012</td> <td>  -16.050</td> <td> 0.000</td> <td>   -0.209</td> <td>   -0.163</td>
+</tr>
+<tr>
+  <th>11</th>    <td>   -0.2671</td> <td>    0.012</td> <td>  -22.231</td> <td> 0.000</td> <td>   -0.291</td> <td>   -0.244</td>
+</tr>
+<tr>
+  <th>12</th>    <td>   -0.2721</td> <td>    0.012</td> <td>  -22.997</td> <td> 0.000</td> <td>   -0.295</td> <td>   -0.249</td>
+</tr>
+<tr>
+  <th>13</th>    <td>   -0.2713</td> <td>    0.012</td> <td>  -22.860</td> <td> 0.000</td> <td>   -0.295</td> <td>   -0.248</td>
+</tr>
+<tr>
+  <th>14</th>    <td>   -0.2296</td> <td>    0.012</td> <td>  -18.927</td> <td> 0.000</td> <td>   -0.253</td> <td>   -0.206</td>
+</tr>
+<tr>
+  <th>15</th>    <td>   -0.2090</td> <td>    0.012</td> <td>  -16.809</td> <td> 0.000</td> <td>   -0.233</td> <td>   -0.185</td>
+</tr>
+<tr>
+  <th>16</th>    <td>   -0.1547</td> <td>    0.013</td> <td>  -12.346</td> <td> 0.000</td> <td>   -0.179</td> <td>   -0.130</td>
+</tr>
+<tr>
+  <th>17</th>    <td>   -0.1704</td> <td>    0.012</td> <td>  -13.808</td> <td> 0.000</td> <td>   -0.195</td> <td>   -0.146</td>
+</tr>
+<tr>
+  <th>18</th>    <td>   -0.1385</td> <td>    0.011</td> <td>  -12.242</td> <td> 0.000</td> <td>   -0.161</td> <td>   -0.116</td>
+</tr>
+<tr>
+  <th>19</th>    <td>   -0.1376</td> <td>    0.011</td> <td>  -12.407</td> <td> 0.000</td> <td>   -0.159</td> <td>   -0.116</td>
+</tr>
+<tr>
+  <th>20</th>    <td>   -0.1295</td> <td>    0.011</td> <td>  -11.259</td> <td> 0.000</td> <td>   -0.152</td> <td>   -0.107</td>
+</tr>
+<tr>
+  <th>21</th>    <td>   -0.0831</td> <td>    0.012</td> <td>   -7.147</td> <td> 0.000</td> <td>   -0.106</td> <td>   -0.060</td>
+</tr>
+<tr>
+  <th>22</th>    <td>   -0.0468</td> <td>    0.011</td> <td>   -4.097</td> <td> 0.000</td> <td>   -0.069</td> <td>   -0.024</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+  <th>Omnibus:</th>       <td>1253930.783</td> <th>  Durbin-Watson:     </th>   <td>   2.001</td>   
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th>   <td> 0.000</td>    <th>  Jarque-Bera (JB):  </th> <td>385938280.509</td>
+</tr>
+<tr>
+  <th>Skew:</th>            <td> 4.829</td>    <th>  Prob(JB):          </th>   <td>    0.00</td>   
+</tr>
+<tr>
+  <th>Kurtosis:</th>        <td>90.993</td>    <th>  Cond. No.          </th>   <td>    21.6</td>   
+</tr>
+</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">lr2</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>       <td>tip_amount</td>    <th>  R-squared:         </th>  <td>   0.001</td>  
+</tr>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th>  <td>   0.001</td>  
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th>  <td>   380.3</td>  
+</tr>
+<tr>
+  <th>Date:</th>             <td>Sun, 30 Oct 2022</td> <th>  Prob (F-statistic):</th>   <td>  0.00</td>   
+</tr>
+<tr>
+  <th>Time:</th>                 <td>06:35:26</td>     <th>  Log-Likelihood:    </th> <td>-2.5454e+06</td>
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td>1182030</td>     <th>  AIC:               </th>  <td>5.091e+06</td> 
+</tr>
+<tr>
+  <th>Df Residuals:</th>          <td>1182025</td>     <th>  BIC:               </th>  <td>5.091e+06</td> 
+</tr>
+<tr>
+  <th>Df Model:</th>              <td>     4</td>      <th>                     </th>      <td> </td>     
+</tr>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>      <td> </td>     
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+       <td></td>         <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>const</th>      <td>    1.4439</td> <td>    0.005</td> <td>  300.591</td> <td> 0.000</td> <td>    1.434</td> <td>    1.453</td>
+</tr>
+<tr>
+  <th>Afternon</th>   <td>   -0.2440</td> <td>    0.007</td> <td>  -36.964</td> <td> 0.000</td> <td>   -0.257</td> <td>   -0.231</td>
+</tr>
+<tr>
+  <th>Evening</th>    <td>   -0.1314</td> <td>    0.006</td> <td>  -22.143</td> <td> 0.000</td> <td>   -0.143</td> <td>   -0.120</td>
+</tr>
+<tr>
+  <th>Late night</th> <td>   -0.0448</td> <td>    0.008</td> <td>   -5.577</td> <td> 0.000</td> <td>   -0.061</td> <td>   -0.029</td>
+</tr>
+<tr>
+  <th>Morning</th>    <td>   -0.1181</td> <td>    0.006</td> <td>  -19.483</td> <td> 0.000</td> <td>   -0.130</td> <td>   -0.106</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+  <th>Omnibus:</th>       <td>1253963.407</td> <th>  Durbin-Watson:     </th>   <td>   2.001</td>   
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th>   <td> 0.000</td>    <th>  Jarque-Bera (JB):  </th> <td>385045385.766</td>
+</tr>
+<tr>
+  <th>Skew:</th>            <td> 4.830</td>    <th>  Prob(JB):          </th>   <td>    0.00</td>   
+</tr>
+<tr>
+  <th>Kurtosis:</th>        <td>90.890</td>    <th>  Cond. No.          </th>   <td>    6.67</td>   
+</tr>
+</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+<p>From this analysis we see that 1AM and 6AM are insignificant while most other hours of the day contribute negatively to the average tipping amount except for 5AM as expected.</p>
+<p>We can go even further by trying to model the tipping amount with the features we have. I&rsquo;ll opt for s Random Forest Model, which I will probably write about in the future along with tree models. The code for this is as follows:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestRegressor</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.compose</span> <span class="kn">import</span> <span class="n">ColumnTransformer</span> 
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">make_pipeline</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">OneHotEncoder</span><span class="p">,</span> <span class="n">FunctionTransformer</span><span class="p">,</span> <span class="n">StandardScaler</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">sin_transformer</span><span class="p">(</span><span class="n">period</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">FunctionTransformer</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span> <span class="o">/</span> <span class="n">period</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">cos_transformer</span><span class="p">(</span><span class="n">period</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">FunctionTransformer</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span> <span class="o">/</span> <span class="n">period</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">one_hot_encoder</span> <span class="o">=</span> <span class="n">OneHotEncoder</span><span class="p">(</span><span class="n">handle_unknown</span><span class="o">=</span><span class="s2">&#34;ignore&#34;</span><span class="p">,</span> <span class="n">sparse</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">categorical_columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;payment_type&#39;</span><span class="p">,</span><span class="s1">&#39;dropoff_day&#39;</span><span class="p">,</span><span class="s1">&#39;dropoff_month&#39;</span><span class="p">,</span><span class="s1">&#39;dropoff_time_of_day&#39;</span><span class="p">,</span><span class="s1">&#39;dropoff_borough&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">hour_transformer</span> <span class="o">=</span> <span class="n">ColumnTransformer</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">transformers</span><span class="o">=</span><span class="p">[</span>
+</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="s2">&#34;categorical&#34;</span><span class="p">,</span> <span class="n">one_hot_encoder</span><span class="p">,</span> <span class="n">categorical_columns</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="s2">&#34;hour_sin&#34;</span><span class="p">,</span> <span class="n">sin_transformer</span><span class="p">(</span><span class="mi">24</span><span class="p">),</span> <span class="p">[</span><span class="s2">&#34;dropoff_hour&#34;</span><span class="p">]),</span>
+</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="s2">&#34;hour_cos&#34;</span><span class="p">,</span> <span class="n">cos_transformer</span><span class="p">(</span><span class="mi">24</span><span class="p">),</span> <span class="p">[</span><span class="s2">&#34;dropoff_hour&#34;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">    <span class="p">],</span>
+</span></span><span class="line"><span class="cl">    <span class="n">remainder</span><span class="o">=</span><span class="n">StandardScaler</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">rf_pipe</span> <span class="o">=</span> <span class="n">make_pipeline</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">hour_transformer</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">RandomForestRegressor</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">X</span> <span class="o">=</span> <span class="n">df_train</span><span class="p">[[</span><span class="s1">&#39;payment_type&#39;</span><span class="p">,</span><span class="s1">&#39;dropoff_day&#39;</span><span class="p">,</span><span class="s1">&#39;dropoff_month&#39;</span><span class="p">,</span><span class="s1">&#39;dropoff_time_of_day&#39;</span><span class="p">,</span><span class="s1">&#39;dropoff_borough&#39;</span><span class="p">,</span><span class="s1">&#39;dropoff_hour&#39;</span><span class="p">,</span><span class="s1">&#39;trip_distance&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">             <span class="s1">&#39;trip_time_in_secs&#39;</span><span class="p">,</span><span class="s1">&#39;pickup_longitude&#39;</span><span class="p">,</span><span class="s1">&#39;pickup_latitude&#39;</span><span class="p">,</span><span class="s1">&#39;fare_amount&#39;</span><span class="p">]]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">y</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">tip_amount</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">_</span>  <span class="o">=</span> <span class="n">rf_pipe</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>We also cyclically encode the time feature (dropoff hour), this is usually done when we have cyclical features such as hour of the day, days of the week, and others. This can be achieved by taking the sine and cosine of the cyclical feature divided by the period (total number/maximum number of the feature, i,e. 7 if days of the week and 24 if hours). We also one-hot encode our categorical variables. I&rsquo;ll also write a future article about cyclical encoding of features in the future.  We evaluate how well the model performs on our training data.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Coefficient of determination (R^2) of the model is: &#34;</span><span class="p">,</span> <span class="n">rf_pipe</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">))</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><pre><code>Coefficient of determination (R^2) of the model is: 0.962619575415421
+</code></pre>
+<p>Eventually we would like to see the most important deatures that contribute to predicting the tipping amount (More on this in a future article)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">features</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">categorical_columns</span><span class="p">]),</span><span class="n">X</span><span class="p">[</span><span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="n">categorical_columns</span><span class="p">)]],</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">features</span><span class="p">[</span><span class="n">features</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;dropoff_hour&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="s1">&#39;dropoff_hour_sin&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">features</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">features</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;dropoff_hour_sin&#39;</span><span class="p">)</span> <span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;dropoff_hour_cos&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">feature_importance</span> <span class="o">=</span> <span class="n">rf_pipe</span><span class="o">.</span><span class="n">steps</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">feature_importances_</span>
+</span></span><span class="line"><span class="cl"><span class="n">feature_importance_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Feature Name&#39;</span><span class="p">:</span><span class="n">features</span><span class="p">,</span> <span class="s1">&#39;Importance&#39;</span><span class="p">:</span><span class="n">feature_importance</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="n">feature_importance_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;Importance&#39;</span><span class="p">,</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">feature_importance_df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">feature_importance_fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">feature_importance_df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Importance&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Feature Name&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">       <span class="n">category_orders</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Feature Name&#39;</span><span class="p">:</span><span class="n">feature_importance_df</span><span class="p">[</span><span class="s1">&#39;Feature Name&#39;</span><span class="p">]},</span><span class="n">height</span><span class="o">=</span><span class="mi">900</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">feature_importance_fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><iframe src= "/posts/New-York-Taxi-Analysis/feature_importance_fig.html" height="525" width="100%"></iframe>
+<p>We see that a major influencing factor in determining the tipping amount is how long the trip took and what payment method was used (Cash in our case as intuitively that&rsquo;s what most people tip taxi rides with). We can see the correlation between the tip, time taken and distance to confirm that there is a correlation but a weak one.</p>
+<img src="/posts/New-York-Taxi-Analysis/tip_corr.png" width="100%">
+<p>Seeing this we analyze this again with linear regression modelling the average tipping amount</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">lr_distance</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span><span class="n">df_train</span><span class="o">.</span><span class="n">tip_amount</span><span class="p">,</span> <span class="n">sm</span><span class="o">.</span><span class="n">add_constant</span><span class="p">(</span><span class="n">df_train</span><span class="o">.</span><span class="n">trip_distance</span><span class="p">))</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">lr_distance</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>       <td>tip_amount</td>    <th>  R-squared:         </th>  <td>   0.259</td>  
+</tr>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th>  <td>   0.259</td>  
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th>  <td>4.131e+05</td> 
+</tr>
+<tr>
+  <th>Date:</th>             <td>Sun, 30 Oct 2022</td> <th>  Prob (F-statistic):</th>   <td>  0.00</td>   
+</tr>
+<tr>
+  <th>Time:</th>                 <td>08:03:25</td>     <th>  Log-Likelihood:    </th> <td>-2.3691e+06</td>
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td>1182030</td>     <th>  AIC:               </th>  <td>4.738e+06</td> 
+</tr>
+<tr>
+  <th>Df Residuals:</th>          <td>1182028</td>     <th>  BIC:               </th>  <td>4.738e+06</td> 
+</tr>
+<tr>
+  <th>Df Model:</th>              <td>     1</td>      <th>                     </th>      <td> </td>     
+</tr>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>      <td> </td>     
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+        <td></td>           <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>const</th>         <td>    0.3976</td> <td>    0.002</td> <td>  181.351</td> <td> 0.000</td> <td>    0.393</td> <td>    0.402</td>
+</tr>
+<tr>
+  <th>trip_distance</th> <td>    0.3109</td> <td>    0.000</td> <td>  642.736</td> <td> 0.000</td> <td>    0.310</td> <td>    0.312</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+  <th>Omnibus:</th>       <td>1150484.269</td> <th>  Durbin-Watson:     </th>   <td>   2.002</td>   
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th>   <td> 0.000</td>    <th>  Jarque-Bera (JB):  </th> <td>903227788.715</td>
+</tr>
+<tr>
+  <th>Skew:</th>            <td> 3.820</td>    <th>  Prob(JB):          </th>   <td>    0.00</td>   
+</tr>
+<tr>
+  <th>Kurtosis:</th>        <td>138.207</td>   <th>  Cond. No.          </th>   <td>    6.15</td>   
+</tr>
+</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+<p>A positive contribution</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">scaled_duration</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df_train</span><span class="o">.</span><span class="n">trip_time_in_secs</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span> 
+</span></span><span class="line"><span class="cl"><span class="n">lr_duration</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span><span class="n">df_train</span><span class="o">.</span><span class="n">tip_amount</span><span class="p">,</span> <span class="n">sm</span><span class="o">.</span><span class="n">add_constant</span><span class="p">(</span><span class="n">scaled_duration</span><span class="p">))</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">lr_duration</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>       <td>tip_amount</td>    <th>  R-squared:         </th>  <td>   0.201</td>  
+</tr>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th>  <td>   0.201</td>  
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th>  <td>2.976e+05</td> 
+</tr>
+<tr>
+  <th>Date:</th>             <td>Sun, 30 Oct 2022</td> <th>  Prob (F-statistic):</th>   <td>  0.00</td>   
+</tr>
+<tr>
+  <th>Time:</th>                 <td>08:03:26</td>     <th>  Log-Likelihood:    </th> <td>-2.4135e+06</td>
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td>1182030</td>     <th>  AIC:               </th>  <td>4.827e+06</td> 
+</tr>
+<tr>
+  <th>Df Residuals:</th>          <td>1182028</td>     <th>  BIC:               </th>  <td>4.827e+06</td> 
+</tr>
+<tr>
+  <th>Df Model:</th>              <td>     1</td>      <th>                     </th>      <td> </td>     
+</tr>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>      <td> </td>     
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+    <td></td>       <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>const</th> <td>    1.3245</td> <td>    0.002</td> <td>  772.412</td> <td> 0.000</td> <td>    1.321</td> <td>    1.328</td>
+</tr>
+<tr>
+  <th>x1</th>    <td>    0.9355</td> <td>    0.002</td> <td>  545.563</td> <td> 0.000</td> <td>    0.932</td> <td>    0.939</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+  <th>Omnibus:</th>       <td>1204548.432</td> <th>  Durbin-Watson:     </th>   <td>   2.001</td>   
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th>   <td> 0.000</td>    <th>  Jarque-Bera (JB):  </th> <td>758035989.092</td>
+</tr>
+<tr>
+  <th>Skew:</th>            <td> 4.241</td>    <th>  Prob(JB):          </th>   <td>    0.00</td>   
+</tr>
+<tr>
+  <th>Kurtosis:</th>        <td>126.771</td>   <th>  Cond. No.          </th>   <td>    1.00</td>   
+</tr>
+</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;On Average </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">scaler</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span><span class="n">lr_duration</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;x1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">))[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="mi">0</span><span class="p">)</span><span class="si">}</span><span class="s2"> seconds or 20 minutes contribute to a 1 dollar tip&#34;</span><span class="p">)</span> 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><pre><code>On Average 1249.0 seconds or 20 minutes contribute to a 1 dollar tip
+</code></pre>
+<p>This sums up our findings and this article. I have conducted other analysis as well as a prediction model for predicting the pickup density after clustering New York into several buckets/regions and binning of time. All of this can be found in the projects GitHub repository.</p>
+<p>Thank you for reading and if you have any questions regarding the project I&rsquo;m an email away. Until next time, Bye!
+</span></p>
+</div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-license"></div>

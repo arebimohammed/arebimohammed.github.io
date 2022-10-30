@@ -3302,4 +3302,729 @@ We notice the same patterns as well in that most pickups are focused in the Manh
 
 I have also animated the traffic volume per day and hour as well to get a more granular look but again its file is way too big to publish here, but the code to reproduce it can be found in my GitHub repo linked above.
 
+#### Traffic Density Throughout the Year
+
+```python
+df_train['pickup_datetime'] = pd.to_datetime(df_train['pickup_datetime'])
+df_train['dropoff_datetime'] = pd.to_datetime(df_train['dropoff_datetime'])
+date_time_density = df_train.groupby(['pickup_hour',df_train.pickup_datetime.dt.date],as_index=False).size()
+date_time_density.sort_values(by=["pickup_datetime","pickup_hour"],inplace=True)
+date_time_density_img = date_time_density.pivot_table(columns='pickup_datetime',index="pickup_hour",values= "size")
+date_time_density_img = date_time_density_img[::-1]
+
+
+traffic_datehour = px.imshow(date_time_density_img,color_continuous_scale='OrRd',origin='lower')
+traffic_datehour = traffic_datehour.update_xaxes(showticklabels = False)
+traffic_datehour = traffic_datehour.update_layout(title= "Pickup Density 2013",xaxis_title= "Date",yaxis_title= "Hour")
+
+highlighted_dates = ['2013-02-01','2013-02-08','2013-07-04','2013-09-13','2013-12-25','2013-12-31']
+highlighted_hours = [20, 12, 17, 8, 14, 22]
+text= ['<b>New York Knicks Final</b>', '<b>Weather Storm</b>','<b>4th of July</b>','<b>New York Yankees Final</b>','<b>Christmas</b>',
+       '<b>New Years Eve</b>']
+
+for x,y,text in zip(highlighted_dates, highlighted_hours,text):
+    traffic_datehour.add_annotation(x=x, y=y, text=text,showarrow=True,arrowhead = 2,arrowwidth=1.5,xshift=2.5)
+    
+traffic_datehour.show()
+```
+
+<iframe src= "/posts/New-York-Taxi-Analysis/traffic_datehour.html" height="525" width="100%"></iframe>
+
+Looking at the whole year we can see the traffic volumne pattern on specific dates
+
+### Q4: Tip Analysis
+
+```python
+fig_tip = px.histogram(df_train, x="tip_amount",nbins = 100,title='Histogram of Tip Amount')
+fig_tip = fig_tip.update_layout(xaxis_title = "Tip Amount", yaxis_title= 'Count')
+
+fig_tip.show()
+```
+
+<iframe src= "/posts/New-York-Taxi-Analysis/fig_tip.html" height="525" width="100%"></iframe>
+
+```python
+table =[df_train['tip_amount'].mean(),df_train['tip_amount'].median(),df_train['tip_amount'].mode().values[0]]
+print("Right Skewed Distribution which means mean > median > mode",end="\n\n")
+print(tabulate([table],headers=["Tip Amount Mean","Tip Amount Median","Tip Amount Mode"]))
+```
+    Right Skewed Distribution which means mean > median > mode
+
+    Tip Amount Mean    Tip Amount Median    Tip Amount Mode
+  -----------------  -------------------  -----------------
+          1.32447                    1                  0
+
+We see that most people don't tip.
+
+#### Tip per Hour of Day
+
+```python
+tip_per_hourofday = df_train.groupby("dropoff_hour",as_index=False)['tip_amount'].mean()
+
+tip_hour = go.Figure()
+tip_hour.add_trace(go.Scatter(x=tip_per_hourofday.dropoff_hour, y=tip_per_hourofday['tip_amount'],
+                             name='Average Tip Amount per hour',mode='markers+lines'))
+
+tip_hour = tip_hour.update_layout(title = "Average Tip Amount Per Hour of Day", yaxis_title = "Average Tip Amount", xaxis_title ="Hour of Day")
+tip_hour = tip_hour.update_xaxes(type='category')
+tip_hour.show() 
+```
+
+<iframe src= "/posts/New-York-Taxi-Analysis/tip_hour.html" height="525" width="100%"></iframe>
+
+
+#### Tip per Day of Week
+
+```python
+order_dict = {"Monday":1, "Tuesday":2, "Wednesday":3,"Thursday":4,"Friday":5,"Saturday":6,"Sunday":7}
+tip_per_day = df_train.groupby("dropoff_day",as_index=False)['tip_amount'].mean()
+tip_per_day.sort_values(by=["dropoff_day"],key=lambda x: x.map(order_dict),inplace=True)
+
+
+tip_day = go.Figure()
+tip_day.add_trace(go.Scatter(x=tip_per_day.dropoff_day, y=tip_per_day['tip_amount'],
+                             name='Average Tip Amount per day',mode='markers+lines'))
+
+
+tip_day = tip_day.update_layout(title = "Average Tip Amount Per Day", yaxis_title = "Average Tip Amount", xaxis_title ="Day")
+tip_day = tip_day.update_xaxes(type='category')
+tip_day.show()
+```
+<iframe src= "/posts/New-York-Taxi-Analysis/tip_day.html" height="525" width="100%"></iframe>
+
+
+#### Tip per Hour of Day and Day of Week
+
+```python
+order_dict = {"Monday":1, "Tuesday":2, "Wednesday":3,"Thursday":4,"Friday":5,"Saturday":6,"Sunday":7}
+tip_per_dayhour = df_train.groupby(["dropoff_day","dropoff_hour"],as_index=False)['tip_amount'].mean()
+tip_per_dayhour.sort_values(by=["dropoff_day","dropoff_hour"],key=lambda x: x.map(order_dict),inplace=True)
+
+
+tip_dayhour = px.bar(tip_per_dayhour, x="dropoff_hour",y="tip_amount",facet_row="dropoff_day",color='dropoff_day',
+                       barmode='stack',height=1000,facet_row_spacing=0.03)
+
+tip_dayhour.add_hline(y=df_train[df_train['dropoff_day']== 'Monday']["tip_amount"].mean(), line_dash="dot",
+                        annotation_text="Monday Mean Tip Amount",annotation_position="bottom right",row=7,line_color='red')
+tip_dayhour.add_hline(y=df_train[df_train['dropoff_day']== 'Tuesday']["tip_amount"].mean(), line_dash="dot",
+                        annotation_text="Tuesday Mean Tip Amount",annotation_position="bottom right",row=6,line_color='red')
+tip_dayhour.add_hline(y=df_train[df_train['dropoff_day']== 'Wednesday']["tip_amount"].mean(), line_dash="dot",
+                        annotation_text="Wednesday Mean Tip Amount",annotation_position="bottom right",row=5,line_color='red')
+tip_dayhour.add_hline(y=df_train[df_train['dropoff_day']== 'Thursday']["tip_amount"].mean(), line_dash="dot",
+                        annotation_text="Thursday Mean Tip Amount",annotation_position="bottom right",row=4,line_color='red')
+tip_dayhour.add_hline(y=df_train[df_train['dropoff_day']== 'Friday']["tip_amount"].mean(), line_dash="dot",
+                        annotation_text="Friday Mean Tip Amount",annotation_position="bottom right",row=3,line_color='red')
+tip_dayhour.add_hline(y=df_train[df_train['dropoff_day']== 'Saturday']["tip_amount"].mean(), line_dash="dot",
+                        annotation_text="Saturday Mean Tip Amount",annotation_position="bottom right",row=2,line_color='red')
+tip_dayhour.add_hline(y=df_train[df_train['dropoff_day']== 'Sunday']["tip_amount"].mean(), line_dash="dot",
+                        annotation_text="Sunday Mean Tip Amount",annotation_position="bottom right",row=1,line_color='red')
+
+tip_dayhour = tip_dayhour.for_each_annotation(lambda x: x.update(text=x.text.split("=")[-1]))
+tip_dayhour = tip_dayhour.update_xaxes(title = "Hour",type='category')
+
+for axis in tip_dayhour.layout:
+    if type(tip_dayhour.layout[axis]) == go.layout.YAxis:
+        tip_dayhour.layout[axis].title.text = ''
+    if type(tip_dayhour.layout[axis]) == go.layout.XAxis:
+        tip_dayhour.layout[axis].title.text = ''
+        
+tip_dayhour = tip_dayhour.update_layout(annotations = list(tip_dayhour.layout.annotations) + 
+                            [go.layout.Annotation(x=-0.07,y=0.5,font=dict(size=14),
+                                                  showarrow=False,text="Average Tip Amount",textangle=-90,
+                                                  xref="paper",yref="paper")])
+
+tip_dayhour = tip_dayhour.update_layout(annotations = list(tip_dayhour.layout.annotations) + 
+                            [go.layout.Annotation(x=0.5,y=-0.05,font=dict(size=14),
+                                                  showarrow=False,text="Hour",xref="paper",yref="paper")])
+
+tip_dayhour = tip_dayhour.update_layout(legend_title = 'Day')
+
+tip_dayhour.show()
+```
+
+<iframe src= "/posts/New-York-Taxi-Analysis/tip_dayhour.html" height="525" width="100%"></iframe>
+
+This if a slightly harder figure to interpret so let's simplify it:
+
+```python
+tip_per_dayhour_img = tip_per_dayhour.pivot_table(columns='dropoff_day', index='dropoff_hour',values='tip_amount')
+tip_per_dayhour_img = tip_per_dayhour_img[['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']]
+tip_per_dayhour_img = tip_per_dayhour_img[::-1]
+tip_per_dayhour_img_fig = px.imshow(tip_per_dayhour_img,origin='lower')
+tip_per_dayhour_img_fig = tip_per_dayhour_img_fig.update_layout(title = 'Heatmap of Average Tip Amount', xaxis_title='Day',
+                                                               yaxis_title= 'Hour')
+tip_per_dayhour_img_fig.show()
+```
+
+<iframe src= "/posts/New-York-Taxi-Analysis/tip_per_dayhour_img_fig.html" height="525" width="100%"></iframe>
+
+#### Tip per Time of Day
+
+```python
+tip_per_tday = df_train.groupby("dropoff_time_of_day",as_index=False)['tip_amount'].mean()
+
+
+tip_tday = go.Figure()
+tip_tday = go.Figure()
+tip_tday.add_trace(go.Scatter(x=tip_per_tday.dropoff_time_of_day, y=tip_per_tday['tip_amount'],
+                             name='Average Tip Amount per Time of Day',mode='markers+lines'))
+
+tip_tday = tip_tday.update_layout(title = "Average Tip Amount per Time of Day", yaxis_title = "Average Tip Amount", 
+                                  xaxis_title ="Time of Day")
+tip_tday = tip_tday.update_xaxes(type='category')
+tip_tday.show()
+```
+
+<iframe src= "/posts/New-York-Taxi-Analysis/tip_tday.html" height="525" width="100%"></iframe>
+
+#### Tip per Month
+
+```python
+# Average tipping per month
+
+order_dict = {"January":1, "February":2, "March":3,"April":4,"May":5,"June":6,"July":7,"August":8,"September":9,"October":10,
+              "November":11,"December":12}
+
+tip_per_month = df_train.groupby("dropoff_month",as_index=False)['tip_amount'].mean()
+tip_per_month.sort_values(by=["dropoff_month"],key=lambda x: x.map(order_dict),inplace=True)
+
+tip_month= go.Figure()
+
+tip_month.add_trace(go.Scatter(x=tip_per_month.dropoff_month, y=tip_per_month['tip_amount'],
+                             name='Average Tip Amount per Month',mode='markers+lines'))
+
+tip_month = tip_month.update_layout(title = "Average Tip Amount Per Month", yaxis_title = "Average Tip Amount", xaxis_title ="Month")
+tip_month = tip_month.update_xaxes(type='category')
+tip_month.show()
+```
+
+<iframe src= "/posts/New-York-Taxi-Analysis/tip_month.html" height="525" width="100%"></iframe>
+
+#### Tip per Direction
+
+```python
+# Average tipping per direction
+
+tip_per_dir = df_train.groupby("trip_direction",as_index=False)['tip_amount'].mean()
+
+tip_dir= go.Figure()
+tip_dir.add_trace(go.Scatter(x=tip_per_dir.trip_direction, y=tip_per_dir['tip_amount'],
+                             name='Average Tip Amount per Direction',mode='markers+lines'))
+
+tip_dir = tip_dir.update_layout(title = "Average Tip Amount Per Direction", yaxis_title = "Average Tip Amount", 
+                                xaxis_title ="Direction")
+tip_dir = tip_dir.update_xaxes(type='category')
+tip_dir.show()
+```
+
+<iframe src= "/posts/New-York-Taxi-Analysis/tip_dir.html" height="525" width="100%"></iframe>
+
+On average people tip the highest early in the morning (maybe going home drunk from a nightout :laughing:), lowest at the afternoon. People also tip highest on Wednesdays and lowest on Saturdays but these differences aren't that significant (of a few cents). We can also analyze the tipping behaviour with regards to geographic data.
+
+#### Tip per Borough
+
+```python
+avg_tip_boroughs = df_train.groupby(["pickup_borough","dropoff_borough"],as_index=False)['tip_amount'].mean()
+avg_tip_boroughs_img = pd.pivot_table(avg_tip_boroughs, index='pickup_borough', columns='dropoff_borough', values = 'tip_amount')
+
+avg_tip_boroughs_fig = px.imshow(avg_tip_boroughs_img)
+for i,r in enumerate(avg_tip_boroughs_img.values):
+    for k,c in enumerate(r):
+        if pd.isna(c):
+            c = 'No Trips'
+            avg_tip_boroughs_fig.add_annotation(x=k,y=i,
+                               text=f'<b>{c}</b>',
+                               showarrow=False,
+                               font = dict(color='black'))
+        else:
+            avg_tip_boroughs_fig.add_annotation(x=k,y=i,
+                               text=f'<b>{c:.2f}</b>',
+                               showarrow=False,
+                               font = dict(color='black'))
+avg_tip_boroughs_fig = avg_tip_boroughs_fig.update_layout(title = 'Average Tip Amount between Borough',
+                                                              xaxis_title = 'Dropoff Borough', yaxis_title = 'Pickup Borough')
+
+avg_tip_boroughs_fig.show()
+```
+<iframe src= "/posts/New-York-Taxi-Analysis/avg_tip_boroughs_fig.html" height="525" width="100%"></iframe>
+
+```python
+tip_borough = df_train.groupby('dropoff_borough',as_index=False)['tip_amount'].mean()
+tip_borough.sort_values(by='tip_amount',inplace=True)
+
+tip_borough_fig = px.bar(tip_borough, y='dropoff_borough', x='tip_amount')
+tip_borough_fig = tip_borough_fig.update_layout(title= 'Average Tip Amount Per Borough', xaxis_title = 'Average Tip Amount',
+                                               yaxis_title= 'Borough')
+tip_borough_fig.show()
+```
+
+<iframe src= "/posts/New-York-Taxi-Analysis/tip_borough_fig.html" height="525" width="100%"></iframe>
+
+Queens is the highest tip paying borough when disregarding the low density of trips in Staten Island and the Outside Boroughs
+
+We saw earlier that there isn't a significant difference between the tipping of various time of the day on average but we can also investigate the correlation as well
+
+```python
+columns=list(range(0,24))
+correlation_hour = pd.DataFrame(index=["tip_amount"],columns=columns)
+hour_one_hot = pd.get_dummies(df_train.dropoff_hour)
+for i,col in enumerate(columns):
+    cor = df_train.tip_amount.corr(hour_one_hot[col])
+    correlation_hour.loc[:,columns[i]] = cor
+plt.figure(figsize=(25,5))
+g = sns.heatmap(correlation_hour,annot=True,fmt='.4f', annot_kws={"fontsize":12})
+g.set_yticklabels(['Tip Amount'], fontsize = 16)
+plt.title("Correlation Matrix between Tip Amount and Hour of Day", fontdict={'fontsize':20})
+plt.plot()
+
+columns=df_train.dropoff_time_of_day.unique()
+correlation_tday = pd.DataFrame(index=["tip_amount"],columns=columns)
+tday_onehot = pd.get_dummies(df_train.dropoff_time_of_day)
+for i,col in enumerate(columns):
+    cor = df_train.tip_amount.corr(tday_onehot[col])
+    correlation_tday.loc[:,columns[i]] = cor
+plt.figure(figsize=(25,5))
+g = sns.heatmap(correlation_tday,annot=True,fmt='.4f', annot_kws={"fontsize":16})
+g.set_yticklabels(['Tip Amount'], fontsize = 16)
+plt.title("Correlation Matrix between Tip Amount and Time of Day", fontdict={'fontsize':20})
+plt.plot()
+```
+
+<img src="/posts/New-York-Taxi-Analysis/corr_thour.png" width="100%">
+
+
+<img src="/posts/New-York-Taxi-Analysis/corr_tday.png" width="100%">
+
+Again no significant correlation, but we can still go even further with simple linear regression
+
+```python
+import statsmodels.api as sm
+
+lr = sm.OLS(df_train.tip_amount, sm.add_constant(hour_one_hot.drop(23, axis=1))).fit()
+lr2 = sm.OLS(df_train.tip_amount, sm.add_constant(tday_onehot.drop('Night',axis=1))).fit()
+```
+
+
+```python
+lr.summary()
+```
+
+
+
+
+<table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>       <td>tip_amount</td>    <th>  R-squared:         </th>  <td>   0.002</td>  
+</tr>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th>  <td>   0.002</td>  
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th>  <td>   108.0</td>  
+</tr>
+<tr>
+  <th>Date:</th>             <td>Sun, 30 Oct 2022</td> <th>  Prob (F-statistic):</th>   <td>  0.00</td>   
+</tr>
+<tr>
+  <th>Time:</th>                 <td>06:35:25</td>     <th>  Log-Likelihood:    </th> <td>-2.5450e+06</td>
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td>1182030</td>     <th>  AIC:               </th>  <td>5.090e+06</td> 
+</tr>
+<tr>
+  <th>Df Residuals:</th>          <td>1182006</td>     <th>  BIC:               </th>  <td>5.090e+06</td> 
+</tr>
+<tr>
+  <th>Df Model:</th>              <td>    23</td>      <th>                     </th>      <td> </td>     
+</tr>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>      <td> </td>     
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+    <td></td>       <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>const</th> <td>    1.4465</td> <td>    0.008</td> <td>  181.745</td> <td> 0.000</td> <td>    1.431</td> <td>    1.462</td>
+</tr>
+<tr>
+  <th>0</th>     <td>    0.0436</td> <td>    0.012</td> <td>    3.664</td> <td> 0.000</td> <td>    0.020</td> <td>    0.067</td>
+</tr>
+<tr>
+  <th>1</th>     <td>   -0.0119</td> <td>    0.014</td> <td>   -0.861</td> <td> 0.389</td> <td>   -0.039</td> <td>    0.015</td>
+</tr>
+<tr>
+  <th>2</th>     <td>   -0.0992</td> <td>    0.015</td> <td>   -6.514</td> <td> 0.000</td> <td>   -0.129</td> <td>   -0.069</td>
+</tr>
+<tr>
+  <th>3</th>     <td>   -0.1342</td> <td>    0.017</td> <td>   -7.934</td> <td> 0.000</td> <td>   -0.167</td> <td>   -0.101</td>
+</tr>
+<tr>
+  <th>4</th>     <td>   -0.1116</td> <td>    0.019</td> <td>   -5.870</td> <td> 0.000</td> <td>   -0.149</td> <td>   -0.074</td>
+</tr>
+<tr>
+  <th>5</th>     <td>    0.2021</td> <td>    0.022</td> <td>    9.390</td> <td> 0.000</td> <td>    0.160</td> <td>    0.244</td>
+</tr>
+<tr>
+  <th>6</th>     <td>    0.0184</td> <td>    0.015</td> <td>    1.189</td> <td> 0.235</td> <td>   -0.012</td> <td>    0.049</td>
+</tr>
+<tr>
+  <th>7</th>     <td>   -0.1275</td> <td>    0.012</td> <td>  -10.354</td> <td> 0.000</td> <td>   -0.152</td> <td>   -0.103</td>
+</tr>
+<tr>
+  <th>8</th>     <td>   -0.0405</td> <td>    0.011</td> <td>   -3.557</td> <td> 0.000</td> <td>   -0.063</td> <td>   -0.018</td>
+</tr>
+<tr>
+  <th>9</th>     <td>   -0.0629</td> <td>    0.011</td> <td>   -5.489</td> <td> 0.000</td> <td>   -0.085</td> <td>   -0.040</td>
+</tr>
+<tr>
+  <th>10</th>    <td>   -0.1860</td> <td>    0.012</td> <td>  -16.050</td> <td> 0.000</td> <td>   -0.209</td> <td>   -0.163</td>
+</tr>
+<tr>
+  <th>11</th>    <td>   -0.2671</td> <td>    0.012</td> <td>  -22.231</td> <td> 0.000</td> <td>   -0.291</td> <td>   -0.244</td>
+</tr>
+<tr>
+  <th>12</th>    <td>   -0.2721</td> <td>    0.012</td> <td>  -22.997</td> <td> 0.000</td> <td>   -0.295</td> <td>   -0.249</td>
+</tr>
+<tr>
+  <th>13</th>    <td>   -0.2713</td> <td>    0.012</td> <td>  -22.860</td> <td> 0.000</td> <td>   -0.295</td> <td>   -0.248</td>
+</tr>
+<tr>
+  <th>14</th>    <td>   -0.2296</td> <td>    0.012</td> <td>  -18.927</td> <td> 0.000</td> <td>   -0.253</td> <td>   -0.206</td>
+</tr>
+<tr>
+  <th>15</th>    <td>   -0.2090</td> <td>    0.012</td> <td>  -16.809</td> <td> 0.000</td> <td>   -0.233</td> <td>   -0.185</td>
+</tr>
+<tr>
+  <th>16</th>    <td>   -0.1547</td> <td>    0.013</td> <td>  -12.346</td> <td> 0.000</td> <td>   -0.179</td> <td>   -0.130</td>
+</tr>
+<tr>
+  <th>17</th>    <td>   -0.1704</td> <td>    0.012</td> <td>  -13.808</td> <td> 0.000</td> <td>   -0.195</td> <td>   -0.146</td>
+</tr>
+<tr>
+  <th>18</th>    <td>   -0.1385</td> <td>    0.011</td> <td>  -12.242</td> <td> 0.000</td> <td>   -0.161</td> <td>   -0.116</td>
+</tr>
+<tr>
+  <th>19</th>    <td>   -0.1376</td> <td>    0.011</td> <td>  -12.407</td> <td> 0.000</td> <td>   -0.159</td> <td>   -0.116</td>
+</tr>
+<tr>
+  <th>20</th>    <td>   -0.1295</td> <td>    0.011</td> <td>  -11.259</td> <td> 0.000</td> <td>   -0.152</td> <td>   -0.107</td>
+</tr>
+<tr>
+  <th>21</th>    <td>   -0.0831</td> <td>    0.012</td> <td>   -7.147</td> <td> 0.000</td> <td>   -0.106</td> <td>   -0.060</td>
+</tr>
+<tr>
+  <th>22</th>    <td>   -0.0468</td> <td>    0.011</td> <td>   -4.097</td> <td> 0.000</td> <td>   -0.069</td> <td>   -0.024</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+  <th>Omnibus:</th>       <td>1253930.783</td> <th>  Durbin-Watson:     </th>   <td>   2.001</td>   
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th>   <td> 0.000</td>    <th>  Jarque-Bera (JB):  </th> <td>385938280.509</td>
+</tr>
+<tr>
+  <th>Skew:</th>            <td> 4.829</td>    <th>  Prob(JB):          </th>   <td>    0.00</td>   
+</tr>
+<tr>
+  <th>Kurtosis:</th>        <td>90.993</td>    <th>  Cond. No.          </th>   <td>    21.6</td>   
+</tr>
+</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+
+
+
+
+```python
+lr2.summary()
+```
+
+
+
+
+<table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>       <td>tip_amount</td>    <th>  R-squared:         </th>  <td>   0.001</td>  
+</tr>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th>  <td>   0.001</td>  
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th>  <td>   380.3</td>  
+</tr>
+<tr>
+  <th>Date:</th>             <td>Sun, 30 Oct 2022</td> <th>  Prob (F-statistic):</th>   <td>  0.00</td>   
+</tr>
+<tr>
+  <th>Time:</th>                 <td>06:35:26</td>     <th>  Log-Likelihood:    </th> <td>-2.5454e+06</td>
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td>1182030</td>     <th>  AIC:               </th>  <td>5.091e+06</td> 
+</tr>
+<tr>
+  <th>Df Residuals:</th>          <td>1182025</td>     <th>  BIC:               </th>  <td>5.091e+06</td> 
+</tr>
+<tr>
+  <th>Df Model:</th>              <td>     4</td>      <th>                     </th>      <td> </td>     
+</tr>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>      <td> </td>     
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+       <td></td>         <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>const</th>      <td>    1.4439</td> <td>    0.005</td> <td>  300.591</td> <td> 0.000</td> <td>    1.434</td> <td>    1.453</td>
+</tr>
+<tr>
+  <th>Afternon</th>   <td>   -0.2440</td> <td>    0.007</td> <td>  -36.964</td> <td> 0.000</td> <td>   -0.257</td> <td>   -0.231</td>
+</tr>
+<tr>
+  <th>Evening</th>    <td>   -0.1314</td> <td>    0.006</td> <td>  -22.143</td> <td> 0.000</td> <td>   -0.143</td> <td>   -0.120</td>
+</tr>
+<tr>
+  <th>Late night</th> <td>   -0.0448</td> <td>    0.008</td> <td>   -5.577</td> <td> 0.000</td> <td>   -0.061</td> <td>   -0.029</td>
+</tr>
+<tr>
+  <th>Morning</th>    <td>   -0.1181</td> <td>    0.006</td> <td>  -19.483</td> <td> 0.000</td> <td>   -0.130</td> <td>   -0.106</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+  <th>Omnibus:</th>       <td>1253963.407</td> <th>  Durbin-Watson:     </th>   <td>   2.001</td>   
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th>   <td> 0.000</td>    <th>  Jarque-Bera (JB):  </th> <td>385045385.766</td>
+</tr>
+<tr>
+  <th>Skew:</th>            <td> 4.830</td>    <th>  Prob(JB):          </th>   <td>    0.00</td>   
+</tr>
+<tr>
+  <th>Kurtosis:</th>        <td>90.890</td>    <th>  Cond. No.          </th>   <td>    6.67</td>   
+</tr>
+</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+
+
+From this analysis we see that 1AM and 6AM are insignificant while most other hours of the day contribute negatively to the average tipping amount except for 5AM as expected.
+
+We can go even further by trying to model the tipping amount with the features we have. I'll opt for s Random Forest Model, which I will probably write about in the future along with tree models. The code for this is as follows:
+
+```python
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.compose import ColumnTransformer 
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import OneHotEncoder, FunctionTransformer, StandardScaler
+
+def sin_transformer(period):
+    return FunctionTransformer(lambda x: np.sin(x / period * 2 * np.pi))
+
+
+def cos_transformer(period):
+    return FunctionTransformer(lambda x: np.cos(x / period * 2 * np.pi))
+
+one_hot_encoder = OneHotEncoder(handle_unknown="ignore", sparse=False)
+categorical_columns = ['payment_type','dropoff_day','dropoff_month','dropoff_time_of_day','dropoff_borough']
+
+hour_transformer = ColumnTransformer(
+    transformers=[
+        ("categorical", one_hot_encoder, categorical_columns),
+        ("hour_sin", sin_transformer(24), ["dropoff_hour"]),
+        ("hour_cos", cos_transformer(24), ["dropoff_hour"])
+    ],
+    remainder=StandardScaler()
+)
+
+rf_pipe = make_pipeline(
+    hour_transformer,
+    RandomForestRegressor(),
+)
+
+X = df_train[['payment_type','dropoff_day','dropoff_month','dropoff_time_of_day','dropoff_borough','dropoff_hour','trip_distance',
+             'trip_time_in_secs','pickup_longitude','pickup_latitude','fare_amount']]
+
+y = df_train.tip_amount
+
+_  = rf_pipe.fit(X,y)
+```
+
+We also cyclically encode the time feature (dropoff hour), this is usually done when we have cyclical features such as hour of the day, days of the week, and others. This can be achieved by taking the sine and cosine of the cyclical feature divided by the period (total number/maximum number of the feature, i,e. 7 if days of the week and 24 if hours). We also one-hot encode our categorical variables. I'll also write a future article about cyclical encoding of features in the future.  We evaluate how well the model performs on our training data.
+
+```python
+print("Coefficient of determination (R^2) of the model is: ", rf_pipe.score(X,y))
+```
+    Coefficient of determination (R^2) of the model is: 0.962619575415421
+  
+Eventually we would like to see the most important deatures that contribute to predicting the tipping amount (More on this in a future article)
+
+```python
+features = pd.concat([pd.get_dummies(X[categorical_columns]),X[X.columns.difference(categorical_columns)]],axis=1).columns.tolist()
+features[features.index('dropoff_hour')] = 'dropoff_hour_sin'
+features.insert(features.index('dropoff_hour_sin') +1,'dropoff_hour_cos')
+feature_importance = rf_pipe.steps[-1][1].feature_importances_
+feature_importance_df = pd.DataFrame({'Feature Name':features, 'Importance':feature_importance})
+feature_importance_df.sort_values(by='Importance',ascending=False,inplace=True)
+feature_importance_df.reset_index(drop=True, inplace=True)
+
+feature_importance_fig = px.bar(feature_importance_df, x='Importance', y='Feature Name',
+       category_orders={'Feature Name':feature_importance_df['Feature Name']},height=900)
+feature_importance_fig.show()
+```
+
+
+<iframe src= "/posts/New-York-Taxi-Analysis/feature_importance_fig.html" height="525" width="100%"></iframe>
+
+We see that a major influencing factor in determining the tipping amount is how long the trip took and what payment method was used (Cash in our case as intuitively that's what most people tip taxi rides with). We can see the correlation between the tip, time taken and distance to confirm that there is a correlation but a weak one.  
+
+<img src="/posts/New-York-Taxi-Analysis/tip_corr.png" width="100%">
+
+Seeing this we analyze this again with linear regression modelling the average tipping amount
+
+```python
+lr_distance = sm.OLS(df_train.tip_amount, sm.add_constant(df_train.trip_distance)).fit()
+lr_distance.summary()
+```
+
+
+
+
+<table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>       <td>tip_amount</td>    <th>  R-squared:         </th>  <td>   0.259</td>  
+</tr>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th>  <td>   0.259</td>  
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th>  <td>4.131e+05</td> 
+</tr>
+<tr>
+  <th>Date:</th>             <td>Sun, 30 Oct 2022</td> <th>  Prob (F-statistic):</th>   <td>  0.00</td>   
+</tr>
+<tr>
+  <th>Time:</th>                 <td>08:03:25</td>     <th>  Log-Likelihood:    </th> <td>-2.3691e+06</td>
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td>1182030</td>     <th>  AIC:               </th>  <td>4.738e+06</td> 
+</tr>
+<tr>
+  <th>Df Residuals:</th>          <td>1182028</td>     <th>  BIC:               </th>  <td>4.738e+06</td> 
+</tr>
+<tr>
+  <th>Df Model:</th>              <td>     1</td>      <th>                     </th>      <td> </td>     
+</tr>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>      <td> </td>     
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+        <td></td>           <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>const</th>         <td>    0.3976</td> <td>    0.002</td> <td>  181.351</td> <td> 0.000</td> <td>    0.393</td> <td>    0.402</td>
+</tr>
+<tr>
+  <th>trip_distance</th> <td>    0.3109</td> <td>    0.000</td> <td>  642.736</td> <td> 0.000</td> <td>    0.310</td> <td>    0.312</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+  <th>Omnibus:</th>       <td>1150484.269</td> <th>  Durbin-Watson:     </th>   <td>   2.002</td>   
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th>   <td> 0.000</td>    <th>  Jarque-Bera (JB):  </th> <td>903227788.715</td>
+</tr>
+<tr>
+  <th>Skew:</th>            <td> 3.820</td>    <th>  Prob(JB):          </th>   <td>    0.00</td>   
+</tr>
+<tr>
+  <th>Kurtosis:</th>        <td>138.207</td>   <th>  Cond. No.          </th>   <td>    6.15</td>   
+</tr>
+</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+
+
+
+A positive contribution
+
+```python
+scaler = StandardScaler()
+
+scaled_duration = scaler.fit_transform(df_train.trip_time_in_secs.values.reshape(-1,1)) 
+lr_duration = sm.OLS(df_train.tip_amount, sm.add_constant(scaled_duration)).fit()
+lr_duration.summary()
+```
+
+
+
+
+<table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>       <td>tip_amount</td>    <th>  R-squared:         </th>  <td>   0.201</td>  
+</tr>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th>  <td>   0.201</td>  
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th>  <td>2.976e+05</td> 
+</tr>
+<tr>
+  <th>Date:</th>             <td>Sun, 30 Oct 2022</td> <th>  Prob (F-statistic):</th>   <td>  0.00</td>   
+</tr>
+<tr>
+  <th>Time:</th>                 <td>08:03:26</td>     <th>  Log-Likelihood:    </th> <td>-2.4135e+06</td>
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td>1182030</td>     <th>  AIC:               </th>  <td>4.827e+06</td> 
+</tr>
+<tr>
+  <th>Df Residuals:</th>          <td>1182028</td>     <th>  BIC:               </th>  <td>4.827e+06</td> 
+</tr>
+<tr>
+  <th>Df Model:</th>              <td>     1</td>      <th>                     </th>      <td> </td>     
+</tr>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>      <td> </td>     
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+    <td></td>       <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>const</th> <td>    1.3245</td> <td>    0.002</td> <td>  772.412</td> <td> 0.000</td> <td>    1.321</td> <td>    1.328</td>
+</tr>
+<tr>
+  <th>x1</th>    <td>    0.9355</td> <td>    0.002</td> <td>  545.563</td> <td> 0.000</td> <td>    0.932</td> <td>    0.939</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+  <th>Omnibus:</th>       <td>1204548.432</td> <th>  Durbin-Watson:     </th>   <td>   2.001</td>   
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th>   <td> 0.000</td>    <th>  Jarque-Bera (JB):  </th> <td>758035989.092</td>
+</tr>
+<tr>
+  <th>Skew:</th>            <td> 4.241</td>    <th>  Prob(JB):          </th>   <td>    0.00</td>   
+</tr>
+<tr>
+  <th>Kurtosis:</th>        <td>126.771</td>   <th>  Cond. No.          </th>   <td>    1.00</td>   
+</tr>
+</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+
+```python
+print(f"On Average {np.round(scaler.inverse_transform(lr_duration.params['x1'].reshape(1,-1))[0][0],0)} seconds or 20 minutes contribute to a 1 dollar tip") 
+```
+    On Average 1249.0 seconds or 20 minutes contribute to a 1 dollar tip
+
+This sums up our findings and this article. I have conducted other analysis as well as a prediction model for predicting the pickup density after clustering New York into several buckets/regions and binning of time. All of this can be found in the projects GitHub repository.
+
+Thank you for reading and if you have any questions regarding the project I'm an email away. Until next time, Bye!
 </span>
