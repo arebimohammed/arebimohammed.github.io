@@ -3351,7 +3351,7 @@ print(tabulate([table],headers=["Tip Amount Mean","Tip Amount Median","Tip Amoun
     Right Skewed Distribution which means mean > median > mode
 
     Tip Amount Mean    Tip Amount Median    Tip Amount Mode
-  -----------------  -------------------  -----------------
+    -----------------  -------------------  -----------------
           1.32447                    1                  0
 
 We see that most people don't tip.
@@ -3857,7 +3857,8 @@ We also cyclically encode the time feature (dropoff hour), this is usually done 
 ```python
 print("Coefficient of determination (R^2) of the model is: ", rf_pipe.score(X,y))
 ```
-    Coefficient of determination (R^2) of the model is: 0.962619575415421
+    Coefficient of determination (R^2) of the model is: 
+    0.962619575415421
   
 Eventually we would like to see the most important deatures that contribute to predicting the tipping amount (More on this in a future article)
 
@@ -4022,7 +4023,8 @@ lr_duration.summary()
 ```python
 print(f"On Average {np.round(scaler.inverse_transform(lr_duration.params['x1'].reshape(1,-1))[0][0],0)} seconds or 20 minutes contribute to a 1 dollar tip") 
 ```
-    On Average 1249.0 seconds or 20 minutes contribute to a 1 dollar tip
+    On Average 1249.0 seconds or 20 minutes contribute to a 
+    1 dollar tip
 
 This sums up our findings and this article. I have conducted other analysis as well as a prediction model for predicting the pickup density after clustering New York into several buckets/regions and binning of time. All of this can be found in the projects GitHub repository.
 

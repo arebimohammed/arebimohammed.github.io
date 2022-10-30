@@ -10,7 +10,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://arebimohammed.github.io/new-york-taxi-analysis/" /><meta property="og:image" content="https://arebimohammed.github.io/logo.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2020-10-16T20:29:01+08:00" />
-<meta property="article:modified_time" content="2022-10-30T08:18:47+01:00" />
+<meta property="article:modified_time" content="2022-10-30T08:33:21+01:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://arebimohammed.github.io/logo.png"/>
@@ -29,8 +29,8 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/arebimohammed.github.io\/new-york-taxi-analysis\/"
-        },"image": ["https:\/\/arebimohammed.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "blogging, data science, machine learning, project, python, data analysis","wordcount":  12461 ,
-        "url": "https:\/\/arebimohammed.github.io\/new-york-taxi-analysis\/","datePublished": "2020-10-16T20:29:01+08:00","dateModified": "2022-10-30T08:18:47+01:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+        },"image": ["https:\/\/arebimohammed.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "blogging, data science, machine learning, project, python, data analysis","wordcount":  12464 ,
+        "url": "https:\/\/arebimohammed.github.io\/new-york-taxi-analysis\/","datePublished": "2020-10-16T20:29:01+08:00","dateModified": "2022-10-30T08:33:21+01:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": "https:\/\/arebimohammed.github.io\/images\/avatar.png"},"author": {
                 "@type": "Person",
@@ -106,7 +106,7 @@
             <div class="toc-content always-active" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">Digging Deep Into the New York Taxi Dataset</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Mohammed Arebi</a></span>&nbsp;<span class="post-category">included in <a href="/categories/data-analysis/"><i class="far fa-folder fa-fw"></i>Data Analysis</a>&nbsp;<a href="/categories/machine-learning/"><i class="far fa-folder fa-fw"></i>Machine Learning</a>&nbsp;<a href="/categories/big-data/"><i class="far fa-folder fa-fw"></i>Big Data</a>&nbsp;<a href="/categories/interactive/"><i class="far fa-folder fa-fw"></i>Interactive</a>&nbsp;<a href="/categories/data-visualisation/"><i class="far fa-folder fa-fw"></i>Data Visualisation</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-10-16">2020-10-16</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;12461 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-10-16">2020-10-16</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;12464 words&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;59 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
@@ -4818,9 +4818,8 @@ Speed Mean    Speed Median    Speed Mode
 </div><pre><code>Right Skewed Distribution which means mean &gt; median &gt; mode
 
 Tip Amount Mean    Tip Amount Median    Tip Amount Mode
-</code></pre>
-<hr>
-<pre><code>      1.32447                    1                  0
+-----------------  -------------------  -----------------
+      1.32447                    1                  0
 </code></pre>
 <p>We see that most people don&rsquo;t tip.</p>
 <h4 id="tip-per-hour-of-day">Tip per Hour of Day</h4>
@@ -5536,7 +5535,8 @@ Tip Amount Mean    Tip Amount Median    Tip Amount Mode
 <pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Coefficient of determination (R^2) of the model is: &#34;</span><span class="p">,</span> <span class="n">rf_pipe</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">))</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><pre><code>Coefficient of determination (R^2) of the model is: 0.962619575415421
+</div><pre><code>Coefficient of determination (R^2) of the model is: 
+0.962619575415421
 </code></pre>
 <p>Eventually we would like to see the most important deatures that contribute to predicting the tipping amount (More on this in a future article)</p>
 <div class="highlight"><div class="chroma">
@@ -5716,7 +5716,8 @@ Tip Amount Mean    Tip Amount Median    Tip Amount Mode
 <pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;On Average </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">scaler</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span><span class="n">lr_duration</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;x1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">))[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="mi">0</span><span class="p">)</span><span class="si">}</span><span class="s2"> seconds or 20 minutes contribute to a 1 dollar tip&#34;</span><span class="p">)</span> 
 </span></span></code></pre></td></tr></table>
 </div>
-</div><pre><code>On Average 1249.0 seconds or 20 minutes contribute to a 1 dollar tip
+</div><pre><code>On Average 1249.0 seconds or 20 minutes contribute to a 
+1 dollar tip
 </code></pre>
 <p>This sums up our findings and this article. I have conducted other analysis as well as a prediction model for predicting the pickup density after clustering New York into several buckets/regions and binning of time. All of this can be found in the projects GitHub repository.</p>
 <p>Thank you for reading and if you have any questions regarding the project I&rsquo;m an email away. Until next time, Bye!
