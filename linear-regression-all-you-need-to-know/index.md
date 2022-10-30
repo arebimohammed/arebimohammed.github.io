@@ -17,7 +17,7 @@ What a better way to start my blogging journey, than with one of the most fundam
 - The second step is to compute R<sup>2</sup>
 - Finally, compute the p-value for the computed R squared in the previous step
 
-The first concept we are going to tackle is fitting a line to the data, what exactly does that mean and how can we do it? To effectively explain that we are going to need some data. I will be using the fish market data from Kaggle which is available [here](https://www.kaggle.com/aungpyaeap/fish-market). The dataset contains sales records for seven common fish species seen in fish markets. Some of the features (columns) in dataset are: Species, Weight, Different Lengths, Height and Width. We'll be using it to estimate the weight of the fish, as we are trying to explain linear regression we'll first use only one feature to predict the weight, the height (simple linear regression).
+The first concept we are going to tackle is fitting a line to the data, what exactly does that mean and how can we do it? To effectively explain that we are going to need some data. I will be using the fish market data from Kaggle which is available [here](https://www.kaggle.com/aungpyaeap/fish-market). The dataset contains sales records for seven common fish species seen in fish markets. Some of the features (columns) in dataset are: Species, Weight, Different Lengths, Height and Width. We'll be using it to estimate the weight of the fish, as we are trying to explain linear regression we'll first use only one feature to predict the weight, the height (simple linear regression)
 
 We'll first load the dataset using pandas ``` read_csv ```:
 
@@ -78,9 +78,9 @@ In general, such a relationship may not hold perfectly for the mostly unobserved
 
 But now comes the real question how does linear regression adjust the y-intercept and coefficients to get the "best-fitting" line which yields the lowest sum of squared residuals. Recall that I mentioned that these parameters ($\hat{\alpha}$ and $\hat{\beta}$) can be either estimated iteratively or mathematically. In the third step I mentioned that we rotate the line a little bit to be able to decrease the sum of squared residuals, well that is actually the iterative approach, which is conducted using an optimization technique named gradient descent. The mathematical approach uses derived equations using calculus to estimate these parameters, analytically straight away to get the line. In this article I'll talk about these equations i.e. the mathematical approach, and will leave the iterative approach using gradient descent for another article where I talk about gradient descent in general as it is widely used in many other machine learning algorithms (not only linear regression) to minimize a loss or cost function (or gradient ascent to maximize an objective function) and it does that by iteratively adjusting these parameter, in linear regression the sum of squared residuals is the loss function. 
 
-First let's define the sum of squared residuals equations, we know that the equation for the line is: $ \hat{y} = {\alpha} + {\beta}x$, and we know that the residuals is the actual value $y$ minus the estimated value which we will give the symbol $\hat{y}$ then squared. So the sum of squared residuals is defined by: 
+First let's define the sum of squared residuals equations, we know that the equation for the line is: $ \hat{y} = {\alpha} + {\beta}x$, and we know that the residuals is the actual value $y$ minus the estimated value (which we will give the symbol $\hat{y}$), the result is then squared. So the sum of squared residuals is defined by: 
 
-$$ \sum_{i=1}^{n} (y_i - \hat{y}_i)^2  = \sum_{i=1}^{n} (y_i -  (\hat{\alpha} + {\hat{\beta}}x_i))^2 $$
+<img src = "/posts/Linear Regression/SSR.png">
 
 where $n$ is the sample size.
 

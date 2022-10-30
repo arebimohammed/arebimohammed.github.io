@@ -235,7 +235,7 @@ The figure this time is produced using the ``` FigureWidget ``` object instead, 
 
 I have added several other interactive figures in the dashboard app that I will not discuss here. But you can definitely check out the code for them in the Github repository linked above, and interact with the figures in the app also linked above.  
 
-The next analysis I wanted to work on is trying to predict the number of cases per status (Confirmed, Recovered, Active, Deaths). I opted for Linear regression to conduct such analysis. If you haven't read my blog post on linear regression read it [here](https://arebimohammed.github.io/2020/03/10/Linear-Regression-All-you-need-to-know.html). The blog posts tries to cover most of the details of linear regression, but also includes polynomial regression, which is linear regression with polynomial features, It's also possible to think of it as a linear regression with a feature space mapping (aka a polynomial kernel). I will try to dedicate a seperate post for polynomial features and polynomial regression, but all you need to know ahead here is that the time series data of the Covid-19 cases is not linear, it can have various shapes, particularly for the daily changes per status data, the others are fairly linear especially the 'Confirmed' and 'Deaths', but of course they are if we are looking at the cumulative count, as seen below (click the 'Confirmed' or 'Deaths' button). But if you look at the daily changes data (also by clicking their respective buttons), it is not that linear. 
+The next analysis I wanted to work on is trying to predict the number of cases per status (Confirmed, Recovered, Active, Deaths). I opted for Linear regression to conduct such analysis. If you haven't read my blog post on linear regression read it [here](/posts/Linear Regression/Linear-Regression-All-you-need-to-know). The blog posts tries to cover most of the details of linear regression, but also includes polynomial regression, which is linear regression with polynomial features, It's also possible to think of it as a linear regression with a feature space mapping (aka a polynomial kernel). I will try to dedicate a seperate post for polynomial features and polynomial regression, but all you need to know ahead here is that the time series data of the Covid-19 cases is not linear, it can have various shapes, particularly for the daily changes per status data, the others are fairly linear especially the 'Confirmed' and 'Deaths', but of course they are if we are looking at the cumulative count, as seen below (click the 'Confirmed' or 'Deaths' button). But if you look at the daily changes data (also by clicking their respective buttons), it is not that linear. 
 
 <iframe src= "/posts/COVID19- An Interactive Analysis/stats_fig.html" height="525" width="100%"></iframe>
 
@@ -636,7 +636,9 @@ lin_reg_closure = LinearRegression().fit(X_closure,y)
 
 I first get the average new cases per week and reindex them to calculate the weekly trend in average new cases by substracting subsequent weeks from previous weeks. I have also used the Week and Week squared as input features as well. Finally the input feature we are mostly interested in, is the measure feature which is different for every measure hence the different input variables (``` X_<measure>```) for the different measures. This will give us this Linear Regression equation:
 
-$$ \hat{y}_{t} = {\alpha} + {\beta}_{0}N_{t-1} + {\beta}_{1}W + {\beta}_{2}t + {\beta}_{3}t^2 + {\beta}_{4}M $$
+
+<img src="/posts/COVID19- An Interactive Analysis/LR_EQ.png" alt="Linear Regression Equation"/>
+
 
 Where: 
 - $ {\alpha} $ is the y-intercept
