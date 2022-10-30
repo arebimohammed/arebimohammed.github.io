@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>Applying Under-Sampling Methods to Highly Imbalanced Data - Mohammed Arebi</title><meta name="Description" content="Application"><meta property="og:title" content="Applying Under-Sampling Methods to Highly Imbalanced Data" />
+<meta property="og:description" content="Application" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://arebimohammed.github.io/applying-under-sampling/" /><meta property="og:image" content="https://arebimohammed.github.io/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2020-08-12T20:29:01+08:00" />
+<meta property="article:modified_time" content="2022-09-19T05:52:52+02:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://arebimohammed.github.io/logo.png"/>
+
+<meta name="twitter:title" content="Applying Under-Sampling Methods to Highly Imbalanced Data"/>
+<meta name="twitter:description" content="Application"/>
+<meta name="application-name" content="Mohammed Arebi">
+<meta name="apple-mobile-web-app-title" content="Mohammed Arebi"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://arebimohammed.github.io/applying-under-sampling/" /><link rel="prev" href="https://arebimohammed.github.io/logistic-regression/" /><link rel="next" href="https://arebimohammed.github.io/applying-oversampling/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Applying Under-Sampling Methods to Highly Imbalanced Data",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/arebimohammed.github.io\/applying-under-sampling\/"
+        },"image": ["https:\/\/arebimohammed.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "blogging, data science, machine learning, undersampling, python","wordcount":  1784 ,
+        "url": "https:\/\/arebimohammed.github.io\/applying-under-sampling\/","datePublished": "2020-08-12T20:29:01+08:00","dateModified": "2022-09-19T05:52:52+02:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "xxxx","logo": "https:\/\/arebimohammed.github.io\/images\/avatar.png"},"author": {
+                "@type": "Person",
+                "name": "Mohammed Arebi"
+            },"description": "Application"
+    }
+    </script></head>
+    <body header-desktop="auto" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Mohammed Arebi"><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/about/about-me"> About </a><a class="menu-item" href="/resume/my-resume"> Resume </a><a class="menu-item" href="/projects/my-projects"> Projects </a><a class="menu-item" href="https://github.com/arebimohammed" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Mohammed Arebi"><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/about/about-me" title="">About</a><a class="menu-item" href="/resume/my-resume" title="">Resume</a><a class="menu-item" href="/projects/my-projects" title="">Projects</a><a class="menu-item" href="https://github.com/arebimohammed" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">Applying Under-Sampling Methods to Highly Imbalanced Data</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Mohammed Arebi</a></span>&nbsp;<span class="post-category">included in <a href="/categories/data-preprocessing/"><i class="far fa-folder fa-fw"></i>Data Preprocessing</a>&nbsp;<a href="/categories/machine-learning/"><i class="far fa-folder fa-fw"></i>Machine Learning</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-08-12">2020-08-12</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1784 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;9 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/Undersampling%20Applications/undersample.png"
+        data-srcset="/posts/Undersampling%20Applications/undersample.png, /posts/Undersampling%20Applications/undersample.png 1.5x, /posts/Undersampling%20Applications/undersample.png 2x"
+        data-sizes="auto"
+        alt="/posts/Undersampling Applications/undersample.png"
+        title="Application" /></div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#what-exactly-is-imbalanced-data">What exactly is imbalanced data?</a></li>
+        <li><a href="#why-cant-a-roc-curve-measure-well">Why can&rsquo;t a ROC curve measure well?</a></li>
+        <li><a href="#f1-score">F1 Score</a></li>
+        <li><a href="#what-are-the-possible-solutions">What are the possible solutions?</a></li>
+        <li><a href="#undersampling-methods">Undersampling Methods</a></li>
+        <li><a href="#application-with-python">Application with Python</a></li>
+        <li><a href="#conclusion">Conclusion</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><span style="font-size:1.125rem">
+<p>Class imbalance can lead to a significant bias toward the dominant class, lowering classification performance and increasing the frequency of false negatives. How can we solve the problem? The most popular strategies include data resampling, which involves either undersampling the majority of the class, oversampling the minority class, or a combination of the two. As a consequence, classification performance will improve. In this article, I will describe what unbalanced data is, why <a href="https://en.wikipedia.org/wiki/Receiver_operating_characteristic" target="_blank" rel="noopener noreffer">Receiver Operating Characteristic Curve</a> (ROC) fails to measure accurately, and how to address the problem. The second article, <a href="https://arebimohammed.github.io/applying-oversampling/" target="_blank" rel="noopener noreffer">Applying Over-Sampling Methods to Highly Imbalanced Data</a> is strongly recommended after or even before this article. The Python code in both posts for anyone who is interested is available in my <a href="https://github.com/arebimohammed/code-for-articles" target="_blank" rel="noopener noreffer">github</a>. </p>
+<h3 id="what-exactly-is-imbalanced-data">What exactly is imbalanced data?</h3>
+<p>The definition of unbalanced data is simple. A dataset is considered unbalanced if at least one of the classes represents a relatively tiny minority. In finance, insurance, engineering, and many other areas, unbalanced data is common. In fraud detection, it is normal for the imbalance to be on the order of 100 to 1.</p>
+<h3 id="why-cant-a-roc-curve-measure-well">Why can&rsquo;t a ROC curve measure well?</h3>
+<p>The Receiver operating characteristic (ROC) curve is a common tool for evaluating the performance of machine learning algorithms, however it does not operate well when dealing with unbalanced data. Take an insurance company as an example, which must determine if a claim is legitimate or not. The company must anticipate and avoid potentially fraudulent claims. Assume that 2% of 10,000 claims are fraudulent. The data scientist earns 98% accuracy on the ROC curve if he or she predicts that ALL claims are not fraudulent. However, the data scientist completely overlooked the 2% of actual fraudulent claims.</p>
+<p>Let&rsquo;s frame this decision challenge with either positive or negative labels. A model&rsquo;s performance can be expressed by a confusion matrix with four categories. False positives (FP) are negative instances that are wrongly categorised as positives. True positives (TP) are positive examples that are appropriately identified as positives. Similarly, true negatives (TN) are negatives that are appropriately identified as negative, whereas false negatives (FN) are positive instances that are wrongly categorised as negative.</p>
+<table style=\"width:40%\">
+    <tr>
+       <th></th>
+        <th>Actual positive</th>
+         <th>Actual negative</th>
+        </tr>
+        <tr>
+        <td>Predicted positive</td>
+        <td>TP</td>
+        <td>FP</td>
+        </tr>
+        <tr>
+        <td>Predicted negative</td>
+        <td>FN</td>
+        <td>TN</td>
+        </tr>
+</table>
+<p>We can then define the metrics using the confusion matrix:</p>
+<table style=\"width:40%\">
+      <tr>
+        <th>Name</th>
+        <th>Metric</th>
+      </tr>
+      <tr>
+        <td>True Positive Rate (TPR) / Recall</td>
+        <td>TP / (TP+FN)</td>
+      </tr>
+      <tr>
+        <td>False Positive Rate (FPR)</td>
+        <td>FP / (FP+TN)</td>
+      </tr>
+      <tr>
+        <td>True Negative Rate (TNR)</td>
+        <td>TN / (FP+TN)</td>
+      </tr>
+      <tr>
+        <td>Precision</td>
+        <td>TP / (TP+FP)</td>
+      </tr>
+</table>
+<p>The preceding table illustrates that TPR equals TP / P, which only depends on the positive instances. The Receiver Operating Characteristic curve, as illustrated below, plots the TPR against the FPR. The AUC (Area under the curve) measures the overall classification performance. Because AUC does not prioritise one class above another, it does not adequately represent the minority class. Remember that the red dashed line in the figure represents the outcome when there is no model and the data is picked at random. The ROC curve is shown in blue. If the ROC curve is above the red dashed line, the AUC is 0.5 (half of the square area), indicating that the model outcome is no different from a fully random draw.</p>
+<img style = "width: 100%" src = "/posts/Undersampling Applications/roc_curve.png">
+<p>In this <a href="https://ftp.cs.wisc.edu/machine-learning/shavlik-group/davis.icml06.pdf" target="_blank" rel="noopener noreffer">research</a>, Davis and Goadrich argue that when dealing with severely imbalanced datasets, Precision-Recall (PR) curves will be more useful than ROC curves. Precision vs. recall is plotted on the PR curves. Because Precision is directly impacted by class imbalance, Precision-recall curves are more effective at highlighting differences across models in highly unbalanced data sets. When comparing various models with unbalanced parameters, the Precision-Recall curve will be more sensitive than the ROC curve.</p>
+<img style = "width: 100%" src = "/posts/Undersampling Applications/pr_curve.png">
+<h3 id="f1-score">F1 Score</h3>
+<p>The F1 score should be noted here. It is defined as the harmonic mean of precision and recall as follows:</p>
+<img style = "width: 100%" src = "/posts/Undersampling Applications/eq1.png">
+<h3 id="what-are-the-possible-solutions">What are the possible solutions?</h3>
+<p>In general, there are three techniques to dealing with unbalanced data: data sampling, algorithm tweaks, and cost-sensitive learning. This article will focus on data sampling procedures (others maybe in the future).</p>
+<h3 id="undersampling-methods">Undersampling Methods</h3>
+<ol>
+<li><strong>Random Undersampling of the majority class</strong></li>
+</ol>
+<p>A basic under-sampling strategy is to randomly and evenly under-sample the majority class. This has the potential to result in information loss. However, if the examples of the majority class are close to one another, this strategy may produce decent results.</p>
+<ol start="2">
+<li><strong>Condensed Nearest Neighbor Rule (CNN)</strong></li>
+</ol>
+<p>Some heuristic undersampling strategies have been developed to eliminate duplicate instances that should not impair the classification accuracy of the training set in order to prevent losing potentially relevant data. The Condensed Nearest Neighbor Rule (CNN) was proposed by Hart (1968). Hart begins with two empty datasets A and B. The first sample is first placed in dataset A, while the remaining samples are placed in dataset B. Then, using dataset A as the training set, one instance from dataset B is scanned. If a point in B is incorrectly classified, it is moved to A. This process is repeated until there are no points transferred from B to A.</p>
+<ol start="3">
+<li><strong>TomekLinks</strong></li>
+</ol>
+<p>Similarly, Tomek (1976) presented an effective strategy for considering samples around the boundary. Given two instances $a$ and $b$ that belong to distinct classes and are separated by a distance $d(a,b)$, the pair $(a, b)$ is termed a Tomek link if there is no instance $c$ such that $d(a,c) &lt; d(a,b)$ or $d(b,c) &lt; d(a,b)$. Tomek link instances are either borderline or noisy, thus both are eliminated.</p>
+<ol start="4">
+<li><strong>NearMiss</strong></li>
+</ol>
+<p>The &ldquo;near neighbour&rdquo; strategy and its modifications have been developed to address the issue of potential information loss. The near neighbour family&rsquo;s main algorithms are as follows: first, the approach calculates the distances between all instances of the majority class and the instances of the minority class. Then, $k$ examples from the majority class with the shortest distances to those from the minority class are chosen. If the minority class has $n$ instances, the &ldquo;nearest&rdquo; method will return $k*n$ instances of the majority class.</p>
+<p>&ldquo;NearMiss-1&rdquo; picks samples from the majority class whose average distances to the three nearest minority class instances are the shortest. &ldquo;NearMiss-2&rdquo; employs three of the minority class&rsquo;s most remote samples. &ldquo;NearMiss-3&rdquo; chooses a predetermined number of closest samples from the majority class for each sample from the minority class.</p>
+<ol start="5">
+<li><strong>Edited Nearest Neighbor Rule (ENN)</strong></li>
+</ol>
+<p>Wilson (1972) proposed the Edited Nearest Neighbor Rule (ENN), which requires the removal of any instance whose class label differs from at least two of its three nearest neighbours. The objective behind this strategy is to eliminate examples from the majority class that are near or close to the boundary of distinct classes based on the notion of nearest neighbour (NN) in order to improve the classification accuracy of minority instances rather than majority instances.</p>
+<ol start="6">
+<li><strong>NeighbourhoodCleaningRule</strong></li>
+</ol>
+<p>When sampling the data sets, the neighbourhood Cleaning Rule (NCL) treats the majority and minority samples independently. NCL use ENN to eliminate the vast majority of instances. It discovers three nearest neighbours for each instance in the training set. If the instance belongs to the majority class and the classification provided by the instance&rsquo;s three nearest neighbours is the opposite of the class of the chosen instance, the instance is deleted. If the chosen instance belongs to the minority class and is misclassified by its three nearest neighbours, the majority class nearest neighbours are eliminated.</p>
+<ol start="7">
+<li><strong>ClusterCentroids</strong></li>
+</ol>
+<p>This strategy undersamples the majority class by substituting a cluster of majority samples. Using <a href="https://en.wikipedia.org/wiki/K-means_clustering" target="_blank" rel="noopener noreffer">K-mean</a> techniques, this method discovers the majority class&rsquo;s clusters. The cluster centroids of the N clusters are then kept as the new majority samples.</p>
+<h3 id="application-with-python">Application with Python</h3>
+<p>The sample strategies are demonstrated below using the python package imbalanced-learn from scikit-learn. The data generation progress (DGP) below creates 2,000 samples with two classes. The data is severely imbalanced, with 0.03 and 0.97 allocated to each class. There are ten features, two of which are informative, two of which are redundant, and six of which are repeated. The <code>make_classification</code> function creates the six repeated (useless) features from the informative and redundant features. The redundant features are simple linear combinations of the informative features. Each class was made up of two gaussian clusters. Informative features are drawn individually from $\mathcal{N}(0, 1)$ for each cluster and then linearly blended within each cluster. It is critical to understand that if the <em>weights</em> parameter is left blank, the classes are balanced.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">PCA</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">roc_curve</span><span class="p">,</span><span class="n">roc_auc_score</span><span class="p">,</span> <span class="n">precision_recall_curve</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">xgboost</span> <span class="kn">import</span> <span class="n">XGBClassifier</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">imblearn.datasets</span> <span class="kn">import</span> <span class="n">make_imbalance</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">imblearn.under_sampling</span> <span class="kn">import</span> <span class="p">(</span><span class="n">RandomUnderSampler</span><span class="p">,</span> <span class="n">ClusterCentroids</span><span class="p">,</span> <span class="n">TomekLinks</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">                                     <span class="n">NeighbourhoodCleaningRule</span><span class="p">,</span><span class="n">NearMiss</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">make_classification</span><span class="p">(</span><span class="n">n_samples</span> <span class="o">=</span> <span class="mi">4000</span><span class="p">,</span>  <span class="n">n_classes</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">n_clusters_per_class</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">weights</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.03</span><span class="p">,</span><span class="mf">0.97</span><span class="p">],</span> 
+</span></span><span class="line"><span class="cl">                                    <span class="n">n_features</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">n_informative</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">n_redundant</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">42</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.33</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Original class distribution </span><span class="si">{</span><span class="n">Counter</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Training class distribution </span><span class="si">{</span><span class="n">Counter</span><span class="p">(</span><span class="n">y_train</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><pre><code>Original class distribution Counter({1: 3864, 0: 136})
+Training class distribution Counter({1: 2589, 0: 91})
+</code></pre>
+<p>I use principal component analysis to reduce the dimensions and select the first two principal components for ease of visualisation. The dataset&rsquo;s scatterplot is displayed below.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">plot_data</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">method</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1"># Use principal component to condense the 10 features to 2 features</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pca_2d</span> <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1"># Assign colors</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">pca_2d</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">c1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">pca_2d</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="n">pca_2d</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">elif</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">c2</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">pca_2d</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="n">pca_2d</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;*&#39;</span><span class="p">)</span>  
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="n">c1</span><span class="p">,</span> <span class="n">c2</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;Class 1&#39;</span><span class="p">,</span> <span class="s1">&#39;Class 2&#39;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">method</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span> 
+</span></span><span class="line"><span class="cl">    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl"><span class="n">plot_data</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="s1">&#39;Original&#39;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><img style = "width: 100%" src = "/posts/Undersampling Applications/data_org.png">
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">X_rs</span><span class="p">,</span> <span class="n">y_rs</span> <span class="o">=</span> <span class="n">make_imbalance</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">sampling_strategy</span><span class="o">=</span><span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span> <span class="mi">65</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">                      <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Random undersampling </span><span class="si">{</span><span class="n">Counter</span><span class="p">(</span><span class="n">y_rs</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">plot_data</span><span class="p">(</span><span class="n">X_rs</span><span class="p">,</span><span class="n">y_rs</span><span class="p">,</span><span class="s1">&#39;Random undersampling&#39;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><pre><code>Random undersampling Counter({1: 1000, 0: 65})
+</code></pre>
+<img style = "width: 100%" src = "/posts/Undersampling Applications/data_rs.png">
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># RandomUnderSampler</span>
+</span></span><span class="line"><span class="cl"><span class="n">sampler</span> <span class="o">=</span> <span class="n">RandomUnderSampler</span><span class="p">(</span><span class="n">sampling_strategy</span><span class="o">=</span><span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span> <span class="mi">65</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="n">X_rs</span><span class="p">,</span> <span class="n">y_rs</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">fit_resample</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Random undersampling </span><span class="si">{</span><span class="n">Counter</span><span class="p">(</span><span class="n">y_rs</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">plot_data</span><span class="p">(</span><span class="n">X_rs</span><span class="p">,</span><span class="n">y_rs</span><span class="p">,</span><span class="s1">&#39;Random undersampling&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># ClusterCentroids</span>
+</span></span><span class="line"><span class="cl"><span class="n">sampler</span> <span class="o">=</span> <span class="n">ClusterCentroids</span><span class="p">(</span><span class="n">sampling_strategy</span><span class="o">=</span><span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span> <span class="mi">65</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="n">X_rs</span><span class="p">,</span> <span class="n">y_rs</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">fit_resample</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Cluster centriods undersampling </span><span class="si">{</span><span class="n">Counter</span><span class="p">(</span><span class="n">y_rs</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">plot_data</span><span class="p">(</span><span class="n">X_rs</span><span class="p">,</span><span class="n">y_rs</span><span class="p">,</span><span class="s1">&#39;ClusterCentroids&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># TomekLinks</span>
+</span></span><span class="line"><span class="cl"><span class="n">sampler</span> <span class="o">=</span> <span class="n">TomekLinks</span><span class="p">()</span> 
+</span></span><span class="line"><span class="cl"><span class="n">X_rs</span><span class="p">,</span> <span class="n">y_rs</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">fit_resample</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;TomekLinks undersampling </span><span class="si">{</span><span class="n">Counter</span><span class="p">(</span><span class="n">y_rs</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">plot_data</span><span class="p">(</span><span class="n">X_rs</span><span class="p">,</span><span class="n">y_rs</span><span class="p">,</span><span class="s1">&#39;TomekLinks&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># NeighbourhoodCleaningRule</span>
+</span></span><span class="line"><span class="cl"><span class="n">sampler</span> <span class="o">=</span> <span class="n">NeighbourhoodCleaningRule</span><span class="p">()</span> 
+</span></span><span class="line"><span class="cl"><span class="n">X_rs</span><span class="p">,</span> <span class="n">y_rs</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">fit_resample</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;NearestNeighbours Clearning Rule undersampling </span><span class="si">{</span><span class="n">Counter</span><span class="p">(</span><span class="n">y_rs</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">plot_data</span><span class="p">(</span><span class="n">X_rs</span><span class="p">,</span><span class="n">y_rs</span><span class="p">,</span><span class="s1">&#39;NeighbourhoodCleaningRule&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># NearMiss</span>
+</span></span><span class="line"><span class="cl"><span class="n">sampler</span> <span class="o">=</span> <span class="n">NearMiss</span><span class="p">()</span> 
+</span></span><span class="line"><span class="cl"><span class="n">X_rs</span><span class="p">,</span> <span class="n">y_rs</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">fit_resample</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;NearMiss</span><span class="si">{</span><span class="n">Counter</span><span class="p">(</span><span class="n">y_rs</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">plot_data</span><span class="p">(</span><span class="n">X_rs</span><span class="p">,</span><span class="n">y_rs</span><span class="p">,</span><span class="s1">&#39;NearMiss&#39;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><pre><code>Random undersampling Counter({1: 1000, 0: 65})
+</code></pre>
+<img style = "width: 100%" src = "/posts/Undersampling Applications/data_rs2.png">
+<pre><code>Cluster centriods undersampling Counter({1: 1000, 0: 65})
+</code></pre>
+<img style = "width: 100%" src = "/posts/Undersampling Applications/data_cc.png">
+<pre><code>TomekLinks undersampling Counter({1: 2575, 0: 91})
+</code></pre>
+<img style = "width: 100%" src = "/posts/Undersampling Applications/data_tl.png">
+<pre><code>NearestNeighbours Clearning Rule undersampling Counter({1: 2522, 0: 91})
+</code></pre>
+<img style = "width: 100%" src = "/posts/Undersampling Applications/data_ncl.png">
+<pre><code>NearMissCounter({0: 91, 1: 91})
+</code></pre>
+<img style = "width: 100%" src = "/posts/Undersampling Applications/data_nm.png">
+<h3 id="conclusion">Conclusion</h3>
+<p>I hope this post has helped you better grasp this subject. Thank you very much for reading! 😄
+</span></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://arebimohammed.github.io/applying-under-sampling/" data-title="Applying Under-Sampling Methods to Highly Imbalanced Data" data-hashtags="blogging,data science,machine learning,undersampling,python"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://arebimohammed.github.io/applying-under-sampling/" data-hashtag="blogging"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://arebimohammed.github.io/applying-under-sampling/"><i class="fab fa-linkedin fa-fw"></i></a><a href="javascript:void(0);" title="Share on WhatsApp" data-sharer="whatsapp" data-url="https://arebimohammed.github.io/applying-under-sampling/" data-title="Applying Under-Sampling Methods to Highly Imbalanced Data" data-web><i class="fab fa-whatsapp fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/blogging/">blogging</a>,&nbsp;<a href="/tags/data-science/">data science</a>,&nbsp;<a href="/tags/machine-learning/">machine learning</a>,&nbsp;<a href="/tags/undersampling/">undersampling</a>,&nbsp;<a href="/tags/python/">python</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/logistic-regression/" class="prev" rel="prev" title="Logistic Regression: With Application and Analysis on the &#39;Rain in Australia&#39; Dataset"><i class="fas fa-angle-left fa-fw"></i>Logistic Regression: With Application and Analysis on the &#39;Rain in Australia&#39; Dataset</a>
+            <a href="/applying-oversampling/" class="next" rel="next" title="Applying Over-Sampling Methods to Highly Imbalanced Data">Applying Over-Sampling Methods to Highly Imbalanced Data<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Mohammed Arebi</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery.js@1.2.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/copy-tex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/smooth-scroll@16.1.3/dist/smooth-scroll.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.37.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.8/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.2.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery.js@1.2.0/dist/js/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lg-thumbnail.js@1.2.0/dist/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lg-zoom.js@1.2.0/dist/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.0/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/typeit@7.0.4/dist/typeit.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":30},"comment":{},"data":{"id-1":"Mohammed Arebi","id-2":"Mohammed Arebi"},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"$$","right":"$$"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"},{"display":false,"left":"$","right":"$"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":5,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

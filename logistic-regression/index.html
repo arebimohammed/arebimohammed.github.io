@@ -1,0 +1,2466 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>Logistic Regression: With Application and Analysis on the &#39;Rain in Australia&#39; Dataset - Mohammed Arebi</title><meta name="Description" content="Details and Application"><meta property="og:title" content="Logistic Regression: With Application and Analysis on the &#39;Rain in Australia&#39; Dataset" />
+<meta property="og:description" content="Details and Application" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://arebimohammed.github.io/logistic-regression/" /><meta property="og:image" content="https://arebimohammed.github.io/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2020-07-09T20:29:01+08:00" />
+<meta property="article:modified_time" content="2022-09-19T05:52:52+02:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://arebimohammed.github.io/logo.png"/>
+
+<meta name="twitter:title" content="Logistic Regression: With Application and Analysis on the &#39;Rain in Australia&#39; Dataset"/>
+<meta name="twitter:description" content="Details and Application"/>
+<meta name="application-name" content="Mohammed Arebi">
+<meta name="apple-mobile-web-app-title" content="Mohammed Arebi"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://arebimohammed.github.io/logistic-regression/" /><link rel="prev" href="https://arebimohammed.github.io/polynomial-regression/" /><link rel="next" href="https://arebimohammed.github.io/applying-under-sampling/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Logistic Regression: With Application and Analysis on the 'Rain in Australia' Dataset",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/arebimohammed.github.io\/logistic-regression\/"
+        },"image": ["https:\/\/arebimohammed.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "blogging, data science, machine learning, logistic regression, python","wordcount":  6753 ,
+        "url": "https:\/\/arebimohammed.github.io\/logistic-regression\/","datePublished": "2020-07-09T20:29:01+08:00","dateModified": "2022-09-19T05:52:52+02:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "xxxx","logo": "https:\/\/arebimohammed.github.io\/images\/avatar.png"},"author": {
+                "@type": "Person",
+                "name": "Mohammed Arebi"
+            },"description": "Details and Application"
+    }
+    </script></head>
+    <body header-desktop="auto" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Mohammed Arebi"><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/about/about-me"> About </a><a class="menu-item" href="/resume/my-resume"> Resume </a><a class="menu-item" href="/projects/my-projects"> Projects </a><a class="menu-item" href="https://github.com/arebimohammed" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Mohammed Arebi"><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/about/about-me" title="">About</a><a class="menu-item" href="/resume/my-resume" title="">Resume</a><a class="menu-item" href="/projects/my-projects" title="">Projects</a><a class="menu-item" href="https://github.com/arebimohammed" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">Logistic Regression: With Application and Analysis on the &#39;Rain in Australia&#39; Dataset</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Mohammed Arebi</a></span>&nbsp;<span class="post-category">included in <a href="/categories/logistic-regression/"><i class="far fa-folder fa-fw"></i>Logistic Regression</a>&nbsp;<a href="/categories/tutorial/"><i class="far fa-folder fa-fw"></i>Tutorial</a>&nbsp;<a href="/categories/machine-learning/"><i class="far fa-folder fa-fw"></i>Machine Learning</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-07-09">2020-07-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;6753 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;32 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/Logistic%20Regression/s-curve.jpg"
+        data-srcset="/posts/Logistic%20Regression/s-curve.jpg, /posts/Logistic%20Regression/s-curve.jpg 1.5x, /posts/Logistic%20Regression/s-curve.jpg 2x"
+        data-sizes="auto"
+        alt="/posts/Logistic Regression/s-curve.jpg"
+        title="Details and Application" /></div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#introduction">Introduction</a>
+          <ul>
+            <li><a href="#whats-the-problem-with-linear-regression-for-classification">What&rsquo;s the Problem with Linear Regression for Classification?</a></li>
+          </ul>
+        </li>
+        <li><a href="#the-logistic-function">The Logistic Function</a></li>
+        <li><a href="#logistic-regression-algorithm-representation">Logistic Regression Algorithm Representation</a></li>
+        <li><a href="#why-logistic-regression-is-regression-not-classification">Why Logistic Regression is Regression not Classification</a></li>
+        <li><a href="#learning-the-logistic-regression-model-parameters">Learning the Logistic Regression Model Parameters</a>
+          <ul>
+            <li><a href="#the-loss-function-and-mle">The loss function and MLE</a></li>
+          </ul>
+        </li>
+        <li><a href="#prediction-with-logistic-regression">Prediction with Logistic Regression</a></li>
+        <li><a href="#using-logistic-regression-on-a-dataset">Using Logistic Regression on a dataset</a>
+          <ul>
+            <li><a href="#dataset-shape">Dataset shape</a></li>
+            <li><a href="#preview-the-dataset">Preview the dataset</a></li>
+            <li><a href="#get-column-names">Get column names</a></li>
+            <li><a href="#view-summary-of-dataset">View summary of dataset</a></li>
+            <li><a href="#view-statistical-properties-of-dataset">View statistical properties of dataset</a></li>
+            <li><a href="#univariate-analysis">Univariate Analysis</a>
+              <ul>
+                <li><a href="#explore-raintomorrow-target-variable">Explore RainTomorrow target variable</a></li>
+                <li><a href="#findings-of-univariate-analysis">Findings of Univariate Analysis</a></li>
+              </ul>
+            </li>
+            <li><a href="#bivariate-analysis">Bivariate Analysis</a>
+              <ul>
+                <li><a href="#types-of-variables">Types of variables</a></li>
+                <li><a href="#summary-of-categorical-variables">Summary of categorical variables</a></li>
+                <li><a href="#explore-problems-within-categorical-variables">Explore problems within categorical variables</a></li>
+              </ul>
+            </li>
+            <li><a href="#feature-engineering-of-date-variable">Feature Engineering of Date Variable</a></li>
+            <li><a href="#explore-numerical-variables">Explore Numerical Variables</a></li>
+            <li><a href="#summary-of-numerical-variables">Summary of numerical variables</a></li>
+            <li><a href="#explore-problems-within-numerical-variables">Explore problems within numerical variables</a></li>
+            <li><a href="#outliers-in-numerical-variables">Outliers in numerical variables</a></li>
+            <li><a href="#check-the-distribution-of-variables">Check the distribution of variables</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#multivariate-analysis">Multivariate Analysis</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#interpretation">Interpretation</a></li>
+            <li><a href="#pair-plot">Pair Plot</a></li>
+            <li><a href="#interpretation-1">Interpretation</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#split-target-from-features">Split target from features</a></li>
+    <li><a href="#feature-engineering">Feature Engineering</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#engineering-missing-values-in-categorical-variables">Engineering missing values in categorical variables</a></li>
+            <li><a href="#engineering-outliers-in-numerical-variables">Engineering outliers in numerical variables</a></li>
+            <li><a href="#encode-categorical-variables">Encode categorical variables</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#modelling">Modelling</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#predict_proba-method">predict_proba method</a></li>
+            <li><a href="#compare-the-train-set-and-test-set-accuracy">Compare the train-set and test-set accuracy</a></li>
+            <li><a href="#compare-model-accuracy-with-null-accuracy">Compare model accuracy with null accuracy</a>
+              <ul>
+                <li><a href="#interpretation-2">Interpretation</a></li>
+              </ul>
+            </li>
+            <li><a href="#confusion-matrix">Confusion matrix</a></li>
+            <li><a href="#classification-metrices">Classification Metrices</a>
+              <ul>
+                <li><a href="#classification-report">Classification Report</a></li>
+                <li><a href="#precision">Precision</a></li>
+                <li><a href="#recall">Recall</a></li>
+                <li><a href="#f1-score">f1-score</a></li>
+                <li><a href="#support">Support</a></li>
+              </ul>
+            </li>
+            <li><a href="#observations">Observations</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h3 id="introduction">Introduction</h3>
+<span style="font-size:1.125rem">
+<p>The logistic model (or logit model) in statistics is a statistical model that represents the probability of an event occurring by making the log-odds for the event a linear combination of one or more independent variables.</p>
+<p>Logistic regression is another approach borrowed from statistics by machine learning.
+It is the go-to strategy for binary classification problems (problems with two classes) even though it is a regression algorithm (predicts probabilities, more on that later).</p>
+<p>For example,</p>
+<ul>
+<li>To predict whether an email is spam (1) or not (0)</li>
+<li>Whether the tumor is malignant (1) or not (0)</li>
+</ul>
+<p>This post will discuss the logistic regression algorithm for machine learning.</p>
+<h4 id="whats-the-problem-with-linear-regression-for-classification">What&rsquo;s the Problem with Linear Regression for Classification?</h4>
+<p>The linear regression model is effective for regression but ineffective for classification. Why is this the case? If you have two classes, you may label one with 0 and the other with 1 and use linear regression. It works technically, and most linear model programmes will generate weights for you. However, there are a couple issues with this approach:</p>
+<ul>
+<li>A linear model does not produce probabilities, but rather treats the classes as integers (0 and 1) and finds the optimum hyperplane (for a single feature, a line) that minimises the distances between the points and the hyperplane. As a result, it just interpolates between the points and cannot be interpreted as probabilities.</li>
+<li>A linear model will also extrapolate numbers below zero and above one. This is a promising hint that there may be a more intelligent method to classification.</li>
+<li>Linear models are not applicable to multi-class classification issues. The next class would have to be labelled with 2, then 3, and so on. Although the classes may not be in any meaningful order, the linear model would impose an odd structure on the relationship between the features and your class predictions. The higher the value of a positive-weighted feature, the more it contributes to the prediction of a class with a higher number, even if classes with similar numbers are not closer than other classes.</li>
+</ul>
+<p>Because the predicted outcome is a linear interpolation between points rather than a probability, there is no meaningful threshold at which one class can be distinguished from the other. A decent example of this problem may be seen on <a href="https://stats.stackexchange.com/questions/22381/why-not-approach-classification-through-regression" target="_blank" rel="noopener noreffer">Stackoverflow</a>.</p>
+<p>So what can be a solution to classification problems, well there are many but one solution is logistic regression, here come the logistic function (or the sigmoid function)</p>
+<h3 id="the-logistic-function">The Logistic Function</h3>
+<p>Logistic regression is named after the <a href="https://en.wikipedia.org/wiki/Logistic_function" target="_blank" rel="noopener noreffer">logistic function</a>, which is at the heart of the algorithm.
+The logistic function, also known as the sigmoid function, was devised by statisticians to characterise the characteristics of rapid population expansion in ecology that exceeds the carrying capacity of the ecosystem (check <a href="https://papers.tinbergen.nl/02119.pdf" target="_blank" rel="noopener noreffer">here</a>). It&rsquo;s an S-shaped curve that can transfer any real-valued integer to a value between 0 and 1, but never exactly between those bounds.
+$$f(z) = \frac{1}{1 + e^{-z}}$$</p>
+<p>Where $e$ is the natural logarithm base (<a href="https://en.wikipedia.org/wiki/E_%28mathematical_constant%29" target="_blank" rel="noopener noreffer">Euler&rsquo;s number</a>) and z is the actual numerical value to be transformed.</p>
+<p>Below we can see the logistic/sigmoid function applied to a range of numbers between -10 and 10 transformed into the range 0 and 1 using the logistic function.</p>
+<img style = "width: 100%" src = "/posts/Logistic Regression/sigmoid.png">
+<p>Now that we&rsquo;ve defined the logistic function, let&rsquo;s look at how it&rsquo;s employed in logistic regression.</p>
+<h3 id="logistic-regression-algorithm-representation">Logistic Regression Algorithm Representation</h3>
+<p>Logistic regression, like linear regression, uses an equation as its representation.
+The transition from linear regression to logistic regression is rather simple. We used a linear equation to model the link between the outcome and the features in the linear regression model:</p>
+<img style = " display: block;margin-left: auto;margin-right: auto" src = "/posts/Logistic Regression/eq1.png">
+<p>We prefer probabilities between 0 and 1 for classification, so we wrap the right side of the equation in the logistic function. This constrains the output to only accept values between 0 and 1.</p>
+<img style = " display: block;margin-left: auto;margin-right: auto" src = "/posts/Logistic Regression/eq2.png">
+<p>To predict the output value ($y$), the input values ($X$) are linearly combined using weights or coefficient values (referred to as the Greek capital letter Beta). The coefficients in the equation are the real representation of the model that you would store in memory or in a file.</p>
+<h3 id="why-logistic-regression-is-regression-not-classification">Why Logistic Regression is Regression not Classification</h3>
+<p>Simply put, logistic regression predicts probabilities which are continous values (i.e., regression).The probability of the default class is modelled using logistic regression (e.g. the first class). For example, if we are modelling people&rsquo;s gender based on their height as male or female, the first class may be male, and the logistic regression model could be expressed as the probability of male given a person&rsquo;s height, or more formally:</p>
+<img style = " display: block;margin-left: auto;margin-right: auto" src = "/posts/Logistic Regression/eq3.png">
+<p>In other words, we are modelling the probability that an input (X) belongs to the default class (Y=1); we can express this formally as:</p>
+<img style = " display: block;margin-left: auto;margin-right: auto" src = "/posts/Logistic Regression/eq4.png">
+<div class="details admonition note open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw"></i>Probability Prediction<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">It should be noted that in order to make a probability prediction, the probability prediction must be translated into a binary value (0 or 1). More on this later when we discuss making predictions.</div>
+        </div>
+    </div>
+<p>Logistic regression is a linear method, however the logistic function is used to alter the predictions. As a result, we can no longer understand the predictions as a linear combination of the inputs, as we can with linear regression. To continue from above, the model can be described as:</p>
+<img style = " display: block;margin-left: auto;margin-right: auto" src = "/posts/Logistic Regression/eq2.png">
+<p>We can transform the previous equation as follows (remembering that we may eliminate the $e$ (exp) from one side by adding a natural logarithm ($ln$) to the other):</p>
+<img style = " display: block;margin-left: auto;margin-right: auto" src = "/posts/Logistic Regression/eq5.png">
+<p>This is beneficial because we can see that the output on the right is linear again (exactly like linear regression), and the input on the left is a log of the likelihood of the default class. This ratio on the left is known as the default class&rsquo;s odds (it&rsquo;s historical that we use odds rather than probabilities; for example, odds are used in boxing rather than probabilities). Odds are calculated as a ratio of the event&rsquo;s likelihood divided by the event&rsquo;s probability of not occurring. For example, 0.5/(1-0.5) which has the odds of 1. So we could instead write:</p>
+<img style = " display: block;margin-left: auto;margin-right: auto" src = "/posts/Logistic Regression/eq6.png">
+<p>Because the odds are log transformed, the left hand side is referred to as the log-odds or the probit. Although different types of functions can be used for the transform, the transform that relates the linear regression equation to the probabilities is commonly referred to as the link function, for example, the probit link function.</p>
+<p>We can reposition the exponent to the right and write it as:</p>
+<img style = " display: block;margin-left: auto;margin-right: auto" src = "/posts/Logistic Regression/eq7.png">
+<p>All of this helps us understand that the model is still a linear combination of the inputs, but that this linear combination is related to the default class&rsquo;s log-odds.</p>
+<h3 id="learning-the-logistic-regression-model-parameters">Learning the Logistic Regression Model Parameters</h3>
+<p>The logistic regression algorithm&rsquo;s coefficients must be estimated using your training data. This is typically accomplished through the use of maximum-likelihood estimation (gradient-descent can also be used, article on that in the future)</p>
+<p>Although it does make assumptions about the distribution of your data, <a href="https://en.wikipedia.org/wiki/Maximum_likelihood_estimation" target="_blank" rel="noopener noreffer">maximum-likelihood estimation</a> (MLE) is a frequent learning method utilised by a variety of machine learning algorithms.</p>
+<p>The best coefficients would result in a model that predicted a value very close to 1 (for example, male) for the default class and a value very close to 0 (for example, female) for the other class. The idea behind maximum-likelihood logistic regression is that a search algorithm seeks coefficient values that minimise the error (see <a href="#the-loss-function-and-mle" rel="">The loss function</a>) between the probabilities predicted by the model and those in the data (e.g. probability of 1 if the data is the primary class). It is sufficient to state that a minimization algorithm is utilised to optimise the coefficient values for the training data.</p>
+<h4 id="the-loss-function-and-mle">The loss function and MLE</h4>
+<p>So, to learn the coefficients ($\beta$) of a logistic regression model, we need to define a cost function.
+MLE is a specific type of probability model estimation, where the loss/objective function is the log likelihood (or minimizing the negative log likelihood) denoted by $\mathcal{L}$.</p>
+<p>Suppose we have a set of experimental observations:</p>
+<img style = " display: block;margin-left: auto;margin-right: auto" src = "/posts/Logistic Regression/eq8.png">
+<p>and a class of distributions $p(x;\theta)$, where $\theta$ is a set of parameters on which the form of $p$ depends. The MLE for the distribution from which the dataset has been extracted is defined as the one which maximizes the quantity</p>
+<img style = " display: block;margin-left: auto;margin-right: auto" src = "/posts/Logistic Regression/eq9.png">
+<p>as $\theta$ varies. Therefore, in the hypothesis that variables are i.i.d. (Independent and identically distributed) the best value for $\theta$ will be given by</p>
+<img style = " display: block;margin-left: auto;margin-right: auto" src = "/posts/Logistic Regression/eq10.png">
+<p>Because multiplication easily overflows/underflows, the equivalent expression is frequently used instead of this one</p>
+<img style = " display: block;margin-left: auto;margin-right: auto" src = "/posts/Logistic Regression/eq11.png">
+<p>Let&rsquo;s look at how this method can be used to construct the log-likelihood loss function (also known as cross-entropy).</p>
+<p>Surprisingly, while training machine learning algorithms, the maximum likelihood estimation method can be used to create loss functions. In fact, one can imagine working in a scenario in which a dataset with specific statistical qualities is generated, and then construct a loss function that takes those properties into account automatically.</p>
+<p>Log likelihood or cross-entropy is the mainly used loss function in classification problems, namely problems in which the underlying distribution has a discrete set of output values. Just as an example one can imagine a Bernoulli distribution, which has two outputs, one having probability $p$ and the other $(1−p)$ of being extracted. The negative log likelihood is defined as</p>
+<img style = " display: block;margin-left: auto;margin-right: auto" src = "/posts/Logistic Regression/eq12.png">
+<p>and in information theory it quantifies the average number of bits needed to identify an event drawn from a set if a coding scheme used for the set is optimized for an estimated probability distribution $q$, rather than the true distribution $p$. This quantity can also be derived using MLE.
+Suppose data extracted according to a distribution $p(x)$ and an estimated distribution $q(x)$. Let’s also define the class of estimated probability distributions $\hat{y} = \hat{g}(x; \vec{\theta})$. Then the optimal parameters are obtained minimizing</p>
+<img style = " display: block;margin-left: auto;margin-right: auto" src = "/posts/Logistic Regression/eq13.png">
+<p>where $\Omega$ is the sample space on which the probability space is defined. This way negative log likelihood is recovered as well.</p>
+<h3 id="prediction-with-logistic-regression">Prediction with Logistic Regression</h3>
+<p>Predictions with a logistic regression model are as easy as plugging numbers into the logistic regression equation and computing the result.</p>
+<p>Let&rsquo;s put this into context with an example. Imagine that we had a model that can determine a person&rsquo;s gender based on their height (completely fictitious). Is the person male or female given a height of 192cm?</p>
+<p>Assuming we now know (learned) the coefficients $\beta_{0} = -70$ and $\beta_{1} = 0.4$. Using the aforementioned equation, we can determine the probability of a male given a height of 165cm, or $P(male|height=165)$.</p>
+<img style = " display: block;margin-left: auto;margin-right: auto" src = "/posts/Logistic Regression/eq14.png">
+<br>
+<img style = " display: block;margin-left: auto;margin-right: auto" src = "/posts/Logistic Regression/eq15.png">
+<p>Or a very low probability of that the person is a male.</p>
+<p>In practise, the probabilities can be used immediately. Because this is a classification problem and we want a useful result, we can convert the probabilities to a binary class value, such as</p>
+<img style = " display: block;margin-left: auto;margin-right: auto" src = "/posts/Logistic Regression/eq16.png">
+<h3 id="using-logistic-regression-on-a-dataset">Using Logistic Regression on a dataset</h3>
+<p>I&rsquo;ll be using the Rain In Australia dataset found in <a href="https://www.kaggle.com/datasets/jsphyg/weather-dataset-rattle-package" target="_blank" rel="noopener noreffer">kaggle</a>. The dataset contains information regarding daily weather measurements from a variety of sites in Australia and the aim is to predict whether it will rain the next day or not (Yes or No), which is a binary classification problem that is well suited for logistic regression.</p>
+<p>I implemented Logistic Regression with Python and Scikit-Learn using its <code>LogisticRegression</code> class. All code can be found in my <a href="https://github.com/arebimohammed/code-for-articles" target="_blank" rel="noopener noreffer">github</a>.</p>
+<p>I first import the libraries and load the dataset.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">MinMaxScaler</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">confusion_matrix</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">classification_report</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">category_encoders</span> <span class="k">as</span> <span class="nn">ce</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&#34;./data/weatherAUS.csv&#34;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Then I conduct some Exploratory Data Analysis (EDA), some cleaning and data preparation for modelling</p>
+<h4 id="dataset-shape">Dataset shape</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">shape</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><pre><code>(145460, 23)
+</code></pre>
+<h4 id="preview-the-dataset">Preview the dataset</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Date</th>
+      <th>Location</th>
+      <th>MinTemp</th>
+      <th>MaxTemp</th>
+      <th>Rainfall</th>
+      <th>Evaporation</th>
+      <th>Sunshine</th>
+      <th>WindGustDir</th>
+      <th>WindGustSpeed</th>
+      <th>WindDir9am</th>
+      <th>...</th>
+      <th>Humidity9am</th>
+      <th>Humidity3pm</th>
+      <th>Pressure9am</th>
+      <th>Pressure3pm</th>
+      <th>Cloud9am</th>
+      <th>Cloud3pm</th>
+      <th>Temp9am</th>
+      <th>Temp3pm</th>
+      <th>RainToday</th>
+      <th>RainTomorrow</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2008-12-01</td>
+      <td>Albury</td>
+      <td>13.4</td>
+      <td>22.9</td>
+      <td>0.6</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>W</td>
+      <td>44.0</td>
+      <td>W</td>
+      <td>...</td>
+      <td>71.0</td>
+      <td>22.0</td>
+      <td>1007.7</td>
+      <td>1007.1</td>
+      <td>8.0</td>
+      <td>NaN</td>
+      <td>16.9</td>
+      <td>21.8</td>
+      <td>No</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2008-12-02</td>
+      <td>Albury</td>
+      <td>7.4</td>
+      <td>25.1</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>WNW</td>
+      <td>44.0</td>
+      <td>NNW</td>
+      <td>...</td>
+      <td>44.0</td>
+      <td>25.0</td>
+      <td>1010.6</td>
+      <td>1007.8</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>17.2</td>
+      <td>24.3</td>
+      <td>No</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2008-12-03</td>
+      <td>Albury</td>
+      <td>12.9</td>
+      <td>25.7</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>WSW</td>
+      <td>46.0</td>
+      <td>W</td>
+      <td>...</td>
+      <td>38.0</td>
+      <td>30.0</td>
+      <td>1007.6</td>
+      <td>1008.7</td>
+      <td>NaN</td>
+      <td>2.0</td>
+      <td>21.0</td>
+      <td>23.2</td>
+      <td>No</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2008-12-04</td>
+      <td>Albury</td>
+      <td>9.2</td>
+      <td>28.0</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NE</td>
+      <td>24.0</td>
+      <td>SE</td>
+      <td>...</td>
+      <td>45.0</td>
+      <td>16.0</td>
+      <td>1017.6</td>
+      <td>1012.8</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>18.1</td>
+      <td>26.5</td>
+      <td>No</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2008-12-05</td>
+      <td>Albury</td>
+      <td>17.5</td>
+      <td>32.3</td>
+      <td>1.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>W</td>
+      <td>41.0</td>
+      <td>ENE</td>
+      <td>...</td>
+      <td>82.0</td>
+      <td>33.0</td>
+      <td>1010.8</td>
+      <td>1006.0</td>
+      <td>7.0</td>
+      <td>8.0</td>
+      <td>17.8</td>
+      <td>29.7</td>
+      <td>No</td>
+      <td>No</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 23 columns</p>
+</div>
+<h4 id="get-column-names">Get column names</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">tolist</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">col</span><span class="o">+</span><span class="s2">&#34;,&#34;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span> 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><pre><code>Date, Location, MinTemp, MaxTemp, Rainfall, Evaporation, Sunshine, WindGustDir, 
+WindGustSpeed, WindDir9am, WindDir3pm, WindSpeed9am, WindSpeed3pm, 
+Humidity9am, Humidity3pm, Pressure9am, Pressure3pm, Cloud9am, Cloud3pm, 
+Temp9am, Temp3pm, RainToday, RainTomorrow
+</code></pre>
+<h4 id="view-summary-of-dataset">View summary of dataset</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
+RangeIndex: 145460 entries, 0 to 145459
+Data columns (total 23 columns):
+ #   Column         Non-Null Count   Dtype  
+---  ------         --------------   -----  
+ 0   Date           145460 non-null  object 
+ 1   Location       145460 non-null  object 
+ 2   MinTemp        143975 non-null  float64
+ 3   MaxTemp        144199 non-null  float64
+ 4   Rainfall       142199 non-null  float64
+ 5   Evaporation    82670 non-null   float64
+ 6   Sunshine       75625 non-null   float64
+ 7   WindGustDir    135134 non-null  object 
+ 8   WindGustSpeed  135197 non-null  float64
+ 9   WindDir9am     134894 non-null  object 
+ 10  WindDir3pm     141232 non-null  object 
+ 11  WindSpeed9am   143693 non-null  float64
+ 12  WindSpeed3pm   142398 non-null  float64
+ 13  Humidity9am    142806 non-null  float64
+ 14  Humidity3pm    140953 non-null  float64
+ 15  Pressure9am    130395 non-null  float64
+ 16  Pressure3pm    130432 non-null  float64
+ 17  Cloud9am       89572 non-null   float64
+ 18  Cloud3pm       86102 non-null   float64
+ 19  Temp9am        143693 non-null  float64
+ 20  Temp3pm        141851 non-null  float64
+ 21  RainToday      142199 non-null  object 
+ 22  RainTomorrow   142193 non-null  object 
+dtypes: float64(16), object(7)
+memory usage: 25.5+ MB
+</code></pre>
+<ul>
+<li>We can see that the dataset contains mixture of categorical and numerical variables.</li>
+<li>Categorical variables have data type object.</li>
+<li>Numerical variables have data type float64.</li>
+<li>Also, there are some missing values in the dataset. We will explore it later.</li>
+</ul>
+<h4 id="view-statistical-properties-of-dataset">View statistical properties of dataset</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span> 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>MinTemp</th>
+      <th>MaxTemp</th>
+      <th>Rainfall</th>
+      <th>Evaporation</th>
+      <th>Sunshine</th>
+      <th>WindGustSpeed</th>
+      <th>WindSpeed9am</th>
+      <th>WindSpeed3pm</th>
+      <th>Humidity9am</th>
+      <th>Humidity3pm</th>
+      <th>Pressure9am</th>
+      <th>Pressure3pm</th>
+      <th>Cloud9am</th>
+      <th>Cloud3pm</th>
+      <th>Temp9am</th>
+      <th>Temp3pm</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>143975.000000</td>
+      <td>144199.000000</td>
+      <td>142199.000000</td>
+      <td>82670.000000</td>
+      <td>75625.000000</td>
+      <td>135197.000000</td>
+      <td>143693.000000</td>
+      <td>142398.000000</td>
+      <td>142806.000000</td>
+      <td>140953.000000</td>
+      <td>130395.00000</td>
+      <td>130432.000000</td>
+      <td>89572.000000</td>
+      <td>86102.000000</td>
+      <td>143693.000000</td>
+      <td>141851.00000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>12.194034</td>
+      <td>23.221348</td>
+      <td>2.360918</td>
+      <td>5.468232</td>
+      <td>7.611178</td>
+      <td>40.035230</td>
+      <td>14.043426</td>
+      <td>18.662657</td>
+      <td>68.880831</td>
+      <td>51.539116</td>
+      <td>1017.64994</td>
+      <td>1015.255889</td>
+      <td>4.447461</td>
+      <td>4.509930</td>
+      <td>16.990631</td>
+      <td>21.68339</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>6.398495</td>
+      <td>7.119049</td>
+      <td>8.478060</td>
+      <td>4.193704</td>
+      <td>3.785483</td>
+      <td>13.607062</td>
+      <td>8.915375</td>
+      <td>8.809800</td>
+      <td>19.029164</td>
+      <td>20.795902</td>
+      <td>7.10653</td>
+      <td>7.037414</td>
+      <td>2.887159</td>
+      <td>2.720357</td>
+      <td>6.488753</td>
+      <td>6.93665</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>-8.500000</td>
+      <td>-4.800000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>6.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>980.50000</td>
+      <td>977.100000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>-7.200000</td>
+      <td>-5.40000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>7.600000</td>
+      <td>17.900000</td>
+      <td>0.000000</td>
+      <td>2.600000</td>
+      <td>4.800000</td>
+      <td>31.000000</td>
+      <td>7.000000</td>
+      <td>13.000000</td>
+      <td>57.000000</td>
+      <td>37.000000</td>
+      <td>1012.90000</td>
+      <td>1010.400000</td>
+      <td>1.000000</td>
+      <td>2.000000</td>
+      <td>12.300000</td>
+      <td>16.60000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>12.000000</td>
+      <td>22.600000</td>
+      <td>0.000000</td>
+      <td>4.800000</td>
+      <td>8.400000</td>
+      <td>39.000000</td>
+      <td>13.000000</td>
+      <td>19.000000</td>
+      <td>70.000000</td>
+      <td>52.000000</td>
+      <td>1017.60000</td>
+      <td>1015.200000</td>
+      <td>5.000000</td>
+      <td>5.000000</td>
+      <td>16.700000</td>
+      <td>21.10000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>16.900000</td>
+      <td>28.200000</td>
+      <td>0.800000</td>
+      <td>7.400000</td>
+      <td>10.600000</td>
+      <td>48.000000</td>
+      <td>19.000000</td>
+      <td>24.000000</td>
+      <td>83.000000</td>
+      <td>66.000000</td>
+      <td>1022.40000</td>
+      <td>1020.000000</td>
+      <td>7.000000</td>
+      <td>7.000000</td>
+      <td>21.600000</td>
+      <td>26.40000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>33.900000</td>
+      <td>48.100000</td>
+      <td>371.000000</td>
+      <td>145.000000</td>
+      <td>14.500000</td>
+      <td>135.000000</td>
+      <td>130.000000</td>
+      <td>87.000000</td>
+      <td>100.000000</td>
+      <td>100.000000</td>
+      <td>1041.00000</td>
+      <td>1039.600000</td>
+      <td>9.000000</td>
+      <td>9.000000</td>
+      <td>40.200000</td>
+      <td>46.70000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<h4 id="univariate-analysis">Univariate Analysis</h4>
+<h5 id="explore-raintomorrow-target-variable">Explore RainTomorrow target variable</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1">#Check for missing values</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="p">[</span><span class="s1">&#39;RainTomorrow&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><pre><code>3267
+</code></pre>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1">#Drop Null values of RaiNTomorrow column</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;RainTomorrow&#39;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1">#Number of unique values and the values</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;RainTomorrow&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;RainTomorrow&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><pre><code>2
+['No' 'Yes']
+</code></pre>
+<p>As expected only 2 values (Yes or No)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># Check the frequency distribution of the values</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;RainTomorrow&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#Or in percentage</span>
+</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="p">[</span><span class="s1">&#39;RainTomorrow&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><pre><code>No     110316
+Yes     31877
+Name: RainTomorrow, dtype: int64
+
+No     0.775819
+Yes    0.224181
+Name: RainTomorrow, dtype: float64
+</code></pre>
+<p>We see an unbalanced problem</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># Visualize frequency distribution of RainTomorrow variable</span>
+</span></span><span class="line"><span class="cl"><span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">countplot</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s2">&#34;RainTomorrow&#34;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s2">&#34;Set2&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><img style = "width: 100%" src = "/posts/Logistic Regression/output_26_0.png">    
+<h5 id="findings-of-univariate-analysis">Findings of Univariate Analysis</h5>
+<ul>
+<li>The number of unique values in RainTomorrow variable is 2.</li>
+<li>The two unique values are No and Yes.</li>
+<li>Out of the total number of RainTomorrow values, No appears 77.58% times and Yes appears 22.42% times.</li>
+</ul>
+<h4 id="bivariate-analysis">Bivariate Analysis</h4>
+<h5 id="types-of-variables">Types of variables</h5>
+<p>In this section, I segregate the dataset into categorical and numerical variables. There are a mixture of categorical and numerical variables in the dataset. Categorical variables have data type object. Numerical variables have data type float64.</p>
+<p>First of all, I will find categorical variables.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">categorical</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;object&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">columns</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;There are </span><span class="si">{}</span><span class="s1"> categorical variables</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">categorical</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The categorical variables are :&#39;</span><span class="p">,</span> <span class="n">categorical</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><pre><code>There are 7 categorical variables
+The categorical variables are : ['Date', 'Location', 'WindGustDir', 
+'WindDir9am', 'WindDir3pm', 'RainToday', 'RainTomorrow']
+</code></pre>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># View the categorical variables</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="p">[</span><span class="n">categorical</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Date</th>
+      <th>Location</th>
+      <th>WindGustDir</th>
+      <th>WindDir9am</th>
+      <th>WindDir3pm</th>
+      <th>RainToday</th>
+      <th>RainTomorrow</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2008-12-01</td>
+      <td>Albury</td>
+      <td>W</td>
+      <td>W</td>
+      <td>WNW</td>
+      <td>No</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2008-12-02</td>
+      <td>Albury</td>
+      <td>WNW</td>
+      <td>NNW</td>
+      <td>WSW</td>
+      <td>No</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2008-12-03</td>
+      <td>Albury</td>
+      <td>WSW</td>
+      <td>W</td>
+      <td>WSW</td>
+      <td>No</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2008-12-04</td>
+      <td>Albury</td>
+      <td>NE</td>
+      <td>SE</td>
+      <td>E</td>
+      <td>No</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2008-12-05</td>
+      <td>Albury</td>
+      <td>W</td>
+      <td>ENE</td>
+      <td>NW</td>
+      <td>No</td>
+      <td>No</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<h5 id="summary-of-categorical-variables">Summary of categorical variables</h5>
+<ul>
+<li>There is a date variable. It is denoted by Date column.</li>
+<li>There are 6 categorical variables. These are given by Location, WindGustDir, WindDir9am, WindDir3pm, RainToday and RainTomorrow.</li>
+<li>There are two binary categorical variables - RainToday and RainTomorrow.</li>
+<li>RainTomorrow is the target variable</li>
+</ul>
+<h5 id="explore-problems-within-categorical-variables">Explore problems within categorical variables</h5>
+<p>First, I will explore the categorical variables.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># Missing values in categorical variables</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="p">[</span><span class="n">categorical</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><pre><code>Date                0
+Location            0
+WindGustDir      9330
+WindDir9am      10013
+WindDir3pm       3778
+RainToday        1406
+RainTomorrow        0
+dtype: int64
+</code></pre>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># print categorical variables with missing values</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">cat_missing</span> <span class="o">=</span> <span class="p">[</span><span class="n">col</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">categorical</span> <span class="k">if</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">!=</span><span class="mi">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">cat_missing</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><pre><code>WindGustDir     9330
+WindDir9am     10013
+WindDir3pm      3778
+RainToday       1406
+dtype: int64
+</code></pre>
+<p>We can see that there are only 4 categorical variables in the dataset which contains missing values. These are WindGustDir, WindDir9am, WindDir3pm and RainToday</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># Frequency count of categorical variables</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Markdown</span><span class="p">,</span> <span class="n">display</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">printmd</span><span class="p">(</span><span class="n">string</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">display</span><span class="p">(</span><span class="n">Markdown</span><span class="p">(</span><span class="n">string</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">categorical</span><span class="p">:</span> 
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">col</span> <span class="o">==</span> <span class="s2">&#34;Date&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">continue</span>
+</span></span><span class="line"><span class="cl">    <span class="n">printmd</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;**</span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s1">**&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>Location</strong></p>
+<pre><code>Canberra            3418
+Sydney              3337
+Perth               3193
+Darwin              3192
+Hobart              3188
+Brisbane            3161
+Adelaide            3090
+Bendigo             3034
+Townsville          3033
+AliceSprings        3031
+MountGambier        3030
+Launceston          3028
+Ballarat            3028
+Albany              3016
+Albury              3011
+PerthAirport        3009
+MelbourneAirport    3009
+Mildura             3007
+SydneyAirport       3005
+Nuriootpa           3002
+Sale                3000
+Watsonia            2999
+Tuggeranong         2998
+Portland            2996
+Woomera             2990
+Cairns              2988
+Cobar               2988
+Wollongong          2983
+GoldCoast           2980
+WaggaWagga          2976
+Penrith             2964
+NorfolkIsland       2964
+SalmonGums          2955
+Newcastle           2955
+CoffsHarbour        2953
+Witchcliffe         2952
+Richmond            2951
+Dartmoor            2943
+NorahHead           2929
+BadgerysCreek       2928
+MountGinini         2907
+Moree               2854
+Walpole             2819
+PearceRAAF          2762
+Williamtown         2553
+Melbourne           2435
+Nhil                1569
+Katherine           1559
+Uluru               1521
+Name: Location, dtype: int64
+</code></pre>
+<p><strong>WindGustDir</strong></p>
+<pre><code>W      9780
+SE     9309
+E      9071
+N      9033
+SSE    8993
+S      8949
+WSW    8901
+SW     8797
+SSW    8610
+WNW    8066
+NW     8003
+ENE    7992
+ESE    7305
+NE     7060
+NNW    6561
+NNE    6433
+Name: WindGustDir, dtype: int64
+</code></pre>
+<p><strong>WindDir9am</strong></p>
+<pre><code>N      11393
+SE      9162
+E       9024
+SSE     8966
+NW      8552
+S       8493
+W       8260
+SW      8237
+NNE     7948
+NNW     7840
+ENE     7735
+ESE     7558
+NE      7527
+SSW     7448
+WNW     7194
+WSW     6843
+Name: WindDir9am, dtype: int64
+</code></pre>
+<p><strong>WindDir3pm</strong></p>
+<pre><code>SE     10663
+W       9911
+S       9598
+WSW     9329
+SW      9182
+SSE     9142
+N       8667
+WNW     8656
+NW      8468
+ESE     8382
+E       8342
+NE      8164
+SSW     8010
+NNW     7733
+ENE     7724
+NNE     6444
+Name: WindDir3pm, dtype: int64
+</code></pre>
+<p><strong>RainToday</strong></p>
+<pre><code>No     109332
+Yes     31455
+Name: RainToday, dtype: int64
+</code></pre>
+<p><strong>RainTomorrow</strong></p>
+<pre><code>No     110316
+Yes     31877
+Name: RainTomorrow, dtype: int64
+</code></pre>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># check for cardinality in categorical variables</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">categorical</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="s1">&#39; contains &#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()),</span> <span class="s1">&#39; labels&#39;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><pre><code>Date  contains  3436  labels
+Location  contains  49  labels
+WindGustDir  contains  17  labels
+WindDir9am  contains  17  labels
+WindDir3pm  contains  17  labels
+RainToday  contains  3  labels
+RainTomorrow  contains  2  labels
+</code></pre>
+<p>We can see that there is a Date variable which needs to be preprocessed. I will do preprocessing in the following section.</p>
+<p>All the other variables contain relatively smaller number of variables.</p>
+<h4 id="feature-engineering-of-date-variable">Feature Engineering of Date Variable</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">year</span>
+</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Month&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">month</span>
+</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Day&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">day</span>
+</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Date&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="explore-numerical-variables">Explore Numerical Variables</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">numerical</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">exclude</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;object&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">columns</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;There are </span><span class="si">{}</span><span class="s1"> numerical variables</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">numerical</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The numerical variables are :&#39;</span><span class="p">,</span> <span class="n">numerical</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><pre><code>There are 19 numerical variables
+
+The numerical variables are : ['MinTemp', 'MaxTemp', 'Rainfall',  'Evaporation', 
+'Sunshine', 'WindGustSpeed', 'WindSpeed9am', 'WindSpeed3pm', 'Humidity9am', 'Humidity3pm', 
+'Pressure9am', 'Pressure3pm',  'Cloud9am', 'Cloud3pm', 'Temp9am', 'Temp3pm', 'Year', 'Month', 
+'Day']
+</code></pre>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># view the numerical variables</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="p">[</span><span class="n">numerical</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>MinTemp</th>
+      <th>MaxTemp</th>
+      <th>Rainfall</th>
+      <th>Evaporation</th>
+      <th>Sunshine</th>
+      <th>WindGustSpeed</th>
+      <th>WindSpeed9am</th>
+      <th>WindSpeed3pm</th>
+      <th>Humidity9am</th>
+      <th>Humidity3pm</th>
+      <th>Pressure9am</th>
+      <th>Pressure3pm</th>
+      <th>Cloud9am</th>
+      <th>Cloud3pm</th>
+      <th>Temp9am</th>
+      <th>Temp3pm</th>
+      <th>Year</th>
+      <th>Month</th>
+      <th>Day</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>13.4</td>
+      <td>22.9</td>
+      <td>0.6</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>44.0</td>
+      <td>20.0</td>
+      <td>24.0</td>
+      <td>71.0</td>
+      <td>22.0</td>
+      <td>1007.7</td>
+      <td>1007.1</td>
+      <td>8.0</td>
+      <td>NaN</td>
+      <td>16.9</td>
+      <td>21.8</td>
+      <td>2008</td>
+      <td>12</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>7.4</td>
+      <td>25.1</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>44.0</td>
+      <td>4.0</td>
+      <td>22.0</td>
+      <td>44.0</td>
+      <td>25.0</td>
+      <td>1010.6</td>
+      <td>1007.8</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>17.2</td>
+      <td>24.3</td>
+      <td>2008</td>
+      <td>12</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>12.9</td>
+      <td>25.7</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>46.0</td>
+      <td>19.0</td>
+      <td>26.0</td>
+      <td>38.0</td>
+      <td>30.0</td>
+      <td>1007.6</td>
+      <td>1008.7</td>
+      <td>NaN</td>
+      <td>2.0</td>
+      <td>21.0</td>
+      <td>23.2</td>
+      <td>2008</td>
+      <td>12</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>9.2</td>
+      <td>28.0</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>24.0</td>
+      <td>11.0</td>
+      <td>9.0</td>
+      <td>45.0</td>
+      <td>16.0</td>
+      <td>1017.6</td>
+      <td>1012.8</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>18.1</td>
+      <td>26.5</td>
+      <td>2008</td>
+      <td>12</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>17.5</td>
+      <td>32.3</td>
+      <td>1.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>41.0</td>
+      <td>7.0</td>
+      <td>20.0</td>
+      <td>82.0</td>
+      <td>33.0</td>
+      <td>1010.8</td>
+      <td>1006.0</td>
+      <td>7.0</td>
+      <td>8.0</td>
+      <td>17.8</td>
+      <td>29.7</td>
+      <td>2008</td>
+      <td>12</td>
+      <td>5</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<h4 id="summary-of-numerical-variables">Summary of numerical variables</h4>
+<ul>
+<li>There are 16 numerical variables.</li>
+<li>These are given by MinTemp, MaxTemp, Rainfall, Evaporation, Sunshine, WindGustSpeed, WindSpeed9am, WindSpeed3pm, Humidity9am, Humidity3pm, Pressure9am, Pressure3pm, Cloud9am, Cloud3pm, Temp9am and Temp3pm.</li>
+<li>All of the numerical variables are of continuous type</li>
+</ul>
+<h4 id="explore-problems-within-numerical-variables">Explore problems within numerical variables</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># check missing values in numerical variables</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="p">[</span><span class="n">numerical</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><pre><code>MinTemp            637
+MaxTemp            322
+Rainfall          1406
+Evaporation      60843
+Sunshine         67816
+WindGustSpeed     9270
+WindSpeed9am      1348
+WindSpeed3pm      2630
+Humidity9am       1774
+Humidity3pm       3610
+Pressure9am      14014
+Pressure3pm      13981
+Cloud9am         53657
+Cloud3pm         57094
+Temp9am            904
+Temp3pm           2726
+Year                 0
+Month                0
+Day                  0
+dtype: int64
+</code></pre>
+<p>We can see that all the 16 numerical variables contain missing values.</p>
+<h4 id="outliers-in-numerical-variables">Outliers in numerical variables</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># view summary statistics in numerical variables</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">numerical</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">()),</span><span class="mi">2</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><pre><code>        MinTemp   MaxTemp  Rainfall  Evaporation  Sunshine  WindGustSpeed  \
+count  141556.0  141871.0  140787.0      81350.0   74377.0       132923.0   
+mean       12.0      23.0       2.0          5.0       8.0           40.0   
+std         6.0       7.0       8.0          4.0       4.0           14.0   
+min        -8.0      -5.0       0.0          0.0       0.0            6.0   
+25%         8.0      18.0       0.0          3.0       5.0           31.0   
+50%        12.0      23.0       0.0          5.0       8.0           39.0   
+75%        17.0      28.0       1.0          7.0      11.0           48.0   
+max        34.0      48.0     371.0        145.0      14.0          135.0   
+
+       WindSpeed9am  WindSpeed3pm  Humidity9am  Humidity3pm  Pressure9am  \
+count      140845.0      139563.0     140419.0     138583.0     128179.0   
+mean           14.0          19.0         69.0         51.0       1018.0   
+std             9.0           9.0         19.0         21.0          7.0   
+min             0.0           0.0          0.0          0.0        980.0   
+25%             7.0          13.0         57.0         37.0       1013.0   
+50%            13.0          19.0         70.0         52.0       1018.0   
+75%            19.0          24.0         83.0         66.0       1022.0   
+max           130.0          87.0        100.0        100.0       1041.0   
+
+       Pressure3pm  Cloud9am  Cloud3pm   Temp9am   Temp3pm      Year  \
+count     128212.0   88536.0   85099.0  141289.0  139467.0  142193.0   
+mean        1015.0       4.0       5.0      17.0      22.0    2013.0   
+std            7.0       3.0       3.0       6.0       7.0       3.0   
+min          977.0       0.0       0.0      -7.0      -5.0    2007.0   
+25%         1010.0       1.0       2.0      12.0      17.0    2011.0   
+50%         1015.0       5.0       5.0      17.0      21.0    2013.0   
+75%         1020.0       7.0       7.0      22.0      26.0    2015.0   
+max         1040.0       9.0       9.0      40.0      47.0    2017.0   
+
+          Month       Day  
+count  142193.0  142193.0  
+mean        6.0      16.0  
+std         3.0       9.0  
+min         1.0       1.0  
+25%         3.0       8.0  
+50%         6.0      16.0  
+75%         9.0      23.0  
+max        12.0      31.0   2
+</code></pre>
+<p>On closer inspection, we can see that the Rainfall, Evaporation, WindSpeed9am and WindSpeed3pm columns may contain outliers.
+I will draw boxplots to visualise outliers in the above variables.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># draw boxplots to visualize outliers</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">fig</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s1">&#39;Rainfall&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">fig</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">fig</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Rainfall&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">fig</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s1">&#39;Evaporation&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">fig</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">fig</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Evaporation&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">fig</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s1">&#39;WindSpeed9am&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">fig</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">fig</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;WindSpeed9am&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">fig</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s1">&#39;WindSpeed3pm&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">fig</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">fig</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;WindSpeed3pm&#39;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><pre><code>Text(0, 0.5, 'WindSpeed3pm')
+</code></pre>
+<img style = "width: 100%" src = "/posts/Logistic Regression/output_52_1.png">    
+<p>The above boxplots confirm that there are lot of outliers in these variables.</p>
+<h4 id="check-the-distribution-of-variables">Check the distribution of variables</h4>
+<p>Now, I will plot the histograms to check distributions to find out if they are normal or skewed.</p>
+<p>If the variable follows normal distribution, then I will do Extreme Value Analysis otherwise if they are skewed, I will find IQR (Interquantile range).</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># plot histogram to check distribution</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">fig</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Rainfall</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">bins</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">fig</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Rainfall&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">fig</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;RainTomorrow&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">fig</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Evaporation</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">bins</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">fig</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Evaporation&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">fig</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;RainTomorrow&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">fig</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">WindSpeed9am</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">bins</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">fig</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;WindSpeed9am&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">fig</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;RainTomorrow&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">fig</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">WindSpeed3pm</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">bins</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">fig</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;WindSpeed3pm&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">fig</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;RainTomorrow&#39;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><pre><code>Text(0, 0.5, 'RainTomorrow')
+</code></pre>
+<img style = "width: 100%" src = "/posts/Logistic Regression/output_55_1.png">  
+<p>We can see that all the four variables are skewed. So, I will use interquantile range to find outliers</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># find outliers for Rainfall variable</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">IQR</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Rainfall</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.75</span><span class="p">)</span> <span class="o">-</span> <span class="n">df</span><span class="o">.</span><span class="n">Rainfall</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.25</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">Lower_fence</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Rainfall</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.25</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">IQR</span> <span class="o">*</span> <span class="mi">3</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">Upper_fence</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Rainfall</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.75</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">IQR</span> <span class="o">*</span> <span class="mi">3</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Rainfall outliers are values &lt; </span><span class="si">{</span><span class="n">Lower_fence</span><span class="si">}</span><span class="s1"> or &gt; </span><span class="si">{</span><span class="n">Upper_fence</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><pre><code>Rainfall outliers are values &lt; -2.4000000000000004 or &gt; 3.2
+</code></pre>
+<p>For Rainfall, the minimum and maximum values are 0.0 and 371.0. So, the outliers are values &gt; 3.2.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># find outliers for Evaporation variable</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">IQR</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Evaporation</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.75</span><span class="p">)</span> <span class="o">-</span> <span class="n">df</span><span class="o">.</span><span class="n">Evaporation</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.25</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">Lower_fence</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Evaporation</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.25</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">IQR</span> <span class="o">*</span> <span class="mi">3</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">Upper_fence</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Evaporation</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.75</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">IQR</span> <span class="o">*</span> <span class="mi">3</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Evaporation outliers are values &lt; </span><span class="si">{</span><span class="n">Lower_fence</span><span class="si">}</span><span class="s1"> or &gt; </span><span class="si">{</span><span class="n">Upper_fence</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><pre><code>Evaporation outliers are values &lt; -11.800000000000002 or &gt; 21.800000000000004
+</code></pre>
+<p>For Evaporation, the minimum and maximum values are 0.0 and 145.0. So, the outliers are values &gt; 21.8.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># find outliers for WindSpeed9am variable</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">IQR</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">WindSpeed9am</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.75</span><span class="p">)</span> <span class="o">-</span> <span class="n">df</span><span class="o">.</span><span class="n">WindSpeed9am</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.25</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">Lower_fence</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">WindSpeed9am</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.25</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">IQR</span> <span class="o">*</span> <span class="mi">3</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">Upper_fence</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">WindSpeed9am</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.75</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">IQR</span> <span class="o">*</span> <span class="mi">3</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;WindSpeed9am outliers are values &lt; </span><span class="si">{</span><span class="n">Lower_fence</span><span class="si">}</span><span class="s1"> or &gt; </span><span class="si">{</span><span class="n">Upper_fence</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><pre><code>WindSpeed9am outliers are values &lt; -29.0 or &gt; 55.0
+</code></pre>
+<p>For WindSpeed9am, the minimum and maximum values are 0.0 and 130.0. So, the outliers are values &gt; 55.0.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># find outliers for WindSpeed3pm variable</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">IQR</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">WindSpeed3pm</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.75</span><span class="p">)</span> <span class="o">-</span> <span class="n">df</span><span class="o">.</span><span class="n">WindSpeed3pm</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.25</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">Lower_fence</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">WindSpeed3pm</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.25</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">IQR</span> <span class="o">*</span> <span class="mi">3</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">Upper_fence</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">WindSpeed3pm</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.75</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">IQR</span> <span class="o">*</span> <span class="mi">3</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;WindSpeed3pm outliers are values &lt; </span><span class="si">{</span><span class="n">Lower_fence</span><span class="si">}</span><span class="s1"> or &gt; </span><span class="si">{</span><span class="n">Upper_fence</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><pre><code>WindSpeed3pm outliers are values &lt; -20.0 or &gt; 57.0
+</code></pre>
+<p>For WindSpeed3pm, the minimum and maximum values are 0.0 and 87.0. So, the outliers are values &gt; 57.0.</p>
+<h2 id="multivariate-analysis">Multivariate Analysis</h2>
+<ul>
+<li>An important step in EDA is to discover patterns and relationships between variables in the dataset.</li>
+<li>I will use heat map and pair plot to discover the patterns and relationships in the dataset.</li>
+<li>First of all, I will draw a heat map.</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">correlation</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span><span class="mi">12</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Correlation Heatmap of Rain in Australia Dataset&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">correlation</span><span class="p">,</span> <span class="n">square</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;.2f&#39;</span><span class="p">,</span> <span class="n">linecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">get_xticklabels</span><span class="p">(),</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">ax</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">get_yticklabels</span><span class="p">(),</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>           
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><img style = "width: 100%" src = "/posts/Logistic Regression/output_66_0.png"> 
+<h4 id="interpretation">Interpretation</h4>
+<p>From the above correlation heat map, we can conclude that :</p>
+<ul>
+<li>MinTemp and MaxTemp variables are highly positively correlated (correlation coefficient = 0.74).</li>
+<li>MinTemp and Temp3pm variables are also highly positively correlated (correlation coefficient = 0.71).</li>
+<li>MinTemp and Temp9am variables are strongly positively correlated (correlation coefficient = 0.90).</li>
+<li>MaxTemp and Temp9am variables are strongly positively correlated (correlation coefficient = 0.89).</li>
+<li>MaxTemp and Temp3pm variables are also strongly positively correlated (correlation coefficient = 0.98).</li>
+<li>WindGustSpeed and WindSpeed3pm variables are highly positively correlated (correlation coefficient = 0.69).</li>
+<li>Pressure9am and Pressure3pm variables are strongly positively correlated (correlation coefficient = 0.96).</li>
+<li>Temp9am and Temp3pm variables are strongly positively correlated (correlation coefficient = 0.86).</li>
+</ul>
+<h4 id="pair-plot">Pair Plot</h4>
+<p>First of all, I will define extract the variables which are highly positively correlated.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">num_var</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;MinTemp&#39;</span><span class="p">,</span> <span class="s1">&#39;MaxTemp&#39;</span><span class="p">,</span> <span class="s1">&#39;Temp9am&#39;</span><span class="p">,</span> <span class="s1">&#39;Temp3pm&#39;</span><span class="p">,</span> <span class="s1">&#39;WindGustSpeed&#39;</span><span class="p">,</span> <span class="s1">&#39;WindSpeed3pm&#39;</span><span class="p">,</span> <span class="s1">&#39;Pressure9am&#39;</span><span class="p">,</span> <span class="s1">&#39;Pressure3pm&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">num_var</span><span class="p">],</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;scatter&#39;</span><span class="p">,</span> <span class="n">diag_kind</span><span class="o">=</span><span class="s1">&#39;hist&#39;</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s1">&#39;Rainbow&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><img style = "width: 100%" src = "/posts/Logistic Regression/output_69_0.png"> 
+<h4 id="interpretation-1">Interpretation</h4>
+<ul>
+<li>I have defined a variable num_var which consists of MinTemp, MaxTemp, Temp9am, Temp3pm, WindGustSpeed, WindSpeed3pm, Pressure9am and Pressure3pm variables.</li>
+<li>The above pair plot shows relationship between these variables.</li>
+</ul>
+<h2 id="split-target-from-features">Split target from features</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;RainTomorrow&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;RainTomorrow&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># split X and y into training and testing sets</span>
+</span></span><span class="line"><span class="cl"><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">42</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="feature-engineering">Feature Engineering</h2>
+<p>Feature Engineering is the process of transforming raw data into useful features that help us to understand our model better and increase its predictive power. I will carry out feature engineering on different types of variables.</p>
+<p><strong>Assumption</strong></p>
+<p>I assume that the data are missing completely at random (MCAR). There are two methods which can be used to impute missing values. One is mean or median imputation and other one is random sample imputation. When there are outliers in the dataset, we should use median imputation. So, I will use median imputation because median imputation is robust to outliers.</p>
+<p>I will impute missing values with the appropriate statistical measures of the data, in this case median. Imputation should be done over the training set, and then propagated to the test set. It means that the statistical measures to be used to fill missing values both in train and test set, should be extracted from the train set only. This is to avoid overfitting.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># impute missing values in X_train and X_test with respective column median in X_train</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">df1</span> <span class="ow">in</span> <span class="p">[</span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">]:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">numerical</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">col_median</span><span class="o">=</span><span class="n">X_train</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">median</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="n">df1</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">col_median</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>     
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># check again missing values in numerical variables in X_train</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">X_train</span><span class="p">[</span><span class="n">numerical</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><pre><code>MinTemp          0
+MaxTemp          0
+Rainfall         0
+Evaporation      0
+Sunshine         0
+WindGustSpeed    0
+WindSpeed9am     0
+WindSpeed3pm     0
+Humidity9am      0
+Humidity3pm      0
+Pressure9am      0
+Pressure3pm      0
+Cloud9am         0
+Cloud3pm         0
+Temp9am          0
+Temp3pm          0
+Year             0
+Month            0
+Day              0
+dtype: int64
+</code></pre>
+<h4 id="engineering-missing-values-in-categorical-variables">Engineering missing values in categorical variables</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># impute missing categorical variables with most frequent value</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">df2</span> <span class="ow">in</span> <span class="p">[</span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">]:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">df2</span><span class="p">[</span><span class="s1">&#39;WindGustDir&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">X_train</span><span class="p">[</span><span class="s1">&#39;WindGustDir&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mode</span><span class="p">()[</span><span class="mi">0</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">df2</span><span class="p">[</span><span class="s1">&#39;WindDir9am&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">X_train</span><span class="p">[</span><span class="s1">&#39;WindDir9am&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mode</span><span class="p">()[</span><span class="mi">0</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">df2</span><span class="p">[</span><span class="s1">&#39;WindDir3pm&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">X_train</span><span class="p">[</span><span class="s1">&#39;WindDir3pm&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mode</span><span class="p">()[</span><span class="mi">0</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">df2</span><span class="p">[</span><span class="s1">&#39;RainToday&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">X_train</span><span class="p">[</span><span class="s1">&#39;RainToday&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mode</span><span class="p">()[</span><span class="mi">0</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># check missing values in categorical variables in X_train</span>
+</span></span><span class="line"><span class="cl"><span class="n">categorical</span> <span class="o">=</span> <span class="n">X_train</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;object&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">columns</span>
+</span></span><span class="line"><span class="cl"><span class="n">X_train</span><span class="p">[</span><span class="n">categorical</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><pre><code>Location       0
+WindGustDir    0
+WindDir9am     0
+WindDir3pm     0
+RainToday      0
+dtype: int64
+</code></pre>
+<h4 id="engineering-outliers-in-numerical-variables">Engineering outliers in numerical variables</h4>
+<p>We have seen that the Rainfall, Evaporation, WindSpeed9am and WindSpeed3pm columns contain outliers. I will use top-coding approach to cap maximum values and remove outliers from the above variables.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">max_value</span><span class="p">(</span><span class="n">df3</span><span class="p">,</span> <span class="n">variable</span><span class="p">,</span> <span class="n">top</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">df3</span><span class="p">[</span><span class="n">variable</span><span class="p">]</span><span class="o">&gt;</span><span class="n">top</span><span class="p">,</span> <span class="n">top</span><span class="p">,</span> <span class="n">df3</span><span class="p">[</span><span class="n">variable</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">df3</span> <span class="ow">in</span> <span class="p">[</span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">]:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">df3</span><span class="p">[</span><span class="s1">&#39;Rainfall&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">max_value</span><span class="p">(</span><span class="n">df3</span><span class="p">,</span> <span class="s1">&#39;Rainfall&#39;</span><span class="p">,</span> <span class="mf">3.2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">df3</span><span class="p">[</span><span class="s1">&#39;Evaporation&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">max_value</span><span class="p">(</span><span class="n">df3</span><span class="p">,</span> <span class="s1">&#39;Evaporation&#39;</span><span class="p">,</span> <span class="mf">21.8</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">df3</span><span class="p">[</span><span class="s1">&#39;WindSpeed9am&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">max_value</span><span class="p">(</span><span class="n">df3</span><span class="p">,</span> <span class="s1">&#39;WindSpeed9am&#39;</span><span class="p">,</span> <span class="mi">55</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">df3</span><span class="p">[</span><span class="s1">&#39;WindSpeed3pm&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">max_value</span><span class="p">(</span><span class="n">df3</span><span class="p">,</span> <span class="s1">&#39;WindSpeed3pm&#39;</span><span class="p">,</span> <span class="mi">57</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="encode-categorical-variables">Encode categorical variables</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">encoder</span> <span class="o">=</span> <span class="n">ce</span><span class="o">.</span><span class="n">BinaryEncoder</span><span class="p">(</span><span class="n">cols</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;RainToday&#39;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="n">X_train</span> <span class="o">=</span> <span class="n">encoder</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">X_test</span> <span class="o">=</span> <span class="n">encoder</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">X_train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">X_test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>We now have training and testing set ready for model building. Before that, we should map all the feature variables onto the same scale. It is called feature scaling. I will do it as follows</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">cols</span> <span class="o">=</span> <span class="n">X_train</span><span class="o">.</span><span class="n">columns</span>
+</span></span><span class="line"><span class="cl"><span class="n">scaler</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">X_train</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">X_test</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">X_train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="n">cols</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="n">X_test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="n">cols</span><span class="p">])</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Now we can finally train the logistic regression model</p>
+<h2 id="modelling">Modelling</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># instantiate the model</span>
+</span></span><span class="line"><span class="cl"><span class="n">logreg</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">solver</span><span class="o">=</span><span class="s1">&#39;liblinear&#39;</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># fit the model</span>
+</span></span><span class="line"><span class="cl"><span class="n">logreg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><style>#sk-container-id-1 {color: black;background-color: white;}#sk-container-id-1 pre{padding: 0;}#sk-container-id-1 div.sk-toggleable {background-color: white;}#sk-container-id-1 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-1 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-1 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-1 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-1 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-1 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-1 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-1 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-1 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-1 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-1 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-1 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-1 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-1 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-1 div.sk-item {position: relative;z-index: 1;}#sk-container-id-1 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-1 div.sk-item::before, #sk-container-id-1 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-1 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-1 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-1 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-1 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-1 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-1 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-1 div.sk-label-container {text-align: center;}#sk-container-id-1 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-1 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>LogisticRegression(random_state=42, solver=&#x27;liblinear&#x27;)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox" checked><label for="sk-estimator-id-1" class="sk-toggleable__label sk-toggleable__label-arrow">LogisticRegression</label><div class="sk-toggleable__content"><pre>LogisticRegression(random_state=42, solver=&#x27;liblinear&#x27;)</pre></div></div></div></div></div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">y_pred_test</span> <span class="o">=</span> <span class="n">logreg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="predict_proba-method">predict_proba method</h4>
+<p>predict_proba method gives the probabilities for the target variable(0 and 1) in this case, in array form.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># probability of getting output as 0 - no rain</span>
+</span></span><span class="line"><span class="cl"><span class="n">logreg</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span><span class="mi">0</span><span class="p">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><pre><code>array([0.15163563, 0.703692  , 0.98254885, ..., 0.98586207, 0.9495434 ,
+       0.95416021])
+</code></pre>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># probability of getting output as 1 - rain</span>
+</span></span><span class="line"><span class="cl"><span class="n">logreg</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><pre><code>array([0.84836437, 0.296308  , 0.01745115, ..., 0.01413793, 0.0504566 ,
+       0.04583979])
+</code></pre>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Model accuracy score: </span><span class="si">{</span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_test</span><span class="p">)</span><span class="si">:</span><span class="s1">0.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><pre><code>Model accuracy score: 0.8455
+</code></pre>
+<h4 id="compare-the-train-set-and-test-set-accuracy">Compare the train-set and test-set accuracy</h4>
+<p>Now, I will compare the train-set and test-set accuracy to check for overfitting.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">y_pred_train</span> <span class="o">=</span> <span class="n">logreg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Training-set accuracy score: </span><span class="si">{</span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">y_pred_train</span><span class="p">)</span><span class="si">:</span><span class="s1">0.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><pre><code>Training-set accuracy score: 0.8483
+</code></pre>
+<p>The training-set accuracy score is 0.8483 while the test-set accuracy to be 0.8455. These two values are quite comparable. So, there is no question of overfitting.</p>
+<p>In Logistic Regression, we use default value of C = 1 (C is the inverse of regularization strength, regularization wasn&rsquo;t discussed in this article, maybe in another article in the future). It provides good performance with approximately 85% accuracy on both the training and the test set. But the model performance on both the training and test set are very comparable. It is likely the case of underfitting.</p>
+<p>I will increase C and fit a more flexible model.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># fit the Logsitic Regression model with C=100</span>
+</span></span><span class="line"><span class="cl"><span class="n">logreg100</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">C</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">solver</span><span class="o">=</span><span class="s1">&#39;liblinear&#39;</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># fit the model</span>
+</span></span><span class="line"><span class="cl"><span class="n">logreg100</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><style>#sk-container-id-2 {color: black;background-color: white;}#sk-container-id-2 pre{padding: 0;}#sk-container-id-2 div.sk-toggleable {background-color: white;}#sk-container-id-2 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-2 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-2 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-2 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-2 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-2 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-2 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-2 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-2 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-2 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-2 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-2 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-2 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-2 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-2 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-2 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-2 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-2 div.sk-item {position: relative;z-index: 1;}#sk-container-id-2 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-2 div.sk-item::before, #sk-container-id-2 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-2 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-2 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-2 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-2 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-2 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-2 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-2 div.sk-label-container {text-align: center;}#sk-container-id-2 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-2 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-2" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>LogisticRegression(C=100, random_state=42, solver=&#x27;liblinear&#x27;)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-2" type="checkbox" checked><label for="sk-estimator-id-2" class="sk-toggleable__label sk-toggleable__label-arrow">LogisticRegression</label><div class="sk-toggleable__content"><pre>LogisticRegression(C=100, random_state=42, solver=&#x27;liblinear&#x27;)</pre></div></div></div></div></div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># print the scores on training and test set</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Training set score: </span><span class="si">{</span><span class="n">logreg100</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Test set score: </span><span class="si">{</span><span class="n">logreg100</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><pre><code>Training set score: 0.8488
+Test set score: 0.8456
+</code></pre>
+<p>We can see that, C=100 results in higher test set accuracy and also a slightly increased training set accuracy. So, we can conclude that a more complex model should perform better.</p>
+<h4 id="compare-model-accuracy-with-null-accuracy">Compare model accuracy with null accuracy</h4>
+<p>So, the model accuracy is 0.8501. But, we cannot say that our model is very good based on the above accuracy. We must compare it with the null accuracy. Null accuracy is the accuracy that could be achieved by always predicting the most frequent class.</p>
+<p>So, we should first check the class distribution in the test set.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># check class distribution in test set</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">y_test</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><pre><code>No     22098
+Yes     6341
+Name: RainTomorrow, dtype: int64
+</code></pre>
+<p>We can see that the occurences of most frequent class is 22098. So, we can calculate null accuracy by dividing 22098 by total number of occurences.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># check null accuracy score</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">null_accuracy</span> <span class="o">=</span> <span class="p">(</span><span class="mi">22098</span><span class="o">/</span><span class="p">(</span><span class="mi">22098</span><span class="o">+</span><span class="mi">6341</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Null accuracy score: </span><span class="si">{0:0.4f}</span><span class="s1">&#39;</span><span class="o">.</span> <span class="nb">format</span><span class="p">(</span><span class="n">null_accuracy</span><span class="p">))</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><pre><code>Null accuracy score: 0.7770
+</code></pre>
+<h5 id="interpretation-2">Interpretation</h5>
+<p>We can see that our model accuracy score is 0.8501 but null accuracy score is 0.7759. So, we can conclude that our Logistic Regression model is doing a very good job in predicting the class labels.</p>
+<p>Now, based on the above analysis we can conclude that our classification model accuracy is very good. Our model is doing a very good job in terms of predicting the class labels.</p>
+<p>But, it does not give the underlying distribution of values. Also, it does not tell anything about the type of errors our classifer is making.</p>
+<p>We have another tool called Confusion matrix that comes to our rescue.</p>
+<h4 id="confusion-matrix">Confusion matrix</h4>
+<p>A confusion matrix is a tool for summarizing the performance of a classification algorithm. A confusion matrix will give us a clear picture of classification model performance and the types of errors produced by the model. It gives us a summary of correct and incorrect predictions broken down by each category. The summary is represented in a tabular form.</p>
+<p>Four types of outcomes are possible while evaluating a classification model performance. These four outcomes are described below:</p>
+<ul>
+<li>
+<p>True Positives (TP) – True Positives occur when we predict an observation belongs to a certain class and the observation actually belongs to that class.</p>
+</li>
+<li>
+<p>True Negatives (TN) – True Negatives occur when we predict an observation does not belong to a certain class and the observation actually does not belong to that class.</p>
+</li>
+<li>
+<p>False Positives (FP) – False Positives occur when we predict an observation belongs to a certain class but the observation actually does not belong to that class. This type of error is called Type I error.</p>
+</li>
+<li>
+<p>False Negatives (FN) – False Negatives occur when we predict an observation does not belong to a certain class but the observation actually belongs to that class. This is a very serious error and it is called Type II error.</p>
+</li>
+</ul>
+<p>These four outcomes are summarized in a confusion matrix given below.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">cm</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_test</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Confusion matrix</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">cm</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">True Positives(TP) = &#39;</span><span class="p">,</span> <span class="n">cm</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">True Negatives(TN) = &#39;</span><span class="p">,</span> <span class="n">cm</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">False Positives(FP) = &#39;</span><span class="p">,</span> <span class="n">cm</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">False Negatives(FN) = &#39;</span><span class="p">,</span> <span class="n">cm</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><pre><code>Confusion matrix
+
+ [[20804  1294]
+ [ 3100  3241]]
+
+True Positives(TP) =  20804
+
+True Negatives(TN) =  3241
+
+False Positives(FP) =  1294
+
+False Negatives(FN) =  3100
+</code></pre>
+<p>The confusion matrix shows 20892 + 3285 = 24177 correct predictions and 3087 + 1175 = 4262 incorrect predictions.</p>
+<p>In this case, we have</p>
+<ul>
+<li>True Positives (Actual Positive:1 and Predict Positive:1) - 20892</li>
+<li>True Negatives (Actual Negative:0 and Predict Negative:0) - 3285</li>
+<li>False Positives (Actual Negative:0 but Predict Positive:1) - 1175 (Type I error)</li>
+<li>False Negatives (Actual Positive:1 but Predict Negative:0) - 3087 (Type II error)</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">cm_matrix</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">cm</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Actual Positive:1&#39;</span><span class="p">,</span> <span class="s1">&#39;Actual Negative:0&#39;</span><span class="p">],</span> 
+</span></span><span class="line"><span class="cl">                                 <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Predict Positive:1&#39;</span><span class="p">,</span> <span class="s1">&#39;Predict Negative:0&#39;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">cm_matrix</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;YlGnBu&#39;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><pre><code>&lt;AxesSubplot:&gt;
+</code></pre>
+<img style = "width: 100%" src = "/posts/Logistic Regression/output_108_1.png"> 
+<h4 id="classification-metrices">Classification Metrices</h4>
+<h5 id="classification-report">Classification Report</h5>
+<p>Classification report is another way to evaluate the classification model performance. It displays the precision, recall, f1 and support scores for the model.</p>
+<p>We can print a classification report as follows:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_test</span><span class="p">))</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><pre><code>              precision    recall  f1-score   support
+
+          No       0.87      0.94      0.90     22098
+         Yes       0.71      0.51      0.60      6341
+
+    accuracy                           0.85     28439
+   macro avg       0.79      0.73      0.75     28439
+weighted avg       0.84      0.85      0.84     28439
+</code></pre>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">TP</span> <span class="o">=</span> <span class="n">cm</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">TN</span> <span class="o">=</span> <span class="n">cm</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">FP</span> <span class="o">=</span> <span class="n">cm</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">FN</span> <span class="o">=</span> <span class="n">cm</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="precision">Precision</h5>
+<p>Precision can be defined as the percentage of correctly predicted positive outcomes out of all the predicted positive outcomes. It can be given as the ratio of true positives (TP) to the sum of true and false positives (TP + FP).</p>
+<p>So, Precision identifies the proportion of correctly predicted positive outcome. It is more concerned with the positive class than the negative class.</p>
+<p>Mathematically, precision can be defined as the ratio of TP to (TP + FP).</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># print precision score</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">precision</span> <span class="o">=</span> <span class="n">TP</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">TP</span> <span class="o">+</span> <span class="n">FP</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Precision : </span><span class="si">{0:0.4f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">precision</span><span class="p">))</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><pre><code>Precision : 0.9414
+</code></pre>
+<h5 id="recall">Recall</h5>
+<p>Recall can be defined as the percentage of correctly predicted positive outcomes out of all the actual positive outcomes. It can be given as the ratio of true positives (TP) to the sum of true positives and false negatives (TP + FN). Recall is also called Sensitivity.</p>
+<p>Recall identifies the proportion of correctly predicted actual positives.</p>
+<p>Mathematically, recall can be given as the ratio of TP to (TP + FN).</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">recall</span> <span class="o">=</span> <span class="n">TP</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">TP</span> <span class="o">+</span> <span class="n">FN</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Recall or Sensitivity : </span><span class="si">{0:0.4f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">recall</span><span class="p">))</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><pre><code>Recall or Sensitivity : 0.8703
+</code></pre>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">specificity</span> <span class="o">=</span> <span class="n">TN</span> <span class="o">/</span> <span class="p">(</span><span class="n">TN</span> <span class="o">+</span> <span class="n">FP</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Specificity : </span><span class="si">{0:0.4f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">specificity</span><span class="p">))</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><pre><code>Specificity : 0.7147
+</code></pre>
+<h5 id="f1-score">f1-score</h5>
+<p>f1-score is the weighted harmonic mean of precision and recall. The best possible f1-score would be 1.0 and the worst would be 0.0. f1-score is the harmonic mean of precision and recall. So, f1-score is always lower than accuracy measures as they embed precision and recall into their computation. The weighted average of f1-score should be used to compare classifier models, not global accuracy.</p>
+<h5 id="support">Support</h5>
+<p>Support is the actual number of occurrences of the class in our dataset</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># print the first 10 predicted probabilities of two classes- 0 and 1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">y_pred_prob</span> <span class="o">=</span> <span class="n">logreg</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">y_pred_prob</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><pre><code>array([[0.15163563, 0.84836437],
+       [0.703692  , 0.296308  ],
+       [0.98254885, 0.01745115],
+       [0.86912045, 0.13087955],
+       [0.61398609, 0.38601391],
+       [0.94498646, 0.05501354],
+       [0.95470402, 0.04529598],
+       [0.5290216 , 0.4709784 ],
+       [0.99863574, 0.00136426],
+       [0.78819565, 0.21180435]])
+</code></pre>
+<h4 id="observations">Observations</h4>
+<ul>
+<li>
+<p>In each row, the numbers sum to 1.</p>
+</li>
+<li>
+<p>There are 2 columns which correspond to 2 classes - 0 and 1.</p>
+<ul>
+<li>Class 0 - predicted probability that there is no rain tomorrow.</li>
+<li>Class 1 - predicted probability that there is rain tomorrow.</li>
+</ul>
+</li>
+<li>
+<p>Importance of predicted probabilities</p>
+<ul>
+<li>We can rank the observations by probability of rain or no rain.</li>
+</ul>
+</li>
+<li>
+<p>predict_proba process</p>
+<ul>
+<li>Predicts the probabilities</li>
+<li>Choose the class with the highest probability</li>
+</ul>
+</li>
+<li>
+<p>Classification threshold level</p>
+<ul>
+<li>There is a classification threshold level of 0.5.</li>
+<li>Class 1 - probability of rain is predicted if probability &gt; 0.5.</li>
+<li>Class 0 - probability of no rain is predicted if probability &lt; 0.5.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># store the probabilities in dataframe</span>
+</span></span><span class="line"><span class="cl"><span class="n">y_pred_prob_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">y_pred_prob</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Prob of - No rain tomorrow (0)&#39;</span><span class="p">,</span> <span class="s1">&#39;Prob of - Rain tomorrow (1)&#39;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># store the predicted probabilities for class 1 - Probability of rain</span>
+</span></span><span class="line"><span class="cl"><span class="n">y_pred1</span> <span class="o">=</span> <span class="n">logreg</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># plot histogram of predicted probabilities</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># adjust the font size </span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.size&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">12</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># plot histogram with 10 bins</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">y_pred1</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># set the title of predicted probabilities</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Histogram of predicted probabilities of rain&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># set the x-axis limit</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># set the title</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Predicted probabilities of rain&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Frequency&#39;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><pre><code>Text(0, 0.5, 'Frequency')
+</code></pre>
+<img style = "width: 100%" src = "/posts/Logistic Regression/output_121_1.png"> 
+<p><strong>Observations</strong></p>
+<ul>
+<li>We can see that the above histogram is highly positive skewed.</li>
+<li>The first column tell us that there are approximately 15000 observations with probability between 0.0 and 0.1.</li>
+<li>There are small number of observations with probability &gt; 0.5.</li>
+<li>So, these small number of observations predict that there will be rain tomorrow.</li>
+<li>Majority of observations predict that there will be no rain tomorrow.</li>
+</ul>
+<p>And that&rsquo;s about it. Thank you for reading and see you in the next article!
+</span></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://arebimohammed.github.io/logistic-regression/" data-title="Logistic Regression: With Application and Analysis on the &#39;Rain in Australia&#39; Dataset" data-hashtags="blogging,data science,machine learning,logistic regression,python"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://arebimohammed.github.io/logistic-regression/" data-hashtag="blogging"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://arebimohammed.github.io/logistic-regression/"><i class="fab fa-linkedin fa-fw"></i></a><a href="javascript:void(0);" title="Share on WhatsApp" data-sharer="whatsapp" data-url="https://arebimohammed.github.io/logistic-regression/" data-title="Logistic Regression: With Application and Analysis on the &#39;Rain in Australia&#39; Dataset" data-web><i class="fab fa-whatsapp fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/blogging/">blogging</a>,&nbsp;<a href="/tags/data-science/">data science</a>,&nbsp;<a href="/tags/machine-learning/">machine learning</a>,&nbsp;<a href="/tags/logistic-regression/">logistic regression</a>,&nbsp;<a href="/tags/python/">python</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/polynomial-regression/" class="prev" rel="prev" title="Polynomial Regression"><i class="fas fa-angle-left fa-fw"></i>Polynomial Regression</a>
+            <a href="/applying-under-sampling/" class="next" rel="next" title="Applying Under-Sampling Methods to Highly Imbalanced Data">Applying Under-Sampling Methods to Highly Imbalanced Data<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Mohammed Arebi</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery.js@1.2.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/copy-tex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/smooth-scroll@16.1.3/dist/smooth-scroll.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.37.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.8/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.2.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery.js@1.2.0/dist/js/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lg-thumbnail.js@1.2.0/dist/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lg-zoom.js@1.2.0/dist/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.0/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/typeit@7.0.4/dist/typeit.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":30},"comment":{},"data":{"id-1":"Mohammed Arebi","id-2":"Mohammed Arebi"},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"$$","right":"$$"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"},{"display":false,"left":"$","right":"$"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":5,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

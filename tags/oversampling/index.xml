@@ -1,0 +1,18 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>oversampling - Tag - Mohammed Arebi</title>
+        <link>https://arebimohammed.github.io/tags/oversampling/</link>
+        <description>oversampling - Tag - Mohammed Arebi</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>arebi.mohamed59@gmail.com (Mohammed Arebi)</managingEditor>
+            <webMaster>arebi.mohamed59@gmail.com (Mohammed Arebi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 14 Aug 2020 20:29:01 &#43;0800</lastBuildDate><atom:link href="https://arebimohammed.github.io/tags/oversampling/" rel="self" type="application/rss+xml" /><item>
+    <title>Applying Over-Sampling Methods to Highly Imbalanced Data</title>
+    <link>https://arebimohammed.github.io/applying-oversampling/</link>
+    <pubDate>Fri, 14 Aug 2020 20:29:01 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://arebimohammed.github.io/applying-oversampling/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/posts/Upsampling%20Applications/oversampling.png" referrerpolicy="no-referrer">
+            </div>I mentioned various undersampling approaches for dealing with highly imbalanced data in the earlier post &ldquo;Applying Under-Sampling Methods to Highly Imbalanced Data&rdquo; In this article, I present oversampling strategies for dealing with the same problem.
+By reproducing minority class examples, oversampling raises the weight of the minority class. Although it does not provide information, it introduces the issue of over-fitting, which causes the model to be overly specific. It is possible that while the accuracy for the training set is great, the performance for unseen datasets is poor.]]></description>
+</item></channel>
+</rss>

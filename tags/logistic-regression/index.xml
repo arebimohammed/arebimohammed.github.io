@@ -1,0 +1,18 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>logistic regression - Tag - Mohammed Arebi</title>
+        <link>https://arebimohammed.github.io/tags/logistic-regression/</link>
+        <description>logistic regression - Tag - Mohammed Arebi</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>arebi.mohamed59@gmail.com (Mohammed Arebi)</managingEditor>
+            <webMaster>arebi.mohamed59@gmail.com (Mohammed Arebi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 09 Jul 2020 20:29:01 &#43;0800</lastBuildDate><atom:link href="https://arebimohammed.github.io/tags/logistic-regression/" rel="self" type="application/rss+xml" /><item>
+    <title>Logistic Regression: With Application and Analysis on the &#39;Rain in Australia&#39; Dataset</title>
+    <link>https://arebimohammed.github.io/logistic-regression/</link>
+    <pubDate>Thu, 09 Jul 2020 20:29:01 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://arebimohammed.github.io/logistic-regression/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/posts/Logistic%20Regression/s-curve.jpg" referrerpolicy="no-referrer">
+            </div>Introduction The logistic model (or logit model) in statistics is a statistical model that represents the probability of an event occurring by making the log-odds for the event a linear combination of one or more independent variables.
+Logistic regression is another approach borrowed from statistics by machine learning. It is the go-to strategy for binary classification problems (problems with two classes) even though it is a regression algorithm (predicts probabilities, more on that later).]]></description>
+</item></channel>
+</rss>

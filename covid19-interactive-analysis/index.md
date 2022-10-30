@@ -1,6 +1,7 @@
 # COVID-19: An Interactive Analysis
 
 <!--more-->
+<span style="font-size:1.125rem">
 
 A new virus has plauged us and caused turmoil in the world. This virus has caused shut-downs, lockdowns and in the worst-case will unfortunately cause deaths. It is our job as responsible citizens to do our best to stop it from further spreading, and what better way than for us data scientists to dive deep into the data (of course while wearing masks and keeping the safe distance).
 So lets dive in.
@@ -235,7 +236,11 @@ The figure this time is produced using the ``` FigureWidget ``` object instead, 
 
 I have added several other interactive figures in the dashboard app that I will not discuss here. But you can definitely check out the code for them in the Github repository linked above, and interact with the figures in the app also linked above.  
 
+<<<<<<< HEAD
 The next analysis I wanted to work on is trying to predict the number of cases per status (Confirmed, Recovered, Active, Deaths). I opted for Linear regression to conduct such analysis. If you haven't read my blog post on linear regression read it [here](/posts/Linear Regression/Linear-Regression-All-you-need-to-know). The blog posts tries to cover most of the details of linear regression, but also includes polynomial regression, which is linear regression with polynomial features, It's also possible to think of it as a linear regression with a feature space mapping (aka a polynomial kernel). I will try to dedicate a seperate post for polynomial features and polynomial regression, but all you need to know ahead here is that the time series data of the Covid-19 cases is not linear, it can have various shapes, particularly for the daily changes per status data, the others are fairly linear especially the 'Confirmed' and 'Deaths', but of course they are if we are looking at the cumulative count, as seen below (click the 'Confirmed' or 'Deaths' button). But if you look at the daily changes data (also by clicking their respective buttons), it is not that linear. 
+=======
+The next analysis I wanted to work on is trying to predict the number of cases per status (Confirmed, Recovered, Active, Deaths). I opted for Linear regression to conduct such analysis. If you haven't read my blog post on linear regression read it [here](https://arebimohammed.github.io/linear-regression-all-you-need-to-know/). The blog posts tries to cover most of the details of linear regression, but also includes polynomial regression, which is linear regression with polynomial features, It's also possible to think of it as a linear regression with a feature space mapping (aka a polynomial kernel). I will try to dedicate a seperate post for polynomial features and polynomial regression, but all you need to know ahead here is that the time series data of the Covid-19 cases is not linear, it can have various shapes, particularly for the daily changes per status data, the others are fairly linear especially the 'Confirmed' and 'Deaths', but of course they are if we are looking at the cumulative count, as seen below (click the 'Confirmed' or 'Deaths' button). But if you look at the daily changes data (also by clicking their respective buttons), it is not that linear. 
+>>>>>>> 76b53bbacffa9f29ac31b13f18280e8709ee0f77
 
 <iframe src= "/posts/COVID19- An Interactive Analysis/stats_fig.html" height="525" width="100%"></iframe>
 
@@ -581,7 +586,7 @@ We can then see the results below and that the out of these 5 measures 3 were ef
 </table>
 </div>
 
-With that being said we know from [Linear Regression](https://arebimohammed.github.io/2020/03/10/Linear-Regression-All-you-need-to-know.html) that it is trying to estimate the coefficients of the input variables, these coefficients help us determine the relationship between the input variable (independent variable/predictor/feature) and the output variable (dependent variable/response/target). So I have used Linear Regression to estimate the coefficient for the 'effectiveness' of the measure as we will see below.
+With that being said we know from [Linear Regression](https://arebimohammed.github.io/linear-regression-all-you-need-to-know/) that it is trying to estimate the coefficients of the input variables, these coefficients help us determine the relationship between the input variable (independent variable/predictor/feature) and the output variable (dependent variable/response/target). So I have used Linear Regression to estimate the coefficient for the 'effectiveness' of the measure as we will see below.
 
 ```python
 # Reindexing the average cases to calculate weekly trend (difference between subsequent weeks)
@@ -678,3 +683,5 @@ We add a constant to get the intercept of the Linear Regression ($ {\alpha} $), 
 
 
 Thank you very much for reading all the way through, and I hope you enjoyed the article and hopefully we can all defeat this virus together, don't forget to check out the interactive dashboard app linked above. You can of course write me if you have any questions or just want to chat :), all my contact details are at the end of the page. See you in the next article and, Stay Safe! 
+
+</span>

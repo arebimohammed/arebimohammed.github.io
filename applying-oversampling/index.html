@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>Applying Over-Sampling Methods to Highly Imbalanced Data - Mohammed Arebi</title><meta name="Description" content="Application"><meta property="og:title" content="Applying Over-Sampling Methods to Highly Imbalanced Data" />
+<meta property="og:description" content="Application" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://arebimohammed.github.io/applying-oversampling/" /><meta property="og:image" content="https://arebimohammed.github.io/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2020-08-14T20:29:01+08:00" />
+<meta property="article:modified_time" content="2022-09-19T05:52:52+02:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://arebimohammed.github.io/logo.png"/>
+
+<meta name="twitter:title" content="Applying Over-Sampling Methods to Highly Imbalanced Data"/>
+<meta name="twitter:description" content="Application"/>
+<meta name="application-name" content="Mohammed Arebi">
+<meta name="apple-mobile-web-app-title" content="Mohammed Arebi"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://arebimohammed.github.io/applying-oversampling/" /><link rel="prev" href="https://arebimohammed.github.io/applying-under-sampling/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Applying Over-Sampling Methods to Highly Imbalanced Data",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/arebimohammed.github.io\/applying-oversampling\/"
+        },"image": ["https:\/\/arebimohammed.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "blogging, data science, machine learning, oversampling, python","wordcount":  486 ,
+        "url": "https:\/\/arebimohammed.github.io\/applying-oversampling\/","datePublished": "2020-08-14T20:29:01+08:00","dateModified": "2022-09-19T05:52:52+02:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "xxxx","logo": "https:\/\/arebimohammed.github.io\/images\/avatar.png"},"author": {
+                "@type": "Person",
+                "name": "Mohammed Arebi"
+            },"description": "Application"
+    }
+    </script></head>
+    <body header-desktop="auto" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Mohammed Arebi"><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/about/about-me"> About </a><a class="menu-item" href="/resume/my-resume"> Resume </a><a class="menu-item" href="/projects/my-projects"> Projects </a><a class="menu-item" href="https://github.com/arebimohammed" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Mohammed Arebi"><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/about/about-me" title="">About</a><a class="menu-item" href="/resume/my-resume" title="">Resume</a><a class="menu-item" href="/projects/my-projects" title="">Projects</a><a class="menu-item" href="https://github.com/arebimohammed" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">Applying Over-Sampling Methods to Highly Imbalanced Data</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Mohammed Arebi</a></span>&nbsp;<span class="post-category">included in <a href="/categories/data-preprocessing/"><i class="far fa-folder fa-fw"></i>Data Preprocessing</a>&nbsp;<a href="/categories/machine-learning/"><i class="far fa-folder fa-fw"></i>Machine Learning</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-08-14">2020-08-14</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;486 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;3 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/Upsampling%20Applications/oversampling.png"
+        data-srcset="/posts/Upsampling%20Applications/oversampling.png, /posts/Upsampling%20Applications/oversampling.png 1.5x, /posts/Upsampling%20Applications/oversampling.png 2x"
+        data-sizes="auto"
+        alt="/posts/Upsampling Applications/oversampling.png"
+        title="Application" /></div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#oversampling-methods">Oversampling Methods</a></li>
+        <li><a href="#application-with-python">Application with Python</a></li>
+        <li><a href="#conclusion">Conclusion</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><span style="font-size:1.125rem">
+<p>I mentioned various undersampling approaches for dealing with highly imbalanced data in the earlier post <a href="https://arebimohammed.github.io/applying-under-sampling/" target="_blank" rel="noopener noreffer">&ldquo;Applying Under-Sampling Methods to Highly Imbalanced Data&rdquo;</a> In this article, I present oversampling strategies for dealing with the same problem.</p>
+<p>By reproducing minority class examples, oversampling raises the weight of the minority class. Although it does not provide information, it introduces the issue of over-fitting, which causes the model to be overly specific. It is possible that while the accuracy for the training set is great, the performance for unseen datasets is poor.</p>
+<h3 id="oversampling-methods">Oversampling Methods</h3>
+<ol>
+<li><strong>Random Oversampling of the minority class</strong></li>
+</ol>
+<p>Random oversampling just replicates the minority class instances at random. Overfitting is thought to be more likely when random oversampling is used. Random undersampling, on the other hand, has the main disadvantage of discarding useful data.</p>
+<ol start="2">
+<li><strong>Synthetic Minority Oversampling Technique (SMOTE)</strong></li>
+</ol>
+<p>Chawla et al. (2002) present the Synthetic Minority Over-sampling Technique to avoid the over-fitting problem (SMOTE). This approach, which is regarded state-of-the-art, is effective in many different applications. Based on feature space similarities between existing minority occurrences, this approach produces synthetic data. To generate a synthetic instance, it locates the K-nearest neighbours of each minority instance, chooses one at random, and then performs linear interpolations to generate a new minority instance in the neighbourhood.</p>
+<ol start="3">
+<li><strong>ADASYN: Adaptive Synthetic Sampling</strong></li>
+</ol>
+<p>Motivated by SMOTE, He et al. (2009) introduce and garner widespread attention for the Adaptive Synthetic sampling (ADASYN) approach.</p>
+<p>ADASYN creates minority class samples based on their density distributions. More synthetic data is generated for minority class samples that are more difficult to learn than for minority class samples that are easier to learn. It computes each minority instance&rsquo;s K-nearest neighbours, then uses the class ratio of the minority and majority examples to produce new samples. Repeating this method adaptively adjusts the decision boundary to focus on difficult-to-learn instances.</p>
+<h3 id="application-with-python">Application with Python</h3>
+<p>The three oversampling strategies are demonstrated below. The code can be found on my <a href="https://github.com/arebimohammed/code-for-articles" target="_blank" rel="noopener noreffer">github</a> page.</p>
+<br>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">imblearn.over_sampling</span> <span class="kn">import</span> <span class="p">(</span><span class="n">RandomOverSampler</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">                                    <span class="n">SMOTE</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">                                    <span class="n">ADASYN</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># RandomOverSampler</span>
+</span></span><span class="line"><span class="cl">  <span class="c1"># With over-sampling methods, the number of samples in a class</span>
+</span></span><span class="line"><span class="cl">  <span class="c1"># should be greater or equal to the original number of samples.</span>
+</span></span><span class="line"><span class="cl"><span class="n">sampler</span> <span class="o">=</span> <span class="n">RandomOverSampler</span><span class="p">(</span><span class="n">sampling_strategy</span><span class="o">=</span><span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="mi">2590</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span> <span class="mi">300</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="n">X_rs</span><span class="p">,</span> <span class="n">y_rs</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">fit_resample</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;RandomOverSampler </span><span class="si">{</span><span class="n">Counter</span><span class="p">(</span><span class="n">y_rs</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">plot_data</span><span class="p">(</span><span class="n">X_rs</span><span class="p">,</span><span class="n">y_rs</span><span class="p">,</span> <span class="s1">&#39;Random Oversampling&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># SMOTE</span>
+</span></span><span class="line"><span class="cl"><span class="n">sampler</span> <span class="o">=</span> <span class="n">SMOTE</span><span class="p">(</span><span class="n">sampling_strategy</span><span class="o">=</span><span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="mi">2590</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span> <span class="mi">300</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="n">X_rs</span><span class="p">,</span> <span class="n">y_rs</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">fit_resample</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;SMOTE </span><span class="si">{</span><span class="n">Counter</span><span class="p">(</span><span class="n">y_rs</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">plot_data</span><span class="p">(</span><span class="n">X_rs</span><span class="p">,</span><span class="n">y_rs</span><span class="p">,</span><span class="s1">&#39;SMOTE&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># ADASYN</span>
+</span></span><span class="line"><span class="cl"><span class="n">sampler</span> <span class="o">=</span> <span class="n">ADASYN</span><span class="p">(</span><span class="n">sampling_strategy</span><span class="o">=</span><span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="mi">2590</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span> <span class="mi">300</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="n">X_rs</span><span class="p">,</span> <span class="n">y_rs</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">fit_resample</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;ADASYN </span><span class="si">{</span><span class="n">Counter</span><span class="p">(</span><span class="n">y_rs</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">plot_data</span><span class="p">(</span><span class="n">X_rs</span><span class="p">,</span><span class="n">y_rs</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><pre><code>RandomOverSampler Counter({1: 2590, 0: 300})
+</code></pre>
+<img style = "width: 100%" src = "/posts/Upsampling Applications/data_rs.png">
+<pre><code>SMOTE Counter({1: 2590, 0: 300})
+</code></pre>
+<img style = "width: 100%" src = "/posts/Upsampling Applications/data_smt.png">
+<pre><code>ADASYN Counter({0: 2604, 1: 2589})
+</code></pre>
+<img style = "width: 100%" src = "/posts/Upsampling Applications/data_adsn.png">
+<p>The previous article <a href="https://arebimohammed.github.io/applying-under-sampling/" target="_blank" rel="noopener noreffer">Applying Under-Sampling Methods to Highly Imbalanced Data</a> along with this article together can give you a comprehensive view of both the undersampling and oversampling techniques!</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>I hope this post has helped you better grasp this subject. Thank you very much for reading! 😄
+</span></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://arebimohammed.github.io/applying-oversampling/" data-title="Applying Over-Sampling Methods to Highly Imbalanced Data" data-hashtags="blogging,data science,machine learning,oversampling,python"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://arebimohammed.github.io/applying-oversampling/" data-hashtag="blogging"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://arebimohammed.github.io/applying-oversampling/"><i class="fab fa-linkedin fa-fw"></i></a><a href="javascript:void(0);" title="Share on WhatsApp" data-sharer="whatsapp" data-url="https://arebimohammed.github.io/applying-oversampling/" data-title="Applying Over-Sampling Methods to Highly Imbalanced Data" data-web><i class="fab fa-whatsapp fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/blogging/">blogging</a>,&nbsp;<a href="/tags/data-science/">data science</a>,&nbsp;<a href="/tags/machine-learning/">machine learning</a>,&nbsp;<a href="/tags/oversampling/">oversampling</a>,&nbsp;<a href="/tags/python/">python</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/applying-under-sampling/" class="prev" rel="prev" title="Applying Under-Sampling Methods to Highly Imbalanced Data"><i class="fas fa-angle-left fa-fw"></i>Applying Under-Sampling Methods to Highly Imbalanced Data</a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Mohammed Arebi</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery.js@1.2.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/copy-tex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/smooth-scroll@16.1.3/dist/smooth-scroll.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.37.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.8/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.2.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery.js@1.2.0/dist/js/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lg-thumbnail.js@1.2.0/dist/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lg-zoom.js@1.2.0/dist/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.0/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/typeit@7.0.4/dist/typeit.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":30},"comment":{},"data":{"id-1":"Mohammed Arebi","id-2":"Mohammed Arebi"},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"$$","right":"$$"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"},{"display":false,"left":"$","right":"$"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":5,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

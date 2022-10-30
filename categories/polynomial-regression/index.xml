@@ -1,0 +1,18 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Polynomial Regression - Category - Mohammed Arebi</title>
+        <link>https://arebimohammed.github.io/categories/polynomial-regression/</link>
+        <description>Polynomial Regression - Category - Mohammed Arebi</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>arebi.mohamed59@gmail.com (Mohammed Arebi)</managingEditor>
+            <webMaster>arebi.mohamed59@gmail.com (Mohammed Arebi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 15 May 2020 20:29:01 &#43;0800</lastBuildDate><atom:link href="https://arebimohammed.github.io/categories/polynomial-regression/" rel="self" type="application/rss+xml" /><item>
+    <title>Polynomial Regression</title>
+    <link>https://arebimohammed.github.io/polynomial-regression/</link>
+    <pubDate>Fri, 15 May 2020 20:29:01 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://arebimohammed.github.io/polynomial-regression/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/posts/Polynomial%20Regression/poly.jpg" referrerpolicy="no-referrer">
+            </div>Introduction The data we have frequently cannot be fitted linearly, and we must use a higher degree polynomial (such as a quadratic or cubic one) to be able to fit the data. When the relationship between the dependent ($Y$) and the independent ($X$) variables is curvilinear, as seen in the following figure (generated using numpy based on a quadratic equation), we can utilise a polynomial model.
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 import pandas as pd import numpy as np import matplotlib.]]></description>
+</item></channel>
+</rss>

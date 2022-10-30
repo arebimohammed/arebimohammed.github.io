@@ -1,0 +1,17 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>undersampling - Tag - Mohammed Arebi</title>
+        <link>https://arebimohammed.github.io/tags/undersampling/</link>
+        <description>undersampling - Tag - Mohammed Arebi</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>arebi.mohamed59@gmail.com (Mohammed Arebi)</managingEditor>
+            <webMaster>arebi.mohamed59@gmail.com (Mohammed Arebi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 12 Aug 2020 20:29:01 &#43;0800</lastBuildDate><atom:link href="https://arebimohammed.github.io/tags/undersampling/" rel="self" type="application/rss+xml" /><item>
+    <title>Applying Under-Sampling Methods to Highly Imbalanced Data</title>
+    <link>https://arebimohammed.github.io/applying-under-sampling/</link>
+    <pubDate>Wed, 12 Aug 2020 20:29:01 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://arebimohammed.github.io/applying-under-sampling/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/posts/Undersampling%20Applications/undersample.png" referrerpolicy="no-referrer">
+            </div>Class imbalance can lead to a significant bias toward the dominant class, lowering classification performance and increasing the frequency of false negatives. How can we solve the problem? The most popular strategies include data resampling, which involves either undersampling the majority of the class, oversampling the minority class, or a combination of the two. As a consequence, classification performance will improve. In this article, I will describe what unbalanced data is, why Receiver Operating Characteristic Curve (ROC) fails to measure accurately, and how to address the problem.]]></description>
+</item></channel>
+</rss>
