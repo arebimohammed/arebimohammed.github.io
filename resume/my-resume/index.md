@@ -13,21 +13,48 @@
 
 <br>
 
-# Profile
-A resourceful and extremely motivated data scientist with a proven track record of solving difficult business problems. I like work on meaningful projects and build valuable applications in the area of machine learning. Actively Building. Always Learning.
+The CV can bee found in PDF format using this link: [CV](/resume/Mohammed_Arebi_CV.pdf) 
+
+<br>
+
+# Personal Profile
+A motivated undergraduate who has excellent technical, leadership and organizational skills studying in a top university, Furtwangen University of Applied Sciences in a bachelor's degree in International Business Information Systems and a resourceful and extremely motivated Data Scientist with a proven track record of solving difficult business problems which also has great experience with Programming/Software Development, Data Analytics and Machine Learning, Financial, Education and Manufacturing work environments and businesses. Utilizing my expertise in data science I have been pivotal to supporting businesses and organizations with the tools necessary to meet their goals. I like work on meaningful projects and build valuable applications in the area of machine learning. Actively Building. Always Learning.
 
 <hr>
 
 <br>
 
-# Work Experience
+# Professional Experience
 
 <br>
+
+### Furtwangen University of Applied Science
+
+<p align="left">
+<i>Furtwangen, Germany</i>
+</p>
+<p align="left">
+<b>Data Scientist</b>
+</p>
+
+<p align="right">
+<i>May 2022 to Present</i>
+</p>
+
+- Working on the KISS (Künstliche Intelligenz Service und Systeme; Artificial Intelligence Service and Systems) project at Furtwangen University of Applied Sciences<br>
+
+    Project Link: [KISS Webpage](https://www.hs-furtwangen.de/en/research/forschungsprojekte/kiss-data-management/)
+
+- Creation of synthetic data for anomaly detection. Various data types/formats synthetically created such as time-series data with anomalies and drift, tabular data, and image data. All data was created using python and subsequent libraries, except synthetic image data which was created with the Blender 3D graphics tool along with its Python API (blenderpy).
+- Parameterization of the synthetic data creation. Various parameters created for the synthetic data creation such as the anomalies scale, percentage, if they are in chunks, one sided, or in clusters.
+- Designing and coding of a convolutional autoencoder for image anomaly detection
+- Implementation of various anomaly detection algorithms such us Isolation Forest, One-Class SVM, Autoencoders, etc.
+- Ongoing....
 
 ### TDK-Micronas      
 
 <p align="left">
-<i>Freiburg, Baden-Württemberg</i>
+<i>Freiburg, Germany</i>
 </p>
 <p align="left">
 <b>Data Scientist Intern</b>
@@ -50,10 +77,10 @@ A resourceful and extremely motivated data scientist with a proven track record 
 
 <i>Internship Certificate is in German, as the company is based in Germany. If a translation is required please write me.</i>
 
-### Furtwangen University     
+### Furtwangen University of Applied Science    
 
 <p align="left">
-<i>Furtwangen, Baden-Württemberg</i>
+<i>Furtwangen, Germany</i>
 </p>
 <p align="left">
 <b>Professor Assistant</b>
@@ -142,7 +169,7 @@ A resourceful and extremely motivated data scientist with a proven track record 
 
 <br>
 
-# Education
+# Academic Education
 
 <br>
 
@@ -156,11 +183,14 @@ A resourceful and extremely motivated data scientist with a proven track record 
 Furtwangen University of Applied Sciences<br>
 Bachelor of Science planned to be achieved: 07/2023<br>
 
-### Irish Leaving Certificate
+### Irish Leaving Certificate (Grade: 85%)
 <p align="left">
 <i>September 2014 to July 2017</i>
 </p>
 International School Of Martyrs<br>
+Activities and societies: Student Representatives Board, Teacher- Student Union, Tutoring for Elementary and Primary Students, Volunteering in emergency drills<br>
+Higher Subjects: Biology, Chemistry, Math, Physics, English, Arabic, Economics
+
 
 
 <hr>
@@ -172,7 +202,7 @@ International School Of Martyrs<br>
 <br>
 
 <b>Technical skills</b><br>
-&nbsp;&nbsp; Programming: Python, SQL, HTML, CSS, Java <br>
+&nbsp;&nbsp; Programming: Python, SQL, HTML, CSS, Java, JavaScript<br>
 &nbsp;&nbsp; Database Knowledge: MySQL <br>
 &nbsp;&nbsp; ML & Data Science: TensorFlow, PyTorch, Pandas, scikit-learn, Others.. <br>
 &nbsp;&nbsp; Data Literacy: Data Analysis, Applied Statistics <br>
@@ -202,6 +232,7 @@ International School Of Martyrs<br>
 <li>Data Science </li>
 <li>Data Analytics</li>
 <li>Data Visualisation</li>
+<li>MLOps</li>
 <li>Big Data </li>
 <li>Artificial Intelligence</li>
 <li>Blogging</li>
@@ -238,6 +269,10 @@ International School Of Martyrs<br>
 - Volunteered as a coordinator at the annual event by ‘I am Tawfik’ to raise money for orphans.
 - Design Thinking and Problem-Solving Workshops with Professor Wolfgang Grather
 - Online courses on Agile Management and Leadership
+
+<br>
+
+
 
 
 

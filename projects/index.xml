@@ -16,9 +16,8 @@
       <pubDate>Tue, 03 Mar 2020 11:04:49 +0800</pubDate>
       <author>arebi.mohamed59@gmail.com (Mohammed Arebi)</author>
       <guid>https://arebimohammed.github.io/projects/my-projects/</guid>
-      <description>
-Here are some Projects I have worked on and currently working on:
-Project Name Description Year Status Covid-19 Interactive Data Analysis In-depth analysis of the Covid-19 data. Findings presented in interactive charts. The charts are deployed on both Binder and Heroku. Blog post that talks about the project can be found here and accompanying GitHub Repo 2020 Done✔️ </description>
+      <description>Here are some Projects I have worked on and currently working on:
+Project Name Description Year Status Covid-19 Interactive Data Analysis In-depth analysis of the Covid-19 data. Findings presented in interactive charts. The charts are deployed on both Binder and Heroku. Blog post that talks about the project can be found here and accompanying GitHub Repo 2020 Done✔️ New York Yellow Taxi Dataset Analysis In-depth analysis of the New York yellow Taxi data.</description>
     </item>
     
   </channel>

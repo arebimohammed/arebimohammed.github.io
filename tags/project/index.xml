@@ -1,0 +1,17 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>project - Tag - Mohammed Arebi</title>
+        <link>https://arebimohammed.github.io/tags/project/</link>
+        <description>project - Tag - Mohammed Arebi</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>arebi.mohamed59@gmail.com (Mohammed Arebi)</managingEditor>
+            <webMaster>arebi.mohamed59@gmail.com (Mohammed Arebi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 16 Oct 2020 20:29:01 &#43;0800</lastBuildDate><atom:link href="https://arebimohammed.github.io/tags/project/" rel="self" type="application/rss+xml" /><item>
+    <title>Digging Deep Into the New York Taxi Dataset</title>
+    <link>https://arebimohammed.github.io/new-york-taxi-analysis/</link>
+    <pubDate>Fri, 16 Oct 2020 20:29:01 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://arebimohammed.github.io/new-york-taxi-analysis/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/posts/New-York-Taxi-Analysis/new-york.jpeg" referrerpolicy="no-referrer">
+            </div>This article goes in detail through one of the data science projects I worked on, the New York Taxi dataset which is made available by the New York City Taxi and Limousine Commission (TLC). New York is partly known for its yellow taxis (even though there are green taxis we&rsquo;ll focus on only the yellow taxis) and there are millions of taxi rides taken every month as New York is one of the most populous cities in the United States which makes for a very interesting dataset to dive into as there are a lot of analysis possibilities (Geospatial Data Analysis, Time Analysis, Taxi Ride Price Analysis, Traffic Analysis, etc.]]></description>
+</item></channel>
+</rss>
