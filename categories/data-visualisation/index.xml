@@ -12,7 +12,7 @@
     <guid>https://arebimohammed.github.io/new-york-taxi-analysis/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/posts/New-York-Taxi-Analysis/new-york.jpeg" referrerpolicy="no-referrer">
-            </div>This article goes in detail through one of the data science projects I worked on, the New York Taxi dataset which is made available by the New York City Taxi and Limousine Commission (TLC). New York is partly known for its yellow taxis (even though there are green taxis we&rsquo;ll focus on only the yellow taxis) and there are millions of taxi rides taken every month as New York is one of the most populous cities in the United States which makes for a very interesting dataset to dive into as there are a lot of analysis possibilities (Geospatial Data Analysis, Time Analysis, Taxi Ride Price Analysis, Traffic Analysis, etc.]]></description>
+            </div>An open-source exploration of the city's taxi life, boroughs, neighborhoods, and more via the prism of publicly available taxi data]]></description>
 </item><item>
     <title>COVID-19: An Interactive Analysis</title>
     <link>https://arebimohammed.github.io/covid19-interactive-analysis/</link>

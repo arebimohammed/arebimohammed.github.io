@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>Confounding Variables in Regression Analysis - Mohammed Arebi</title><meta name="Description" content="This articles provides a detailed explanation with examples to the concept of confounding"><meta property="og:title" content="Confounding Variables in Regression Analysis" />
+<meta property="og:description" content="This articles provides a detailed explanation with examples to the concept of confounding" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://arebimohammed.github.io/confounding-variables/" /><meta property="og:image" content="https://arebimohammed.github.io/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2020-10-30T20:29:01+08:00" />
+<meta property="article:modified_time" content="2022-11-01T08:12:56+01:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://arebimohammed.github.io/logo.png"/>
+
+<meta name="twitter:title" content="Confounding Variables in Regression Analysis"/>
+<meta name="twitter:description" content="This articles provides a detailed explanation with examples to the concept of confounding"/>
+<meta name="application-name" content="Mohammed Arebi">
+<meta name="apple-mobile-web-app-title" content="Mohammed Arebi"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://arebimohammed.github.io/confounding-variables/" /><link rel="prev" href="https://arebimohammed.github.io/new-york-taxi-analysis/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Confounding Variables in Regression Analysis",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/arebimohammed.github.io\/confounding-variables\/"
+        },"image": ["https:\/\/arebimohammed.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "blogging, data science, machine learning, python, data analysis","wordcount":  2603 ,
+        "url": "https:\/\/arebimohammed.github.io\/confounding-variables\/","datePublished": "2020-10-30T20:29:01+08:00","dateModified": "2022-11-01T08:12:56+01:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "xxxx","logo": "https:\/\/arebimohammed.github.io\/images\/avatar.png"},"author": {
+                "@type": "Person",
+                "name": "Mohammed Arebi"
+            },"description": "This articles provides a detailed explanation with examples to the concept of confounding"
+    }
+    </script></head>
+    <body header-desktop="auto" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Mohammed Arebi"><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/about/about-me"> About </a><a class="menu-item" href="/resume/my-resume"> Resume </a><a class="menu-item" href="/projects/my-projects"> Projects </a><a class="menu-item" href="https://github.com/arebimohammed" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Mohammed Arebi"><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/about/about-me" title="">About</a><a class="menu-item" href="/resume/my-resume" title="">Resume</a><a class="menu-item" href="/projects/my-projects" title="">Projects</a><a class="menu-item" href="https://github.com/arebimohammed" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">Confounding Variables in Regression Analysis</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Mohammed Arebi</a></span>&nbsp;<span class="post-category">included in <a href="/categories/data-analysis/"><i class="far fa-folder fa-fw"></i>Data Analysis</a>&nbsp;<a href="/categories/machine-learning/"><i class="far fa-folder fa-fw"></i>Machine Learning</a>&nbsp;<a href="/categories/tutorial/"><i class="far fa-folder fa-fw"></i>Tutorial</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-10-30">2020-10-30</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;2603 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;13 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/Confounding%20Variables%20In%20Regression%20Analysis/confounding.jpg"
+        data-srcset="/posts/Confounding%20Variables%20In%20Regression%20Analysis/confounding.jpg, /posts/Confounding%20Variables%20In%20Regression%20Analysis/confounding.jpg 1.5x, /posts/Confounding%20Variables%20In%20Regression%20Analysis/confounding.jpg 2x"
+        data-sizes="auto"
+        alt="/posts/Confounding Variables In Regression Analysis/confounding.jpg"
+        title="This articles provides a detailed explanation with examples to the concept of confounding" /></div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#introduction">Introduction</a>
+      <ul>
+        <li><a href="#what-does-confounding-mean">What does confounding mean?</a></li>
+      </ul>
+    </li>
+    <li><a href="#how-does-confounding-occur">How does confounding occur?</a>
+      <ul>
+        <li><a href="#identifying-confounding">Identifying confounding</a></li>
+      </ul>
+    </li>
+    <li><a href="#residual-confounding">Residual Confounding</a></li>
+    <li><a href="#confounding-and-predictive-accuracy">Confounding and Predictive Accuracy</a></li>
+    <li><a href="#example-on-king-county-housing-data">Example on King County Housing Data</a></li>
+    <li><a href="#checking-confounding-with-lung-capacity-dataset">Checking Confounding with Lung Capacity Dataset</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><span style="font-size:1.125rem">
+<h2 id="introduction">Introduction</h2>
+<p>In today&rsquo;s article I will be writing about the concept of confounding variables and also include code examples with two datasets as an example. In classical statistics, confounding variable is a critical concept since it can distort our view about input variables and outcome variable&rsquo;s relationship, while confounding is not a frequent topic that shows up in machine learning and predictive analysis even though it is an important concept that should be understood to fully comprehend regression analysis.</p>
+<h3 id="what-does-confounding-mean">What does confounding mean?</h3>
+<p>Let&rsquo;s start by defining what the word confounding means and according to Oxford confounding means to mix up something, which explains the concept well as confounding happens when the effect of our variable of interest is stuck together or mixed with or confounded with another variable. Basically a confounding variable is a type of extraneous variable that is related to both the independent and dependent variables and it must meet two conditions to be a confounder which are:</p>
+<ul>
+<li>It must be correlated with the independent variable. This may be a causal relationship, but it does not have to be.</li>
+<li>It must be causally related to the dependent variable</li>
+</ul>
+<p>So let&rsquo;s say we have our dependent variable $y$ and two other independent variables $X_1$ and $X_2$, with the help of a diagram we can further understand confounding.</p>
+<img src = "/posts/Confounding Variables In Regression Analysis/confounding_diagram.png" height= "200px" width="100%">
+<p>So we&rsquo;re going to recall when fitting a regression model (check my article on Linear Regression <a href="/linear-regression-all-you-need-to-know" rel="">here</a>), we get the equation $y = {\beta}_0 + {\beta}_1X_1$ and that the learned parameter ${\beta}_1$ tells us what effect does $X_1$ have on the outcome ($y$), we update the diagram to indicate where this learned parameter lies:</p>
+<img src = "/posts/Confounding Variables In Regression Analysis/confounding_diagram2.png" height= "200px" width="100%">
+<p>Now there might be some other variable, $X_2$, that&rsquo;s associated with $X_1$ as portrayed in the diagram, and it can be distorting the effect of $X_1$ on $y$ because these two effects can be stuck together. So the effect that $X_1$ has on y and the effect that $X_2$ has on y are a little bit stuck together as shown here:</p>
+<img src = "/posts/Confounding Variables In Regression Analysis/confounding_diagram3.png" height= "200px" width="100%">
+<p>And this happens when $X_2$ is not included in the model. So let&rsquo;s just think of this example dataset (we&rsquo;ll explore it later). We have an age variable, we have a smoking variable, and we have the FEV or forced expiratory volume which measures how much air a person can exhale during a forced breath (in other words a persons lung capacity). Both the age and smoking variables are our independent variables and the FEV will be our dependent variable we are trying to predict, portrayed in the diagram as such:</p>
+<img src = "/posts/Confounding Variables In Regression Analysis/confounding_diagram4.png" height= "200px" width="100%">
+<p>And our goal here is to try and estimate what effect the smoking has on the lung capacity of these people. Now let&rsquo;s suppose that age is not included in the model. And lets say we discovered from analyzing this dataset is that these smokers are older on average than the non-smokers. This data set is kids ranging from 3 to 19 years old. So the 3, 4, 5, 6, 7, 8, etc. years olds are non-smokers. So the non-smokers on average are younger. And what do we know about this? Younger kids have smaller bodies i.e. smaller lung capacities. Older kids have bigger bodies, bigger lung capacities. The smokers are older on average. So the effect of smoking and the effect of age are going to be a bit stuck together if we don&rsquo;t include age in the model. When we include age in the model then the equation of the model changes to $y = {\beta}_0 + {\beta}_1X_1 + {\beta}_2X_2$. Then the coefficient/parameter ${\beta}_1$, gives us what&rsquo;s the effect of smoking on FEV <b>adjusting</b> for the age. So we&rsquo;re comparing the smoking effect for two people who are the same age. With this in mind we can ask ourselves how can confounding occur?</p>
+<h2 id="how-does-confounding-occur">How does confounding occur?</h2>
+<p>The way confounding can occur (in the example given; applicable to any regression model) is if the age variable ($X_2$) distribution is different for smoking and non-smoking ($X_1$). But how can we identify that is actually occurred?</p>
+<h3 id="identifying-confounding">Identifying confounding</h3>
+<p>Some of the ways in identifying confounding are:</p>
+<ul>
+<li>$X_2$ and $X_1$ are associated (some association between the variables)</li>
+<li>$X_2$ is also associated with the outcome ($y$)</li>
+<li>$X_2$ is not on the &ldquo;pathway&rdquo; between $X_1$ and $y$, what is meant by that is that $X_1$ doesn&rsquo;t have a direct effect on $X_2$ which then has an effect on the outcome $y$ shown here:</li>
+</ul>
+<img src = "/posts/Confounding Variables In Regression Analysis/confounding_diagram5.png" height= "100px" width="100%">
+<p>this is called mediation and $X_2$ in this case is a mediator. And we&rsquo;re saying that confounding cannot occur when $X_1$ directly effects $X_2$ WHICH THEN effects the outcome $y$.</p>
+<ul>
+<li>It makes sense conceptually. What is meant by this is that we don&rsquo;t want to just see that numerically (possibly via correlation) our variables ($X_1$ and $X_2$) are associated but that the association should make sense conceptually. Does it make sense that the age distribution of smokers and non-smokers would be different? And I&rsquo;d say yes, I think it does. If we&rsquo;re looking at a group of kids as they get older, they&rsquo;re more likely to smoke. Doesn&rsquo;t mean they&rsquo;re going to, but that association makes sense. And for the second point. Does it make sense that age has an effect on lung capacity? Yes, it does. As kids get older, their bodies get bigger and their lungs should get bigger as well.</li>
+<li>When we adjust for $X_2$ (including it in the model), tha parameter ${\beta}_1$ changes significantly, there is no rule for how much should it change but the idea is that it shouldn&rsquo;t stay the same and it should change a decent amount (if there wasn&rsquo;t confounding it will most probably stay the same because most of the loss functions used to estimate the coefficients have a global minimum and are convex, so there is only one solution to the regression estimation problem). This tells us that some of the $X_2$ effect was mixed in to the $X_1$ effect.</li>
+</ul>
+<h2 id="residual-confounding">Residual Confounding</h2>
+<p>Residual confounding is the bias/distortion that is still left over even after we adjust for the variable (age in our case, $X_2$). This often happens when binning (categorizing) our variable, for example say instead of the actual age we have a categorical variable, age category/group that is in ranges such as 0-4, 5-10, 11-20, etc. Including this variable in the model will help in adjusting for age a bit but it&rsquo;s not going to be a very good adjustment there is still going to be some confounding (age confounding) left over even after we have adjusted for age in some way.</p>
+<h2 id="confounding-and-predictive-accuracy">Confounding and Predictive Accuracy</h2>
+<p>During my learning journey I ran into this &ldquo;problem&rdquo; a couple of times so it is extremely important to understand and have a good grasp on the topic to be able to efficiently deal with it whenever it arises.</p>
+<p>You see in the previous paragraph I put the word problem between two quotation marks, this is because confounding is usually regarded as a negative effect and as it should be but at the same time it can also assist the analyst in understanding the data and the variables more, it depends from what angle you&rsquo;d like to see the problem, nevertheless objectively for measuring effect sizes it is an issue. I mention here effect sizes not predictive accuracy as confounding only affects effect sizes and not predictions. Confounding is less of an issue while making prediction since we are not interested in determining the exact effect of one variable on another. We just want to know what the most probable value of a dependent variable is given a collection of predictors. So for example, suppose that we would like to estimate to what degree a person&rsquo;s age effects their salary. So we can estimate the model: $salary_i={\beta}_0+{\beta}_1age_i$. It is very likely that ${\beta}_1$ in the equation above will be positive and fairly large, because older people tend to have more education and more work experience. So if we wish pin-point the link between age and salary (effect size), we should probably control for these confounders, estimating the model:
+$${\beta}_0+{\beta^*}_1age_i+{\beta}_2education_i+{\beta}_3experience_i$$</p>
+<p>It is very likely that $${\beta}^* &lt; {\beta}_1$$ and that ${\beta}^*$ will be a much better estimator for the pure effect of age on one&rsquo;s earnings. That, in the sense of &ldquo;change someone&rsquo;s age and keep EVERYTHING else fixed&rdquo;. However, since age is highly correlated with education and experience, the first model might just be good enough for predicting a person&rsquo;s salary</p>
+<p><b>Note:</b> Confounding is a problem for prediction when the confounding relationship changes. This is a common problem for ML models in production. E.g., see <a href="https://www.wired.com/2015/10/can-learn-epic-failure-google-flu-trends/" target="_blank" rel="noopener noreffer">What We Can Learn From the Epic Failure of Google Flu Trends</a></p>
+<h2 id="example-on-king-county-housing-data">Example on King County Housing Data</h2>
+<p>The data can be found in King County&rsquo;s official public data website <a href="https://kingcounty.gov/services/data.aspx" target="_blank" rel="noopener noreffer">here</a>, data was downloaded from 2014-15. We&rsquo;ll start first by applying a linear regression model to predict the house price using these predictors/features: AdjSalePrice, SqFtTotLiving, SqFtLot, Bathrooms, Bedrooms, BldgGrade. All code can be found <a href="https://github.com/arebimohammed/code-for-articles/tree/master/Confounding%20Variables" target="_blank" rel="noopener noreffer">here</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">r2_score</span><span class="p">,</span> <span class="n">mean_squared_error</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&#34;data/king_county.csv&#34;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&#34;</span><span class="se">\t</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">predictors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;AdjSalePrice&#39;</span><span class="p">,</span> <span class="s1">&#39;SqFtTotLiving&#39;</span><span class="p">,</span> <span class="s1">&#39;SqFtLot&#39;</span><span class="p">,</span> <span class="s1">&#39;Bathrooms&#39;</span><span class="p">,</span> <span class="s1">&#39;Bedrooms&#39;</span><span class="p">,</span> <span class="s1">&#39;BldgGrade&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">outcome</span> <span class="o">=</span> <span class="s1">&#39;AdjSalePrice&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">data</span><span class="p">[</span><span class="n">predictors</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>SqFtTotLiving</th>
+      <th>SqFtLot</th>
+      <th>Bathrooms</th>
+      <th>Bedrooms</th>
+      <th>BldgGrade</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>2400</td>
+      <td>9373</td>
+      <td>3.00</td>
+      <td>6</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3764</td>
+      <td>20156</td>
+      <td>3.75</td>
+      <td>4</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2060</td>
+      <td>26036</td>
+      <td>1.75</td>
+      <td>4</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>3200</td>
+      <td>8618</td>
+      <td>3.75</td>
+      <td>5</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>1720</td>
+      <td>8620</td>
+      <td>1.75</td>
+      <td>4</td>
+      <td>7</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">model</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">predictors</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="n">outcome</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Intercept: </span><span class="si">{</span><span class="n">model</span><span class="o">.</span><span class="n">intercept_</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Coefficients:&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">coef</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">predictors</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">coef_</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39; </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">coef</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><pre><code>Intercept: -521871.368
+Coefficients:
+SqFtTotLiving: 228.8306036024076
+SqFtLot: -0.06046682065307258
+Bathrooms: -19442.840398320994
+Bedrooms: -47769.955185214334
+BldgGrade: 106106.96307898096
+</code></pre>
+<p>The issue with confounding variables is one of omission: a key variable is missing from the regression equation. An improper interpretation of the equation coefficients might result in incorrect findings. Taking for example our dataset and model, the regression coefficients of SqFtLot, Bathrooms, and Bedrooms are all negative. The regression model does not contain a variable to represent location which is a very important predictor of house price. To model location, I&rsquo;ll include a variable zip group that categorizes the zip code into one of five groups, from least expensive (0) to most expensive (4) (There are 80 zip codes in King County, several with just a handful of sales. An alternative to directly using zip code as a categorical variable, zip group clusters similar zip codes into a single group).</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">zip_groups</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span>
+</span></span><span class="line"><span class="cl">    <span class="o">*</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;ZipCode&#39;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;ZipCode&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;residual&#39;</span> <span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="n">outcome</span><span class="p">]</span> <span class="o">-</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">predictors</span><span class="p">]),</span>
+</span></span><span class="line"><span class="cl">    <span class="p">})</span>
+</span></span><span class="line"><span class="cl">    <span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;ZipCode&#39;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">    <span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;ZipCode&#39;</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;count&#39;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;median_residual&#39;</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">residual</span><span class="o">.</span><span class="n">median</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="p">])</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;median_residual&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">zip_groups</span><span class="p">[</span><span class="s1">&#39;cum_count&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">zip_groups</span><span class="p">[</span><span class="s1">&#39;count&#39;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="n">zip_groups</span><span class="p">[</span><span class="s1">&#39;ZipGroup&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">qcut</span><span class="p">(</span><span class="n">zip_groups</span><span class="p">[</span><span class="s1">&#39;cum_count&#39;</span><span class="p">],</span> <span class="mi">5</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">retbins</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">to_join</span> <span class="o">=</span> <span class="n">zip_groups</span><span class="p">[[</span><span class="s1">&#39;ZipCode&#39;</span><span class="p">,</span> <span class="s1">&#39;ZipGroup&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;ZipCode&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">to_join</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;ZipCode&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">data</span><span class="p">[</span><span class="s1">&#39;ZipGroup&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;ZipGroup&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>We have added this new grouping feature to our dataset</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">new_predictors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;SqFtTotLiving&#39;</span><span class="p">,</span> <span class="s1">&#39;SqFtLot&#39;</span><span class="p">,</span> <span class="s1">&#39;Bathrooms&#39;</span><span class="p">,</span> <span class="s1">&#39;Bedrooms&#39;</span><span class="p">,</span> <span class="s1">&#39;BldgGrade&#39;</span><span class="p">,</span> <span class="s1">&#39;PropertyType&#39;</span><span class="p">,</span> <span class="s1">&#39;ZipGroup&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">outcome</span> <span class="o">=</span> <span class="s1">&#39;AdjSalePrice&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">X</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">new_predictors</span><span class="p">],</span> <span class="n">drop_first</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">confounding_model</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">confounding_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="n">outcome</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Intercept: </span><span class="si">{</span><span class="n">confounding_model</span><span class="o">.</span><span class="n">intercept_</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Coefficients:&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">coef</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span> <span class="n">confounding_model</span><span class="o">.</span><span class="n">coef_</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39; </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">coef</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><pre><code>Intercept: -666637.469
+Coefficients:
+SqFtTotLiving: 210.61266005580183
+SqFtLot: 0.4549871385465901
+Bathrooms: 5928.425640001864
+Bedrooms: -41682.871840744745
+BldgGrade: 98541.18352725943
+PropertyType_Single Family: 19323.625287919334
+PropertyType_Townhouse: -78198.72092762386
+ZipGroup_1: 53317.173306597986
+ZipGroup_2: 116251.58883563547
+ZipGroup_3: 178360.53178793367
+ZipGroup_4: 338408.60185652017
+</code></pre>
+<p>ZipGroup 0 is not there as we did <code>drop_first = True</code>.</p>
+<p>ZipGroup is certainly a key variable: a house in the most expensive zip code group is expected to sell for a higher sales price by almost 340,000 dollars. The SqFtLot and Bathrooms coefficients are now positive, and adding a bathroom raises the sale price by 5,928 dollars. Bedrooms&rsquo; coefficient is still negative. While this may appear odd, it is a well-known phenomena in real estate. Having more and hence smaller bedrooms is connected with less value houses for homes of the same living size and number of bathrooms.</p>
+<h2 id="checking-confounding-with-lung-capacity-dataset">Checking Confounding with Lung Capacity Dataset</h2>
+<p>The data can be found in Kaggle <a href="https://www.kaggle.com/datasets/radhakrishna4/lung-capacity?select=LungCap.xls" target="_blank" rel="noopener noreffer">here</a>.</p>
+<p>We&rsquo;ll use ths dataset to check and see if age seems to be confounding the effect of smoking on FEV (lung capacity). The first thing we can do is check if the age distribution is similar or different for smokers or non-smokers, in other words is there an association between age and smoking. To visually examine this we can look at a boxplot which is usually a good way to check for association between different groups and a numerical variable.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">lung</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&#34;data/lung.txt&#34;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&#34;</span><span class="se">\t</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">plotly.express</span> <span class="k">as</span> <span class="nn">px</span>
+</span></span><span class="line"><span class="cl"><span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">box</span><span class="p">(</span><span class="n">lung</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&#34;Smoke&#34;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&#34;Age&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><iframe src= "/posts/Confounding Variables In Regression Analysis/fig.html" height="525" width="100%"></iframe>
+<p>And here we can see that the smokers are much older on average than the non-smokers so there does appear an association. If we think about it, what direction would the association go in? Does age affect smoking? Or does smoking affect age? Well of course age is going to affect smoking and not the opposite and does this association make sense conceptually aside from being numerically present in the data? Sure it does, as explained above as kids get older they are more likely to become a smoker.</p>
+<p>Now we can check if age is associated with FEV, to visually explore this we can plot a scatter plot (two numerical variables).</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">lung</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span> <span class="s2">&#34;Age&#34;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span> <span class="s2">&#34;LungCap&#34;</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="p">{</span><span class="s2">&#34;LungCap&#34;</span><span class="p">:</span> <span class="s2">&#34;FEV&#34;</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><iframe src= "/posts/Confounding Variables In Regression Analysis/fig2.html" height="525" width="100%"></iframe>
+<p>We can see a pretty strong association here, we can also quantify that numerically:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">lung</span><span class="o">.</span><span class="n">Age</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">lung</span><span class="o">.</span><span class="n">LungCap</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><pre><code>0.8196748974989415
+</code></pre>
+<p>Again a pretty strong association/correlation. And what would the direction of this association, well lung capacity can&rsquo;t have an effect on your age and it&rsquo;s going to be that age that has an effect on lung capacity, getting older means the lung capacity gets larger. Does this association make sense conceptually? Again yes it does.</p>
+<p>Now let&rsquo;s fit a linear regression model that includes age so we can adjust for it statistically:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span> <span class="c1">#Use statsmodels for R style summary</span>
+</span></span><span class="line"><span class="cl"><span class="nb">vars</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Age&#39;</span><span class="p">,</span> <span class="s1">&#39;Smoke&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">X</span><span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">lung</span><span class="p">[</span><span class="nb">vars</span><span class="p">],</span> <span class="n">drop_first</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">model_adj</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span><span class="n">lung</span><span class="p">[</span><span class="s1">&#39;LungCap&#39;</span><span class="p">],</span> <span class="n">X</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">const</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">res</span> <span class="o">=</span> <span class="n">model_adj</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">res</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>         <td>LungCap</td>     <th>  R-squared:         </th> <td>   0.677</td> 
+</tr>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.676</td> 
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   757.5</td> 
+</tr>
+<tr>
+  <th>Date:</th>             <td>Tue, 01 Nov 2022</td> <th>  Prob (F-statistic):</th> <td>4.97e-178</td>
+</tr>
+<tr>
+  <th>Time:</th>                 <td>07:42:47</td>     <th>  Log-Likelihood:    </th> <td> -1328.1</td> 
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td>   725</td>      <th>  AIC:               </th> <td>   2662.</td> 
+</tr>
+<tr>
+  <th>Df Residuals:</th>          <td>   722</td>      <th>  BIC:               </th> <td>   2676.</td> 
+</tr>
+<tr>
+  <th>Df Model:</th>              <td>     2</td>      <th>                     </th>     <td> </td>    
+</tr>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>    
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+      <td></td>         <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Age</th>       <td>    0.5554</td> <td>    0.014</td> <td>   38.628</td> <td> 0.000</td> <td>    0.527</td> <td>    0.584</td>
+</tr>
+<tr>
+  <th>Smoke_yes</th> <td>   -0.6486</td> <td>    0.187</td> <td>   -3.473</td> <td> 0.001</td> <td>   -1.015</td> <td>   -0.282</td>
+</tr>
+<tr>
+  <th>const</th>     <td>    1.0857</td> <td>    0.183</td> <td>    5.933</td> <td> 0.000</td> <td>    0.726</td> <td>    1.445</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+  <th>Omnibus:</th>       <td> 0.325</td> <th>  Durbin-Watson:     </th> <td>   1.808</td>
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.850</td> <th>  Jarque-Bera (JB):  </th> <td>   0.411</td>
+</tr>
+<tr>
+  <th>Skew:</th>          <td>-0.039</td> <th>  Prob(JB):          </th> <td>   0.814</td>
+</tr>
+<tr>
+  <th>Kurtosis:</th>      <td> 2.912</td> <th>  Cond. No.          </th> <td>    44.8</td>
+</tr>
+</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+<p>The coefficient for smoking is now -0.6486, so the interpretation for this would be that for someone who smokes we would expect the mean FEV to be 0.65 litres lower than a non-smoker when we adjust for age. Another way to phrase this is if we take two people who are the same age, on average we&rsquo;d expect the smoker&rsquo;s lung capacity to be 0.65 liters lower than the non-smoker. This is what we mean by statistically adjusting for age or statistically adjusting for this confounder.</p>
+<p>I also fitted a linear regression model without the age variable and got a coefficient of 0.87 for the smoking variable which shows the negative effect of confounding in interpreting the model coefficients and effect sizes (even though we get the same predictions).</p>
+<p>Multicollinearity is another closely related topic to confounding that I will also write about in the future. For now this is it.</p>
+<p>Thank you for reading and until next time.</p>
+</span></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://arebimohammed.github.io/confounding-variables/" data-title="Confounding Variables in Regression Analysis" data-hashtags="blogging,data science,machine learning,python,data analysis"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://arebimohammed.github.io/confounding-variables/" data-hashtag="blogging"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://arebimohammed.github.io/confounding-variables/"><i class="fab fa-linkedin fa-fw"></i></a><a href="javascript:void(0);" title="Share on WhatsApp" data-sharer="whatsapp" data-url="https://arebimohammed.github.io/confounding-variables/" data-title="Confounding Variables in Regression Analysis" data-web><i class="fab fa-whatsapp fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/blogging/">blogging</a>,&nbsp;<a href="/tags/data-science/">data science</a>,&nbsp;<a href="/tags/machine-learning/">machine learning</a>,&nbsp;<a href="/tags/python/">python</a>,&nbsp;<a href="/tags/data-analysis/">data analysis</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/new-york-taxi-analysis/" class="prev" rel="prev" title="Digging Deep Into the New York Taxi Dataset"><i class="fas fa-angle-left fa-fw"></i>Digging Deep Into the New York Taxi Dataset</a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Mohammed Arebi</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery.js@1.2.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/copy-tex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/smooth-scroll@16.1.3/dist/smooth-scroll.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.37.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.8/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.2.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery.js@1.2.0/dist/js/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lg-thumbnail.js@1.2.0/dist/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lg-zoom.js@1.2.0/dist/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.0/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/typeit@7.0.4/dist/typeit.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":60},"comment":{},"data":{"id-1":"Mohammed Arebi","id-2":"Mohammed Arebi"},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"$$","right":"$$"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"},{"display":false,"left":"$","right":"$"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":5,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

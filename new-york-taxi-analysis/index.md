@@ -1,6 +1,6 @@
 # Digging Deep Into the New York Taxi Dataset
 
-
+<!--more-->
 <span style="font-size:1.125rem">
 
 This article goes in detail through one of the data science projects I worked on, the New York Taxi dataset which is made available by the [New York City Taxi and Limousine Commission (TLC)](https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page). New York is partly known for its yellow taxis (even though there are green taxis we'll focus on only the yellow taxis) and there are millions of taxi rides taken every month as New York is one of the most populous cities in the United States which makes for a very interesting dataset to dive into as there are a lot of analysis possibilities (Geospatial Data Analysis, Time Analysis, Taxi Ride Price Analysis, Traffic Analysis, etc.). 
