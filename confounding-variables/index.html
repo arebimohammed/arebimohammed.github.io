@@ -10,7 +10,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://arebimohammed.github.io/confounding-variables/" /><meta property="og:image" content="https://arebimohammed.github.io/logo.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2020-10-30T20:29:01+08:00" />
-<meta property="article:modified_time" content="2022-11-01T08:12:56+01:00" />
+<meta property="article:modified_time" content="2022-11-01T08:27:51+01:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://arebimohammed.github.io/logo.png"/>
@@ -29,8 +29,8 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/arebimohammed.github.io\/confounding-variables\/"
-        },"image": ["https:\/\/arebimohammed.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "blogging, data science, machine learning, python, data analysis","wordcount":  2603 ,
-        "url": "https:\/\/arebimohammed.github.io\/confounding-variables\/","datePublished": "2020-10-30T20:29:01+08:00","dateModified": "2022-11-01T08:12:56+01:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+        },"image": ["https:\/\/arebimohammed.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "blogging, data science, machine learning, python, data analysis","wordcount":  2604 ,
+        "url": "https:\/\/arebimohammed.github.io\/confounding-variables\/","datePublished": "2020-10-30T20:29:01+08:00","dateModified": "2022-11-01T08:27:51+01:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": "https:\/\/arebimohammed.github.io\/images\/avatar.png"},"author": {
                 "@type": "Person",
@@ -106,7 +106,7 @@
             <div class="toc-content always-active" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">Confounding Variables in Regression Analysis</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Mohammed Arebi</a></span>&nbsp;<span class="post-category">included in <a href="/categories/data-analysis/"><i class="far fa-folder fa-fw"></i>Data Analysis</a>&nbsp;<a href="/categories/machine-learning/"><i class="far fa-folder fa-fw"></i>Machine Learning</a>&nbsp;<a href="/categories/tutorial/"><i class="far fa-folder fa-fw"></i>Tutorial</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-10-30">2020-10-30</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;2603 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-10-30">2020-10-30</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;2604 words&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;13 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
@@ -169,7 +169,7 @@
 <p>this is called mediation and $X_2$ in this case is a mediator. And we&rsquo;re saying that confounding cannot occur when $X_1$ directly effects $X_2$ WHICH THEN effects the outcome $y$.</p>
 <ul>
 <li>It makes sense conceptually. What is meant by this is that we don&rsquo;t want to just see that numerically (possibly via correlation) our variables ($X_1$ and $X_2$) are associated but that the association should make sense conceptually. Does it make sense that the age distribution of smokers and non-smokers would be different? And I&rsquo;d say yes, I think it does. If we&rsquo;re looking at a group of kids as they get older, they&rsquo;re more likely to smoke. Doesn&rsquo;t mean they&rsquo;re going to, but that association makes sense. And for the second point. Does it make sense that age has an effect on lung capacity? Yes, it does. As kids get older, their bodies get bigger and their lungs should get bigger as well.</li>
-<li>When we adjust for $X_2$ (including it in the model), tha parameter ${\beta}_1$ changes significantly, there is no rule for how much should it change but the idea is that it shouldn&rsquo;t stay the same and it should change a decent amount (if there wasn&rsquo;t confounding it will most probably stay the same because most of the loss functions used to estimate the coefficients have a global minimum and are convex, so there is only one solution to the regression estimation problem). This tells us that some of the $X_2$ effect was mixed in to the $X_1$ effect.</li>
+<li>When we adjust for $X_2$ (including it in the model), the parameter ${\beta}_1$ changes significantly, there is no rule for how much it should change but the idea is that it shouldn&rsquo;t stay the same and it should change a decent amount (if there wasn&rsquo;t confounding it will most probably stay the same because most of the loss functions used to estimate the coefficients have a global minimum and are convex, so there is only one solution to the regression estimation problem). This tells us that some of the $X_2$ effect was mixed in to the $X_1$ effect.</li>
 </ul>
 <h2 id="residual-confounding">Residual Confounding</h2>
 <p>Residual confounding is the bias/distortion that is still left over even after we adjust for the variable (age in our case, $X_2$). This often happens when binning (categorizing) our variable, for example say instead of the actual age we have a categorical variable, age category/group that is in ranges such as 0-4, 5-10, 11-20, etc. Including this variable in the model will help in adjusting for age a bit but it&rsquo;s not going to be a very good adjustment there is still going to be some confounding (age confounding) left over even after we have adjusted for age in some way.</p>
@@ -304,7 +304,7 @@ Bathrooms: -19442.840398320994
 Bedrooms: -47769.955185214334
 BldgGrade: 106106.96307898096
 </code></pre>
-<p>The issue with confounding variables is one of omission: a key variable is missing from the regression equation. An improper interpretation of the equation coefficients might result in incorrect findings. Taking for example our dataset and model, the regression coefficients of SqFtLot, Bathrooms, and Bedrooms are all negative. The regression model does not contain a variable to represent location which is a very important predictor of house price. To model location, I&rsquo;ll include a variable zip group that categorizes the zip code into one of five groups, from least expensive (0) to most expensive (4) (There are 80 zip codes in King County, several with just a handful of sales. An alternative to directly using zip code as a categorical variable, zip group clusters similar zip codes into a single group).</p>
+<p>The issue with confounding variables is one of omission: a key variable is missing from the regression equation. An improper interpretation of the equation coefficients might result in incorrect findings. Taking for example our dataset and model, the regression coefficients of SqFtLot, Bathrooms, and Bedrooms are all negative (unintuitive). The regression model does not contain a variable to represent location which is a very important predictor of house price. To model location, I&rsquo;ll include a variable zip group that categorizes the zip code into one of five groups, from least expensive (0) to most expensive (4) (There are 80 zip codes in King County, several with just a handful of sales. An alternative to directly using zip code as a categorical variable, zip group clusters similar zip codes into a single group).</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
