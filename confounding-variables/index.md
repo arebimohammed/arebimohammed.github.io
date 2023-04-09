@@ -42,7 +42,7 @@ Some of the ways in identifying confounding are:
 
 - $X_2$ and $X_1$ are associated (some association between the variables)
 - $X_2$ is also associated with the outcome ($y$)
-- $X_2$ is not on the "pathway" between $X_1$ and $y$, what is meant by that is that $X_1$ doesn't have a direct effect on $X_2$ which then has an effect on the outcome $y$ shown here:
+- $X_2$ is on the "pathway" between $X_1$ and $y$, what is meant by that is that $X_1$ has a direct effect on $X_2$ which then has an effect on the outcome $y$ shown here:
 
 <img src = "/posts/Confounding Variables In Regression Analysis/confounding_diagram5.png" height= "100px" width="100%">
 
