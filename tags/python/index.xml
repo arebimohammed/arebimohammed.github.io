@@ -4,7 +4,16 @@
         <link>https://arebimohammed.github.io/tags/python/</link>
         <description>python - Tag - Mohammed Arebi</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>arebi.mohamed59@gmail.com (Mohammed Arebi)</managingEditor>
-            <webMaster>arebi.mohamed59@gmail.com (Mohammed Arebi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 30 Oct 2020 20:29:01 &#43;0800</lastBuildDate><atom:link href="https://arebimohammed.github.io/tags/python/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>arebi.mohamed59@gmail.com (Mohammed Arebi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 10 Feb 2021 20:29:01 &#43;0800</lastBuildDate><atom:link href="https://arebimohammed.github.io/tags/python/" rel="self" type="application/rss+xml" /><item>
+    <title>Decision Trees: The unfounded strength of recursive decision rules</title>
+    <link>https://arebimohammed.github.io/cart/</link>
+    <pubDate>Wed, 10 Feb 2021 20:29:01 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://arebimohammed.github.io/cart/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/posts/Decision%20Trees%20%28CART%29/tree.jpg" referrerpolicy="no-referrer">
+            </div>Article on decision trees and how they work with code examples and implementation]]></description>
+</item><item>
     <title>Confounding Variables in Regression Analysis</title>
     <link>https://arebimohammed.github.io/confounding-variables/</link>
     <pubDate>Fri, 30 Oct 2020 20:29:01 &#43;0800</pubDate>
