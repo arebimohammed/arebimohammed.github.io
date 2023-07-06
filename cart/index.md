@@ -415,7 +415,7 @@ Pruning Decision Trees can prevent excessive growth by limiting their maximum de
 
 What about the issue of high variance? Unfortunately, it is an inherent feature when training a single Decision Tree.
 
-The Importance of Moving Beyond Decision Trees
+The Importance of Moving Beyond Decision Trees <br>
 Ironically, one method for mitigating the instability caused by perturbations is to introduce an extra layer of randomness into the training process. In practise, this can be accomplished by assembling groups of Decision Trees trained on slightly different versions of the data set, the combined predictions of which are less prone to high variance. This method paves the way for one of the most successful Machine Learning algorithms to date: Random Forests. The random forest algorithm uses an ensemble technique known as bagging. There are other ensembling techniques that utilize the decision tree algorithm such as boosting (gradient or adaptive) and stacking, which just further shows the strength of this versatile algorithm and how it can be improved. 
 
 Here is a python implementation of the decision tree algorithm (using recursion):
