@@ -145,7 +145,7 @@ plt.legend(
 <img src = "/posts/Decision Trees (CART)/farm4.png" height= "100%" width="100%">
 <img src = "/posts/Decision Trees (CART)/tree3.PNG" height= "100%" width="100%">
 
-And still some more
+And still some more <br>
 The remaining region simply requires another horizontal division, and our job is done! We've found the best set of nested decisions.
 
 Nonetheless, some regions still contain a few misclassified points. Should we keep splitting and dividing into smaller sections?

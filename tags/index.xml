@@ -1,0 +1,78 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Tags - Tag - Mohammed Arebi</title>
+        <link>https://arebimohammed.github.io/tags/</link>
+        <description>Tags - Tag - Mohammed Arebi</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>arebi.mohamed59@gmail.com (Mohammed Arebi)</managingEditor>
+            <webMaster>arebi.mohamed59@gmail.com (Mohammed Arebi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 10 Feb 2021 20:29:01 &#43;0800</lastBuildDate><atom:link href="https://arebimohammed.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>blogging</title>
+    <link>https://arebimohammed.github.io/tags/blogging/</link>
+    <pubDate>Wed, 10 Feb 2021 20:29:01 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://arebimohammed.github.io/tags/blogging/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
+    <title>data science</title>
+    <link>https://arebimohammed.github.io/tags/data-science/</link>
+    <pubDate>Wed, 10 Feb 2021 20:29:01 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://arebimohammed.github.io/tags/data-science/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
+    <title>machine learning</title>
+    <link>https://arebimohammed.github.io/tags/machine-learning/</link>
+    <pubDate>Wed, 10 Feb 2021 20:29:01 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://arebimohammed.github.io/tags/machine-learning/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
+    <title>python</title>
+    <link>https://arebimohammed.github.io/tags/python/</link>
+    <pubDate>Wed, 10 Feb 2021 20:29:01 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://arebimohammed.github.io/tags/python/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
+    <title>data analysis</title>
+    <link>https://arebimohammed.github.io/tags/data-analysis/</link>
+    <pubDate>Fri, 30 Oct 2020 20:29:01 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://arebimohammed.github.io/tags/data-analysis/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
+    <title>project</title>
+    <link>https://arebimohammed.github.io/tags/project/</link>
+    <pubDate>Fri, 16 Oct 2020 20:29:01 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://arebimohammed.github.io/tags/project/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
+    <title>oversampling</title>
+    <link>https://arebimohammed.github.io/tags/oversampling/</link>
+    <pubDate>Fri, 14 Aug 2020 20:29:01 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://arebimohammed.github.io/tags/oversampling/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
+    <title>undersampling</title>
+    <link>https://arebimohammed.github.io/tags/undersampling/</link>
+    <pubDate>Wed, 12 Aug 2020 20:29:01 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://arebimohammed.github.io/tags/undersampling/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
+    <title>logistic regression</title>
+    <link>https://arebimohammed.github.io/tags/logistic-regression/</link>
+    <pubDate>Thu, 09 Jul 2020 20:29:01 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://arebimohammed.github.io/tags/logistic-regression/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
+    <title>polynomial regression</title>
+    <link>https://arebimohammed.github.io/tags/polynomial-regression/</link>
+    <pubDate>Fri, 15 May 2020 20:29:01 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://arebimohammed.github.io/tags/polynomial-regression/</guid>
+    <description><![CDATA[]]></description>
+</item></channel>
+</rss>

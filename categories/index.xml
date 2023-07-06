@@ -1,0 +1,64 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Categories - Category - Mohammed Arebi</title>
+        <link>https://arebimohammed.github.io/categories/</link>
+        <description>Categories - Category - Mohammed Arebi</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>arebi.mohamed59@gmail.com (Mohammed Arebi)</managingEditor>
+            <webMaster>arebi.mohamed59@gmail.com (Mohammed Arebi)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 10 Feb 2021 20:29:01 &#43;0800</lastBuildDate><atom:link href="https://arebimohammed.github.io/categories/" rel="self" type="application/rss+xml" /><item>
+    <title>Machine Learning</title>
+    <link>https://arebimohammed.github.io/categories/machine-learning/</link>
+    <pubDate>Wed, 10 Feb 2021 20:29:01 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://arebimohammed.github.io/categories/machine-learning/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
+    <title>Tutorial</title>
+    <link>https://arebimohammed.github.io/categories/tutorial/</link>
+    <pubDate>Wed, 10 Feb 2021 20:29:01 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://arebimohammed.github.io/categories/tutorial/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
+    <title>Data Analysis</title>
+    <link>https://arebimohammed.github.io/categories/data-analysis/</link>
+    <pubDate>Fri, 30 Oct 2020 20:29:01 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://arebimohammed.github.io/categories/data-analysis/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
+    <title>Big Data</title>
+    <link>https://arebimohammed.github.io/categories/big-data/</link>
+    <pubDate>Fri, 16 Oct 2020 20:29:01 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://arebimohammed.github.io/categories/big-data/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
+    <title>Data Visualisation</title>
+    <link>https://arebimohammed.github.io/categories/data-visualisation/</link>
+    <pubDate>Fri, 16 Oct 2020 20:29:01 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://arebimohammed.github.io/categories/data-visualisation/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
+    <title>Interactive</title>
+    <link>https://arebimohammed.github.io/categories/interactive/</link>
+    <pubDate>Fri, 16 Oct 2020 20:29:01 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://arebimohammed.github.io/categories/interactive/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
+    <title>Data Preprocessing</title>
+    <link>https://arebimohammed.github.io/categories/data-preprocessing/</link>
+    <pubDate>Fri, 14 Aug 2020 20:29:01 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://arebimohammed.github.io/categories/data-preprocessing/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
+    <title>General</title>
+    <link>https://arebimohammed.github.io/categories/general/</link>
+    <pubDate>Wed, 04 Mar 2020 10:29:01 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://arebimohammed.github.io/categories/general/</guid>
+    <description><![CDATA[]]></description>
+</item></channel>
+</rss>
